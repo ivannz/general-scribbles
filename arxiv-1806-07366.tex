@@ -1,0 +1,111 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\real}{\mathbb{R}}
+
+\newcommand{\T}{\mathrm{T}}
+\DeclareMathOperator{\Tr}{Tr}
+
+\title{Some notes on ArXiv:\url{1806.07366}}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent
+Consder the Cauchy problem $\dot{z} = f(t, z)$, $z(t_0) = z_0 \in \real^d$. Let $f$ be
+jointly continuous on an open connected domain $D \subseteq \real \times \real^d$ and
+Lipschits w.r.t. $z$ uniformly over $t$ on any closed and bounded subset of $D$. Then
+there is $\delta > 0$ such that the Cauchy problem admits a solution on $[t_0 - \delta,
+t_0 + \delta]$, and solutions defined on onverlapping intervals coincide over the
+intersection.
+
+If $f$ depends on a parameter is a continuous or differentiable manne uniformly on $t$,
+then the solution to ODE is also continuous~/~differentiable w.r.t. that parameter. This
+follows from the successive approximations used in the proof of Picard's existence and
+uniqueness theorem and Lipschits condition.\footnotemark
+\footnotetext{G. Petrovskiy, Lecture on Ordinary Differential Equations,
+\url{http://www.rfbr.ru/rffi/ru/books/o_17815#99}}.
+
+% The solution of this ode coincides with $\hat{z}(t) = z_0 + \xi(t - t_0)$, where $\xi$
+% solves $\dot{\xi} = g(s, \xi)$, $\xi(0) = 0$, and $g(s, \xi) = f(s + t_0, \xi + z_0)$.
+% This follows from the uniqueness of ode solutions, since $f$ is continuous.
+
+Now suppose $z(t_0 + \epsilon) = T_\epsilon (z(t_0))$ for a small $\epsilon > 0$. Then
+\begin{equation}
+  T_\epsilon(z(t_0))
+    = z_0 + \int_0^\epsilon f(t + \tau, z(t) + \xi(\tau)) d\tau
+    \,.
+\end{equation}
+The 1st-order Taylor series expansion of $z(t_0 + \epsilon)$ w.r.t $\epsilon$ is
+\begin{equation}
+  T_\epsilon (z(t_0))
+    = z_0 + \tfrac{d}{d\epsilon} T_\epsilon (z(t_0)) \Big\vert_{\epsilon = 0} \, \epsilon
+      + \mathcal{O}(\epsilon^2)
+    = z_0 + f(t_0, z_0) \, \epsilon
+      + \mathcal{O}(\epsilon^2)
+    \,.
+\end{equation}
+Differentiating the linear terms w.r.t. $z(t_0)=z_0$ results in
+\begin{equation}
+  \tfrac{\partial}{\partial z_0} T_\epsilon (z(t_0))
+    = I + \epsilon \, \nabla_z f(t_0, z) \big \vert_{z=z_0}
+    \,,
+\end{equation}
+
+Let $p$ be some density or a likelihood. Then by the Jacobian formula
+\begin{equation}
+  \log p(z(t_0 + \epsilon))
+    = \log p(z_0)
+    - \log \bigl \lvert
+        \det \tfrac{\partial}{\partial z} T_\epsilon (z)
+      \bigr \rvert \Big \vert_{z=z_0}
+  \,.
+\end{equation}
+The derivative of $\log p(z(t))$ w.r.t. $t$ at $t_0$ is
+\begin{equation}
+  \tfrac{\partial}{\partial t}
+    \log p(z(t)) \bigg\vert_{t = t_0}
+    = \tfrac{\partial}{\partial \epsilon}
+      \log p(z(t_0 + \epsilon)) \bigg\vert_{\epsilon = 0}
+    = - \tfrac{\partial}{\partial \epsilon} \log \bigl \lvert
+        \det \tfrac{\partial}{\partial z} T_\epsilon (z)
+      \bigr \rvert \bigg \vert_{\substack{
+        z=z_0 \\ \epsilon = 0}}
+      \,.
+\end{equation}
+Let's differentiate the log-det (we can ignore the absolute value here since,
+in a small neighborhood the matrix has to be nonsingular)
+\begin{align}
+  \tfrac{\partial}{\partial \epsilon}
+    \log \det \tfrac{\partial}{\partial z} T_\epsilon (z)
+    &= \Tr{\bigl(
+        \bigl( \tfrac{\partial}{\partial z} T_\epsilon (z) \bigr)^{- \T}
+        \tfrac{\partial}{\partial \epsilon}
+          \tfrac{\partial}{\partial z} T_\epsilon (z)
+      \bigr)} \bigg\vert_{\epsilon = 0}
+    \notag \\
+    &= \Tr{ I^{- \T} \nabla_z f(t_0, z) \big \vert_{z=z_0}}
+    \,,
+\end{align}
+whence
+\begin{equation}
+  \tfrac{\partial}{\partial t}
+    \log p(z(t)) \bigg\vert_{t = t_0}
+    = - \Tr{\nabla_z f(t_0, z_0) \big \vert_{z=z_0}}
+      \,.
+\end{equation}
+
+
+\end{document}
