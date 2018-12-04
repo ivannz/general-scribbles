@@ -1,0 +1,220 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\cplx}{\mathbb{C}}
+
+\title{Condensed notes for \url{probability.net}}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\paragraph{tut 11} % (fold)
+\label{par:tut_11}
+
+Complex measures form a normed $\cplx$-vector space $M_1(\Omega, \Fcal)$ and their total variation is always a finite measure;
+$L^1_\cplx(\mu) \equiv L^1_\cplx(|\mu|)$;
+the norm is $\|\mu\| = |\mu|(\Omega)$;
+real valued bounded linear functionals on complex measures give signed measures;
+their real~/~imaginary total variation can be used to decompose the complex measure into a $\cplx$-linear combination;
+reverse triangle inequality: there is $S \subseteq \{1,\, \ldots,\,N\}$ such that $\sum_{i=1}^N |z_i| \leq \pi |\sum_{i \in S} z_i|$.
+
+% paragraph tut_11 (end)
+
+
+\paragraph{tut 12} % (fold)
+\label{par:tut_12}
+
+Absolute continuity of measures has $\varepsilon - \delta$ continuity set-theoretic equivalent;
+if for a finite measure $\mu$ and $f \in L^1_\cplx(\Omega, \Fcal, \mu)$, we have $\tfrac1{d\mu(E)} \int_E f d\mu \in S$ for $S$ closed in $\cplx$, then $f \in S$ $\mu$-as;
+Radon-Nikodym derivative $h$ of a complex~/~signed~/~finite measure $\nu$ on $(\Omega, \Fcal)$ wrt. $\sigma$-finite measure $\mu$ is an element of $L^1_\cplx(\mu)$ and respects the co-domain of $\nu$;
+the same holds for a pair of $\sigma$-finite measures, but $h\colon \Omega \to [0, +\infty]$;
+derivative of a complex measure wrt. its total variation exists and its modulus~/~absolute value is $1$ almost surely;
+set convergence holds for complex measures (via DCT);
+for any measure $\mu$ if $d\nu = f d\mu$ for some complex $\mu$-integrable $f$, then $\nu$ is a complex measure, $d|\nu| = |f| d\mu$ and for any bounded measurable $g$ or $g \in L^1_\cplx(\nu)$ we have $\int g d\nu = \int g f d\mu$;
+Complex Lebesgue integral is defined as $\int f d\mu = \int f h d|\mu|$, $d\mu = h d|\mu|$;
+Complex Lebesgue is bilinear wrt. function and measure arguments;
+ordinary Lebesgue is also monotone wrt. measures and linear wrt. nonnegative finite linear combinations of measures;
+Complex integral can be decomposed into a linear combination of ordinary Lebesgue integrals wrt. finite measures based on total-variation (unique for any given complex measure);
+Basically all commons sense operations and manipulations with complex integrands and complex measures are legal.
+
+% paragraph tut_12 (end)
+
+
+\paragraph{tut 13} % (fold)
+\label{par:tut_13}
+
+Simple $\cplx$-valued functions that are also in $L^p_\cplx(\Omega, \Fcal, \mu)$ are dense in $L^p_\cplx(\mu)$;
+for any finite measure $\mu$ on metrizable space $(\Omega, \Tcal)$ (metrizability -- to get open neighborhoods of closed sets) for any measurable $E \in \Bcal(\Omega)$ and $\varepsilon > 0$ there are $F$ -- closed and $U$ -- open, $F \subseteq E \subseteq U$ with $\mu(U \setminus F) \leq \varepsilon$;
+bounded continuous functions $C_\cplx^b(\Omega, \Tcal)$ on metrizable spaces (or T4 for Urhyson lemma) approximate measurable indicator functions;
+bounded continuous functions on metrizable spaces (T4 not enough due to measure!) are dense in $L^p_\cplx(\Omega, \Bcal(\Omega), \mu)$ for $\mu$ finite measure and $p < +\infty$;
+Portmanteau lemma: complex measures on metrizable space coincide if their integrals are equal for all continuous bounded real-valued functions;
+compact sets have finite measure for any locally finite measure;
+on a metrizable $\sigma$-compact topological space any locally finite measure is inner and outer regular;
+strongly $\sigma$-compact topological space is the same as $\sigma$-compact and locally compact;
+in a metrizable locally compact space for any $K$ -- compact, $U$ -- open, $K \subseteq U$, there is a continuous function $\phi$ with compact support ($[\{\phi \neq 0\}]$ -- compact in $\Omega$) such that $1_K \leq \phi \leq 1_U$;
+on a metrizable strongly $\sigma$-compact topological space continuous functions with compact support are dense in $L^p_\cplx(\Omega, \Bcal(\Omega), \mu)$.
+
+Locally compact -- every open neighborhood has a compact closure;
+$\sigma$-compact -- there exists an increasing family of compact sets that covers $\Omega$;
+strongly $\sigma$-compact -- there is an increasing sequence of open sets with compact closure that covers $\Omega$.
+
+% paragraph tut_13 (end)
+
+
+\paragraph{tut 14} % (fold)
+\label{par:tut_14}
+
+Total variation (tv) of a $b\colon \real^+ \to \cplx$ map is non-decreasing, preserves right~/~left continuity if any, and $|b|(t) - |b|(s) = \sup_{t_i \in [s, t]} \sum_i |b(t_i) - b(t_{i-1})|$;
+tv of a nonnegative non-decreasing map is the map itself;
+tv of a map is sub-additive and preserves order;
+nondecreasing nonnegative $\real$-valued maps (of finite variation) make Stieltjes measures, complex maps of bounded variation --- complex Stieltjes measures, $db((s,t]) = b(t) - b(s)$, $db(\{0\}) = b(0)$;
+tv of a complex Stieltjes measure is the Stieltjes measure of the tv, i.e. $|db| = d|b|$;
+total variations can be used to linearly decompose maps of finite variation;
+for measures on $\real^+$ to be ordered it is sufficient for them to be ordered on half-intervals and at zero;
+tv of a right~/~left continuous map can be computed on partitions $t_k = \tfrac{k t}{2^n}$, $k=0,\, \ldots,\,2^n$;
+cadlag complex maps are bounded on bounded sets: for some $M\geq 0$ $|b(t-) \vee b(t)| \leq M$ for all $t \in [0, T]$.
+
+% paragraph tut_14 (end)
+
+
+\paragraph{tut 15} % (fold)
+\label{par:tut_15}
+
+Stieltjes (local) $L^1$-space $L^1_\cplx(b)$ ($L^{1,loc}_\cplx(b)$) for right continuous ({\bf rc}) $b\colon \real^+ \to \cplx$ of finite variation is $L_\cplx^1(\real^+, \Bcal(\real^+), d|b|)$ ($L_\cplx^1(d|b|^{[0,t]})$);
+for an {\bf rc} nonnegative nondecreasing $a$ and $f \in L^1_\cplx(a)$ (or $f \geq 0$ in $L^{1,loc}_\real(a)$) we have $f.a(t) = \int_0^t f da$ {\bf rc} map of bounded (finite) variation and $d(f.a) = f da$;
+for {\bf rc} nonnegative nondecreasing $a$ and $f \in L^1_\cplx(a)$ we have $|f.a| = |f|.a$ with $\Delta f.a = f\Delta a$, $\Delta a = a(t) - a(t-)$;
+for $a\colon \real^+ \to \real^+$ {\bf rc} nonnegative nondecreasing and $b\colon \real^+ \to \cplx$ {\bf rc} of finite variation there is $f \in L^1_\cplx(a)$ $da$-as unique such that $b = f.a$ and $f$ preserves the co-domain of $b$;
+for $b\colon \real^+ \to \cplx$ {\bf rc} of finite variation there exists $h \in L^{1,loc}_\cplx(b)$ with $|h|=1$ and $b = h.|b|$ and for $f \in L^1_\cplx(b)$ the Stieltjes integral of $f$ is $f.b = (f h).|b|$, $|f.b| = |f|.|b|$ and $\Delta f.b = f \Delta b$;
+for $g \in L^{1,loc}_\cplx(b)$ we have $f.(g.b) = (fg).b$ for any $f \in L^{1,loc}_\cplx(g.b) \Leftrightarrow fg \in L^{1,loc}_\cplx(b)$ or bounded;
+$f.b$ is bilinear for $f \in L^{1,loc}_\cplx(b)$ and $b\colon \real^+ \to \cplx$ {\bf rc} of finite variation;
+$f.b = f.|b_1|^+ - f.|b_1|^- + i(f.|b_2|^+ - f.|b_2|^-)$ for $b_1 = \Re(b)$, $b_2 = \Im(b)$;
+for $a\colon \real^+ \to \real^+$ {\bf rc} nonnegative and non decreasing the inverse $c_a(t) = \inf\{s \geq 0 \mid t < a(s) \}$ is nonnegative, nondecreasing and right continuous, sort of generalized inverse, and $f.a(t) = ((f \circ c_a).s)(a(t))$ for $f \in L^{1,loc}_\cplx(a)$ and also $a = c_{c_a}$;
+nondecreasing maps are always measurable.
+
+% paragraph tut_15 (end)
+
+
+\paragraph{tut 16} % (fold)
+\label{par:tut_16}
+
+Remember $\limsup_{x\to x_0} = \inf_{U\ni x_0} \sup_{x\in U}$;
+lsc functions ($\{\lambda < f\}$ -- open in $\Omega$) are closed under addition, scaling by nonnegative values, and arbitrary suprema;
+lsc = - usc;
+$1_U$, $U$ open, is lsc;
+$1_F$, $F$ -- closed, is usc;
+all usc~/~lsc maps are measurable wrt. Borel $\sigma$-algebra;
+on a metrizable $\sigma$-compact space with a locally finite measure $\mu$ for any $f \in L^1_\real(\Omega, \Fcal, \mu)$ and any $\varepsilon > 0$ there are lsc $v$ and usc $u$ ($\mu$-as having counterparts in $L^1_\real(\mu)$) such that $u \leq f \leq v$ and $\int (v - u) d\mu \leq \varepsilon$ (Viteli-Caratheodory);
+a connected topological space has $\emptyset$ and $\Omega$ as the only closed and open;
+a space is connected iff whenever $\Omega = A \uplus B$ then either $A$ or $B$ is $\emptyset$;
+an interval is a subset $G$ of $\real$ such that for all $a \leq b$ we have $[a, b] \subseteq G$;
+$G$ is an intervals iff $G$ is either $(a, b]$, $(a, b)$, $[a, b)$, or $[a, b]$;
+a subset of $\real$ is an interval iff it is connected;
+images of connected subsets via a continuous map are connected;
+if $\Omega$ is connected and $f$ continuous, then $[a, b] \subseteq f(\Omega)$ implies that for any $c \in [a, b]$ there is $z \in \Omega$ with $c = f(z)$;
+if $a < b$, and $f$ is differentiable everywhere at $[a, b]$ with $\int_a^b | f'(x)| dx < + \infty$, then $f(b) - f(a) = \int_a^b f'(s) ds$;
+on $(\real^n, \Bcal(\real^n))$ for any $\alpha > 0$ we have $dx({k_\alpha \in B}) = \alpha^n dx(B)$;
+for complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ the maximal function $M\mu(x) = \sup_{\varepsilon>0} \tfrac{|\mu|(B(x,\varepsilon))}{dx(B(x,\varepsilon))}$ is nonnegative and lsc;
+(constructive) for a collection $(B(x_i,\varepsilon_i))_{i=1}^n$, $\varepsilon_i > 0$ there exists an $S \subseteq \{1,\,\ldots,\,n\}$ such that $\cup_{i=1}^n B(x_i,\varepsilon_i))_{i=1}^n \subseteq \cup_{i\in S} B(x_i, 3\varepsilon_i)$ and $(B(x_i,\varepsilon_i))_{i\in S}$ are pairwise disjoint;
+for a complex measure $\mu$ and any $\lambda > 0$ we have $dx(\{\lambda < M\mu\}) \leq \tfrac{3^n}{\lambda} \|\mu\|$;
+the maximal function of $f \in L^1_\cplx(\real^n, \Bcal(\real^n), dx)$ is $M f = M \mu$ for $d\mu = f dx$;
+for any $f \in L^1_\cplx(dx)$ we have $\bigl\{\lim_{\varepsilon \downarrow 0} \tfrac{\int_{B(x, \varepsilon)} |f(x) - f(y)| dy}{dx(B(x, \varepsilon)))} = 0\bigr\}$ $dx$-a.s;
+
+% paragraph tut_16 (end)
+
+
+\paragraph{tut 17} % (fold)
+\label{par:tut_17}
+
+The space of $n\times n$ matrices $M_n(K)$, $K = \real$ or $\cplx$, is the same as the space $M'_n(K)$ of all finite products of diagonal scaling ($H_\alpha e_1 = \alpha e_1$, $H_\alpha e_i = e_i$, $\alpha \in K$), row swapping $P_{ij}$ ($P_{ij} e_i = e_j$, $P_{ij} e_j = e_i$, and $P_{ij} e_l = e_l$) and pivoting ($U e_1 = e_1 + e_2$, $U e_j = e_j$) matrices;
+if matrices with $1$ in the top left corner is in $M'_n(K)$, then $M'_n(K) \subseteq M_n(K)$;
+if matrices with $e_1$ in its first column is in $M'_n(K)$, then all matrices with $1$ in the top left corner are in $M'_n(K)$;
+the distribution of $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ under $\mu$ (possibly complex), or the image measure of $\mu$ under $X$, is $X(\mu)(E) = \mu^X(E) = \mu(\{X \in E\}) = \mu(X^{-1}(E))$, and we have $Y(X(\mu)) = Y(\mu^X)$;
+$|\mu^X| \leq |\mu|^X$;
+a complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ is translation invariant iff $\tau_\alpha(\mu) = \mu$ for $\tau_\alpha(x) = \alpha + x$;
+$\tau_\alpha(dx) = dx$, $k_\alpha(dx) = \alpha^{-n} dx$ for $x\mapsto k_\alpha(x) = \alpha x$, $a > 0$;
+for $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ we have $\int_{\Omega} (f \circ X) d\mu = \int_{\Omega'} f dX(\mu)$ for measure $\mu$ and measurable $f\colon \Omega' \to [0, +\infty]$ or $f\in L^1_\cplx(\Omega', \Fcal', X(\mu))$ (iff $f\circ X \in L^1_\cplx(\Omega, \Fcal, \mu)$), or for a complex measure $\mu$ and integrable $f$;
+if $\mu$ is a translation-invariant measure $(\real^n, \Bcal(\real^n))$, then there is a unique $\alpha \geq 0$, such that $\mu = \alpha dx$ (due to translation invariance the scaling in front of $\mu$ becomes the Lebesgue measure);
+$T\colon \real^n \to \real^n$ is a linear bijection iff it has a non-singular matrix representation in, e.g., canonical bases in domain and image spaces;
+the linearity of $T$ makes the image measure $\mu = T(dx)$ translation invariant in $\real^n$ with $\mu = \Delta(T) dx$;
+the matrix of $T$ being composed of invertible simple matrices makes $\Delta(T) \neq 0$ and $\Delta(T_1 \circ T_2) = \Delta(T_1) \Delta(T_2)$;
+ultimately $\Delta(T) = \lvert \det T^{-1} \rvert = \lvert \det T \rvert^{-1}$ due to the determinant of a product being equal to the product of determinants;
+$dx(T(B)) = \lvert \det T\rvert dx(B)$;
+any linear subspace $V$ of $\real^n$ is closed and $dx(V) = 0$ when $\dim V \leq n-1$;
+
+% paragraph tut_17 (end)
+
+
+\paragraph{tut 18} % (fold)
+\label{par:tut_18}
+
+The norm topology of the $K$-normed vector space is the metric topology induced by the norm metric;
+if $E$ and $F$ are $K$-mormed spaces and $l\colon E \to F$ is a linear map, then $l$ is continuous iff $l$ is continuous at $0$, iff there is $M\geq 0$ such that $\|l(x)\| \leq M \|x\|$ for all $x\in E$, iff $\|l\| = \sup\{\|l(x)\|\colon x\in E,\, \|x\|=1\} < +\infty$;
+the norm $\|l\|$ of a linear map $l$ is $\sup\{\|l(x)\|\colon x\in E,\, \|x\| \leq 1\}$, $\sup\{\tfrac{\|l(x)\|}{\|x\|} \colon x\in E,\, x\neq 0\}$, and $\inf\{M\geq 0\colon \|l(x)\| \leq M \|x\|\,\,\forall{x\in E} \}$;
+for all $x\in E$ we have $\|l(x)\| \leq \|l\| \|x\|$, and $(\Lcal_K(E, F), \|\cdot\|)$ is a $K$-normed space.
+
+For $E, F$ be $\real$-normed spaces and an open $U\subseteq E$, the map $\phi\colon E\to F$ is differentiable at $a\in U$ iff there is $d\phi(a) \in \Lcal_\real(E, F)$ so that for any $\varepsilon > 0$ there is $\delta > 0$ such that for all $h\in E$ with $\|h\| \leq \delta$ and $a + h \in U$ we have $\|\phi(a+h) - \phi(a) - l(h) \| \leq \varepsilon \|h\|$;
+the linear map $d\phi(a)$ is unique, and the map $\phi$ is differentiable on $U$ if it is differentiable at every $a\in U$;
+$\phi\colon U \to F$ is $C^1$ if it is differentiable on $U$ and $d\phi\colon U \to (\Lcal_\real(E, F), \|\cdot\|)$ is continuous;
+for $\real$-normed spaces $E, F, G$ with $U$ -- open in $E$, $V$ -- open in $F$, if maps $\phi\colon U\to F$ and $\psi\colon V\to G$ are differentiable at $a\in U$ and $\phi(a)\in V$ with $\phi(U) \subseteq V$, then the map $\psi\circ \phi$ is differentiable at $a$ and $d(\psi\circ\phi)(a) = d\psi(\phi(a)) \circ d\phi(a)$;
+norms on finte product spaces are topologically equivalent;
+if norms $\|\cdot\|$ and $N_E(\cdot)$ induce the same topology, then the $id_E\colon (E, \|\cdot\|) \to (E, N_E(\cdot))$ is continuous, and the norms are equivalent: there exist $m_E, M_E > 0$ such that $m_E\|\cdot\| \leq N_E(\cdot) \leq M_E \|\cdot\|$;
+if maps are differentiable at $a$ so are their linear combinations;
+the differential does not depend on the choice of norms in finite dimensional spaces;
+if $\phi\colon U\to F$ and $\psi\colon V\to G$ are $C^1$, then so their composition is $C^1$ as well;
+if $E$ is an $\real$-normed space, $f\colon [a, b] \to E$ and $g\colon [a, b] \to \real$ are differentiable at every $(a, b)$ with $\|f'(t)\| \leq g'(t)$, then $\|f(b) - f(a)\| \leq g(b) - g(b)$;
+$\Rightarrow$ if $\phi\subseteq \real^n \to E$, $\real$-normed, is differentiable at $a\in U$ then all $\tfrac{\partial \phi}{\partial x_i}(a)$ exist at $a$, furthermore $d\phi(a)(h) = \sum_i \tfrac{\partial \phi}{\partial x_i}(a) h_i$;
+if $d\phi$ exists on $U$ and is continuous at $a$, then $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous at $a$;
+$\Leftarrow$ if $\phi$ has all $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ on $U$ and they are continuous at $a\in U$, then $\phi$ is differentiable at $a$ (only existence!);
+if $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous on $U$ then so is $d\phi$ on $U$;
+finally $\phi\colon U\to E$ is $C^1$ on $U$ iff each $a\to \tfrac{\partial \phi}{\partial x_i}(a)$ is $U$-$E$ continuous;
+$l\in \Lcal(E, F)$ is $C^1$ and $d(l\big\vert_U)(a) = l$ for any $a\in U$ -- open in $E$;
+$\phi\colon U \to F = \prod_{i=1}^p F_p$ is differentiable at $a$ iff each $\phi_i\colon U\to F_i$ is, $\phi$ is $C^1$ on $U$ iff each $\phi_i$ is $C_1$ on $U$, and $d\phi(a) = (d\phi_i(a))_{i=1}^n \in \Lcal(E, F)$;
+if $\phi\colon U \to \real^n$ then $d\phi(a) = (\tfrac{\phi_c}{\partial x_r})_{r,c}^{n,n}\in \real^{n\times n}$;
+the Jacobian of $\phi$ is $J(\phi)(a) = \det d\phi(a)$ --- the determinant of the partial derivative matrix.
+
+For $\Omega$ and $\Omega'$ open in $\real^n$ a bijection $\phi\colon \Omega \to \Omega'$ is a $C^1$-diffeomorphism between $\Omega$ and $\Omega'$ iff $\phi\colon \Omega \to \real^n$ and $\phi^{-1}\colon \Omega' \to \real^n$ are both $C^1$;
+if $\phi$ is a $C^1$-diffeomorphism ($\psi = \phi^{-1}$) then $d\phi(\psi(x)) \circ d\psi(x) = id_{\real^n}$ and $d\psi(\phi(x)) \circ d\phi(x) = id_{\real^n}$ and $J(\phi) = \tfrac1{J(\psi) \circ \phi} \neq 0$;
+if $d\phi(a) = id_{\real^n}$, then $\lim_{\varepsilon\downarrow 0} \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}{dx\big\vert_{\Omega'}(B(x, \varepsilon))} = 1$ for all $x\in \Omega'$;
+the matrix $A = d\phi(x)$ is non-singular, and $\tilde{\phi} = \phi \circ A$ is $C^1$ diffeomorphism between $\Omega'' = A^{-1}(\Omega)$ and $\Omega'$ with $\tilde{\psi} = A^{-1} \circ \psi$ and $d\tilde{\phi}(x) = id_{\real^n} \in \Lcal(\real^n, \real^n)$;
+hence $\lim_{\varepsilon\downarrow 0} \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}{dx\big\vert_{\Omega'}(B(x, \varepsilon))} = \lvert \det J(\psi)(x) \rvert$ for all $x\in \Omega'$;
+finally $\phi(dx\big\vert_{\Omega}) \ll dx\big\vert_{\Omega'}$ for a $C^1$-diffeomorphism $\phi$ between $\Omega$ and $\Omega'$ and the Radon-Nikodym derivative is $a \to \lvert \det J(\psi)(a) \rvert$;
+the Jacobian formula is $\int_\Omega (f\circ \phi) dx\big\vert_{\Omega} = \int_{\Omega'} f \, \phi(dx\big\vert_{\Omega}) = \int_{\Omega'} f \lvert J(\phi^{-1})\rvert dx\big\vert_{\Omega'}$ and $\int_{\Omega'} f dx\big\vert_{\Omega'} = \int_{\Omega} (f\circ \phi) \, \phi^{-1}(dx\big\vert_{\Omega}) = \int_{\Omega} (f\circ \phi) \lvert J(\phi)\rvert dx\big\vert_{\Omega}$ -- true for nonnegative $f$, $f\in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$ iff $(f \circ \phi) \lvert J(\phi) \rvert \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$, and $f \circ \phi \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$ iff $f \lvert J(\phi^{-1}) \rvert \in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$;
+
+% paragraph tut_18 (end)
+
+
+\paragraph{tut 19} % (fold)
+\label{par:tut_19}
+
+
+
+% paragraph tut_19 (end)
+
+
+\paragraph{tut 20} % (fold)
+\label{par:tut_20}
+
+
+
+% paragraph tut_20 (end)
+\end{document}
