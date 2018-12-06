@@ -1,0 +1,111 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\T}{\mathrm{T}}
+
+\title{Some notes on Boyle, Dykstra (1986)}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Let $(\Hcal, \langle\cdot,\cdot\rangle)$ be a Hilbert space. We say that $(x_n)_{n\geq1} 
+\in \Hcal$ converges {\bf strongly} to $x\in\Hcal$ if $\|x_n - x\| \to 0$. A sequence 
+converges to $x$ weakly, if $\langle x_n, z \rangle \to \langle x, z\rangle$ for all
+$z\in \Hcal$. Due to continuity of $\langle\cdot,\cdot\rangle$ w.r.t the product norm
+topology and $\real$, strong convergence implies weak convergence.
+
+A property of sequences, crucial for optimization problems in finite-dimensional spaces,
+is strong sequential compactness: that every bounded sequence has a stringly convergent
+subsequence (Bolzano-Weierstrass theorem). But in finite dimensional spaces it fails to
+hold.
+
+Let $C \subseteq \Hcal$ be a non-empty closed convex subset of $\Hcal$. Then for any
+$g\in \Hcal$ there exists $g^*\in C$ such that $\|g - g^*\| = \inf_{h\in C} \|g - h\|$,
+and for any $h\in C$ we have $\langle g - g^*, g^* - h\rangle \geq 0$. The latter follows
+from convexity of $C$ and differentiability: in the following let $f = g^* + t (h -g ^*)$
+and observe that $f \in C$ and it we have $\|f - g\| \geq \|g^* - g\|$ for all $t\in
+[0, 1]$ (and in the limit $t\downarrow 0$)
+\begin{equation*}
+  \|f - g\|^2
+    = \|f - g^*\|^2 + 2 \langle f - g^*, g^* - g\rangle + \|g^* - g\|^2
+    % \geq \|f - g^*\|^2 + \|g^* - g\|^2
+    \,.
+\end{equation*}
+
+Let $K$ non-empty closed convex sets $C_k \subseteq \Hcal$ with non-empty intersection.
+Consider the following problem:
+\begin{equation} \label{eq:k-projection}
+  \begin{aligned}
+    & \underset{x\in \Hcal}{\text{miminize}}
+      & & \|x - g\|
+          \,, \\
+    & \text{s.t.}
+      & & x \in \bigcap_{k=1}^K C_k
+          \,.
+  \end{aligned}
+\end{equation}
+Dykstra's algorithm assumes that it is cheap an easy to project onto $C_k$ for any $k$,
+and proposes the following iterations:
+
+
+\paragraph{Application to the GLS estimate} % (fold)
+\label{par:application_to_the_gls_estimate}
+
+The GLS estimate of $y\sim X$ with weights $\Omega$ is $\hat{\beta} = \bigl(X^\T \Omega^{-1} X
+\bigr)^{-1} X^\T \Omega^{-1} y$ and solves the unconstrained problem
+\begin{equation} \label{eq:gls_unc}
+  \begin{aligned}
+    & \underset{\beta\in \real^p}{\text{miminize}}
+      & & \tfrac12 \bigl(y - X \beta\bigr)^\T \Omega^{-1} \bigl(y - X \beta\bigr)
+          \,.
+  \end{aligned}
+\end{equation}
+
+Noting that the objective can be rewritten as
+\begin{align*}
+  \bigl(y - X \beta\bigr)^\T \Omega^{-1} \bigl(y - X \beta\bigr)
+    &= \bigl(y - X \hat{\beta}\bigr)^\T \Omega^{-1} \bigl(y - X \hat{\beta}\bigr)
+    \\
+    &+ 2 \bigl(y - X \hat{\beta}\bigr)^\T \Omega^{-1} X \bigl(\hat{\beta} - \beta\bigr)
+    \\
+    &+ \bigl(X \hat{\beta} - X \beta\bigr)^\T \Omega^{-1} \bigl(X \hat{\beta} - X \beta\bigr)
+    \,.
+\end{align*}
+and that
+\begin{align*}
+  \bigl(y - X \hat{\beta}\bigr)^\T
+    &= \bigl(y - X \bigl(X^\T \Omega^{-1} X \bigr)^{-1} X^\T \Omega^{-1} y\bigr)^\T \Omega^{-1} X
+    \\
+    &= y^\T \Omega^{-\T} \bigl(\Omega - X \bigl(X^\T \Omega^{-1} X \bigr)^{-1} X^\T \bigr)^\T \Omega^{-1} X
+    \\
+    &= y^\T \Omega^{-1} \bigl(X - X \bigl(X^\T \Omega^{-1} X \bigr)^{-1} X^\T \Omega^{-1} X \bigr)
+    = y^\T \Omega^{-1} \bigl(X - X\bigr)
+    \,,
+\end{align*}
+we get a reformulation of the constrained GLS problem
+\begin{equation} \label{eq:gls_proj}
+  \begin{aligned}
+    & \underset{\beta\in C}{\text{miminize}}
+      & & \tfrac12 \bigl(\beta - \hat{\beta} \bigr)^\T X^\T \Omega^{-1} X \bigl(\beta - \hat{\beta}\bigr)
+          \,,
+  \end{aligned}
+\end{equation}
+as a projection of $\hat{\beta}$ onto $C$ with respect a special metric.
+
+% paragraph application_to_the_gls_estimate (end)
+
+\end{document}
