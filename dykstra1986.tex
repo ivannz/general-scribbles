@@ -5,6 +5,7 @@
 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{xcolor}
 \usepackage{amsthm}
 \usepackage[mathcal]{euscript}
 
@@ -165,11 +166,103 @@ Finally we have the bound for all $t$:
       \\
     &\geq \|g^t_K - g^*\|^2
       + \sum_{s=1}^t \sum_{j=1}^K \| \delta^s_j - \delta^{s-1}_j \|^2
-      \\
     % \delta^s_j - g^s_{j-1} + g^s_j = \delta^{s-1}_j
-    % \,,
+    \,,
 \end{align*}
+whence $\sum_{s=1}^t \sum_{j=1}^K \| g^s_{j-1} - g^s_j \|^2 < +\infty$.
 
+This series implies that $\|g^t_{k-1} - g^t_k\|^2 \to 0$ for any $k=1,\,\ldots,\,K$
+as $t\to \infty$. If $(g^t_k)_{t\geq 1}\in \Hcal$ converges strongly to $h$, then
+so does $(g^t_p)_{t\geq 1}$ for any $p=1,\,\ldots,\,K$:
+\begin{equation*}
+  \limsup_{t\to \infty} \| g^t_p - h \|
+    \leq \limsup_{t\to \infty} \|g^t_k - h\|
+      + \sum_{j=p+1}^k \limsup_{t\to \infty} \| g^t_{j-1} - g^t_j \|
+    \,.
+\end{equation*}
+Therefore proving the convergence of $(g^t_K)_{t\geq 1}$ is sufficient.
+
+For any $f\in \bigcap_{k=1}^K C_k$ we have $\langle g^t_K - f, \delta^t_K \rangle
+\geq 0$, since $g^t_k$ is a projection onto $C_k$, whence
+\begin{equation*}
+  \langle g^t_1 - f, g^t_K - g \rangle
+    % = - \sum_{k=1}^K \langle g^t_1 \pm g^t_k - f, \delta^t_k \rangle
+    = \sum_{k=1}^K \langle g^t_k - g^t_1, \delta^t_k \rangle
+      + (-1) \sum_{k=1}^K \langle g^t_k - f, \delta^t_k \rangle
+    \leq \sum_{k=2}^K \langle g^t_k - g^t_1, \delta^t_k \rangle
+      \,.
+\end{equation*}
+If we let $a_t = \sum_{j=2}^K \| g^t_{j-1} - g^t_j \|$, then we get
+\begin{align*}
+  \bigl\lvert \langle g^t_1 - f, g^t_K - g \rangle \bigr\rvert
+    &\leq \sum_{k=2}^K \bigl\lvert \langle g^t_k - g^t_1, \delta^t_k \rangle \bigr\rvert
+    \leq \sum_{k=2}^K \|\delta^t_k\| \| g^t_k - g^t_1 \|
+    \\
+    &\leq \sum_{k=2}^K \|\delta^t_k\| \sum_{j=2}^k \| g^t_{j-1} - g^t_j \|
+    \leq \sum_{k=2}^K \|\delta^t_k\| \sum_{j=2}^K \| g^t_{j-1} - g^t_j \|
+    \\
+    &= \sum_{k=2}^K \Bigl\|\sum_{s=1}^t \delta^s_k - \delta^{s-1}_k \Bigr\| a_t
+    \leq \sum_{k=2}^K \sum_{s=1}^t \|\delta^s_k - \delta^{s-1}_k \| a_t
+    \\
+    &= \sum_{s=1}^t \sum_{k=2}^K \|g^s_{k-1} - g^s_k \| a_t
+    = \sum_{s=1}^t a_s a_t
+      \,.
+\end{align*}
+Since $2 a b \leq a^2 + b^2$, we have
+\begin{align*}
+  a^2_t
+    &= \sum_{j=2}^K \| g^t_{j-1} - g^t_j \|^2
+      + \sum_{j=2}^K \sum_{p > j} 2 \| g^t_{j-1} - g^t_j \| \| g^t_{p-1} - g^t_p \|
+    \\
+    &\leq \sum_{j=2}^K \| g^t_{j-1} - g^t_j \|^2
+        % + \sum_{j=2}^K \sum_{p > j} \sum_{j=2}^K \| g^t_{j-1} - g^t_j \|^2
+        + \sum_{j=2}^K \sum_{p > j} \| g^t_{j-1} - g^t_j \|^2 + \| g^t_{p-1} - g^t_p \|^2
+    \\
+    &\leq \Bigl(1+\tfrac{(K-1)(K-2)}{2}\Bigr) \sum_{j=1}^K \| g^t_{j-1} - g^t_j \|^2
+    \,,
+\end{align*}
+which implies that
+\begin{align*}
+  \sum_{t\geq 1} a^2_t
+    &\leq \Bigl(1+\tfrac{(K-1)(K-2)}{2}\Bigr)
+      \sum_{t\geq 1} \sum_{j=1}^K \| g^t_{j-1} - g^t_j \|^2
+      < +\infty
+    \,,
+\end{align*}
+Therefore there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} a_s a_{t_n}
+\to 0$ as $n\longrightarrow \infty$ ({\color{red} WHY?}).
+Hence
+\begin{equation*}
+  \lim_{n \to \infty} \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+    \leq \lim_{n \to \infty} \sum_{s=1}^{t_n} a_s a_{t_n}
+    = 0
+    \,.
+\end{equation*}
+Since $\|g^t_{k-1} - g^t_k \| \to 0$, $\|g^*-g\|<+\infty$ and $\|g^0_K - g^*\|^2
+\geq \|g^t_k - g^*\|^2$ for all $t\geq 1$ and $k=1,\,\ldots,\,K$, we have that
+\begin{align*}
+  \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle
+    &= \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+      + \sum_{j=2}^K \langle g^{t_n}_j - g^{t_n}_{j-1}, g^{t_n}_K - g \rangle
+      \\
+    &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+      + \sum_{j=2}^K \|g^{t_n}_K - g\| \|g^{t_n}_j - g^{t_n}_{j-1}\|
+      \,,
+\end{align*}
+and the $\limsup_{n\to \infty}$ of the right-hand side is zero. Thus there exsits
+$(t_n)_{n\geq1} \uparrow$ such that $\lim_{n\to 0} \langle g^{t_n}_K - f, g^{t_n}_K - g
+\rangle \leq 0$ for all $f\in \bigcap_{k=1}^K C_k$.
+
+The sequence $(g^{t_n}_K)_{n\geq 1}$ is bounded from the main bound above, whence
+by weak compactness it must have another subsequence that weakly converges to some
+$h\in \Hcal$. This subsequence can be further refined to make $\|g^t_k\|$ converge
+in $\real$. Ultimately, there is a subsequence $(t_n)_{n\geq1}\uparrow$ such that
+\begin{itemize}
+  \item there is $h\in \Hcal$ such that $g^{t_n}_K \rightharpoonup h$;
+  \item $\lim_{n\to \infty} \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle \leq 0$
+  for all $f\in \bigcap_{k=1}^K C_k$;
+  \item $\lim_{n \to \infty} \|g^{t_n}_K\| \in [0, +\infty)$.
+\end{itemize}
 
 \paragraph{Application to the GLS estimate} % (fold)
 \label{par:application_to_the_gls_estimate}
