@@ -204,6 +204,8 @@ with $b^0_k = 2 \langle \delta^0_k, g^0_k - g^* \rangle = 0$ and $a^0_k = 2 \lan
     \,,
 \end{align*}
 since $b^t_k \geq 0$ and $a^t_k \geq 0$ for all $t\geq 0$ by \eqref{eq:dykstra_prop}.
+The first and the last lines imply that $\|g^0_K - g^*\| \geq \|g^t_k - g^*\|$, whence
+$(g^t_k)_{t\geq1}$ is bounded for all $k$.
 
 % subsection* working_with_the_iterations (end)
 
@@ -260,17 +262,6 @@ Observe that by Cauchy-Schwartz (H{\"o}lder for $p=q=2$) inequality we have
     \biggr)^{\tfrac12}
     \,,
 \end{equation*}
-% Since $a b \leq \tfrac12 a^2 + \tfrac12 b^2$, we have
-% \begin{align*}
-%   a^2_t
-%     &= \biggl(\sum_{k=2}^K \| g^t_{k-1} - g^t_k \| \biggr)^2
-%       = \sum_{k=2}^K \sum_{j=2}^K \| g^t_{k-1} - g^t_k \| \| g^t_{j-1} - g^t_j \|
-%     \\
-%     &\leq \tfrac12 \sum_{k=2}^K \sum_{j=2}^K
-%       \| g^t_{k-1} - g^t_k \|^2 + \| g^t_{j-1} - g^t_j \|^2
-%     = (K - 1) \sum_{k=2}^K \| g^t_{k-1} - g^t_k \|^2
-%     \,,
-% \end{align*}
 which implies that
 \begin{equation*}
   \sum_{t\geq 1} a^2_t
@@ -278,9 +269,8 @@ which implies that
       < +\infty
     \,,
 \end{equation*}
-Therefore there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} a_s a_{t_n}
-\to 0$ as $n\longrightarrow \infty$ ({\color{red} WHY?}).
-Hence
+For such series there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} a_s
+a_{t_n} \to 0$ ({\bf \color{red} WHY?}). Hence
 \begin{equation*}
   \lim_{n \to \infty} \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
     \leq \lim_{n \to \infty} \sum_{s=1}^{t_n} a_s a_{t_n}
@@ -295,7 +285,10 @@ Since $\|g^t_{k-1} - g^t_k \| \to 0$, $\|g^*-g\|<+\infty$ and $\|g^0_K - g^*\|^2
       + \sum_{j=2}^K \langle g^{t_n}_j - g^{t_n}_{j-1}, g^{t_n}_K - g \rangle
       \\
     &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-      + \sum_{j=2}^K \|g^{t_n}_K - g\| \|g^{t_n}_j - g^{t_n}_{j-1}\|
+      + \|g^{t_n}_K - g\| \sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
+      \\
+    &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+      + \bigl(\|g^0_K - g^*\| + \|g^* - g\| \bigr)\sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
       \,,
 \end{align*}
 and the $\limsup_{n\to \infty}$ of the right-hand side is zero. Thus there exsits
