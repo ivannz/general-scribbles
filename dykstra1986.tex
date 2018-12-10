@@ -81,7 +81,7 @@ Consider the following problem:
       & & \tfrac12 \|h - g\|^2
           \,, \\
     & \text{s.t.}
-      & & h \in \bigcap_{k=1}^K C_k
+      & & h \in C = \bigcap_{k=1}^K C_k
           \,.
   \end{aligned}
 \end{equation}
@@ -113,8 +113,8 @@ the projection property \eqref{eq:proj_prop} implies that $\delta^t_k$ in
   \geq 0
   \,.
 \end{equation}
-In particular, $h$ can be $g^s_k \in C_k$ for any $s\geq 1$ or an element of
-$\bigcap_{j=1}^K C_j \subseteq C_k$.
+In particular, $h$ can be $g^s_k \in C_k$ for any $s\geq 1$ or any element of
+$C = \bigcap_{j=1}^K C_j \subseteq C_k$.
 
 Below we shall show that iterations \eqref{eq:dykstra_iter} converge to $g^*$, the
 solution of \eqref{eq:k-projection}.
@@ -128,28 +128,29 @@ solution of \eqref{eq:k-projection}.
 The proof hinges on a key ``balance'' property of the updates in \eqref{eq:dykstra_iter}
 and the property of the projection \eqref{eq:proj_prop}. The relation $g^t_{k-1} - g^t_k =
 \delta^t_k - \delta^{t-1}_k$ implies
-\begin{align*}
-  % g^t_k - g^t_{k-1} &= \delta^{t-1}_k - \delta^t_k \,, \\
+\begin{align}
+  % g^t_k - g^t_{k-1} &= \delta^{t-1}_k - \delta^t_k
+  %   \,, \notag \\
   g^t_k - g^{t-1}_K
     &= g^t_k - g^t_0
       = \sum_{j=1}^k (\delta^{t-1}_j - \delta^t_j)
-    \,, \\
+    \,, \notag \\
   % g^t_K - g^{t-1}_K
   %   &= \sum_{j=1}^K \delta^{t-1}_j - \delta^t_j
-  %   \,, \\
+  %   \,, \notag \\
   g^t_K - g^0_K
     &= \sum_{s=1}^t (g^s_K - g^{s-1}_K)
     % = \sum_{s=1}^t \sum_{j=1}^K \delta^{s-1}_j - \delta^s_j
     = \sum_{j=1}^K \sum_{s=1}^t (\delta^{s-1}_j - \delta^s_j)
     % = \sum_{j=1}^K \delta^0_j - \delta^t_j
     = \sum_{j=1}^K \delta^0_j - \sum_{j=1}^K \delta^t_j
-    \,, \\
+    \,, \label{eq:tK_iterate} \\
   g^t_k - g
     &= g^t_k - g^0_K
     = - \sum_{j=1}^K \delta^{t-1}_j + \sum_{j=1}^k \delta^{t-1}_j - \delta^t_j
     = - \sum_{j=1}^k \delta^t_j - \sum_{j=k+1}^K \delta^{t-1}_j
-    \,. 
-\end{align*}
+    \,. \notag
+\end{align}
 This relation also implies that the difference $\|g^t_{k-1} - g^*\|^2 - \|g^t_k - g^*\|^2
 = \ldots$ is
 \begin{align*}
@@ -166,37 +167,46 @@ This relation also implies that the difference $\|g^t_{k-1} - g^*\|^2 - \|g^t_k 
     &= \underbrace{2 \langle \delta^t_k, g^t_k - g^* \rangle}_{b^t_k}
       - \underbrace{2 \langle \delta^{t-1}_k, g^{t-1}_k - g^* \rangle}_{b^{t-1}_k}
       + \underbrace{2 \langle \delta^{t-1}_k, g^{t-1}_k - g^t_k\rangle}_{a^{t-1}_k}
-      + \| \delta^t_k - \delta^{t-1}_k \|^2
+      + \underbrace{\| \delta^t_k - \delta^{t-1}_k \|^2}_{c^t_k}
     \,,
 \end{align*}
 with $b^0_k = 2 \langle \delta^0_k, g^0_k - g^* \rangle = 0$ and $a^0_k = 2 \langle
 \delta^0_k, g^0_k - g^1_k\rangle = 0$. Furthermore
-\begin{align*}
+\begin{align}
   % \|g^t_{k-1} - g^*\|^2 - \|g^t_k - g^*\|^2
-  %   &= (b^t_k - b^{t-1}_k) + a^{t-1}_k + \| \delta^t_k - \delta^{t-1}_k \|^2
-  %   \,, \\
+  %   &= (b^t_k - b^{t-1}_k) + a^{t-1}_k + c^t_k
+  %   \,, \notag \\
   \|g^t_0 - g^*\|^2 - \|g^t_k - g^*\|^2
     &= \sum_{j=1}^k (b^t_j - b^{t-1}_j)
-      + \sum_{j=1}^k \bigl(
-        a^{t-1}_j + \| \delta^t_j - \delta^{t-1}_j \|^2
-      \bigr)
-    \,, \\
+      + \sum_{j=1}^k \bigl( a^{t-1}_j + c^t_j \bigr)
+    \,, \label{eq:t0k_norm} \\
+  \bigl \| g^{t_1}_K - g^* \bigr \|^2 - \bigl \| g^{t_2}_K - g^* \bigr \|^2
+    % &= \sum_{s=t_1+1}^{t_2} \|g^{s-1}_K - g^*\|^2 - \|g^s_K - g^*\|^2
+    %   \notag \\
+    &= \sum_{t=t_1+1}^{t_2} \Bigl(
+        \sum_{j=1}^K (b^t_j - b^{t-1}_j)
+          + \sum_{j=1}^K \bigl( a^{t-1}_j + c^t_j \bigr)
+        \Bigr)
+      \notag \\
+    % &= \sum_{j=1}^K \sum_{t=t_1+1}^{t_2} (b^t_j - b^{t-1}_j)
+    %     + \sum_{j=1}^K \sum_{t=t_1+1}^{t_2} a^{t-1}_j
+    %     + \sum_{t=t_1+1}^{t_2} \sum_{j=1}^K c^t_j
+    %   \notag \\
+    &= \sum_{j=1}^K (b^{t_2}_j - b^{t_1}_j)
+        + \sum_{j=1}^K \sum_{t=t_1}^{t_2-1} a^t_j
+        + \sum_{t=t_1+1}^{t_2} \sum_{j=1}^K c^t_j
+      \notag \\
+    &= \sum_{j=1}^K \Bigl( b^{t_2}_j + a^{t_1}_j - b^{t_1}_j
+          + \sum_{t=t_1+1}^{t_2-1} a^t_j + \sum_{t=t_1+1}^{t_2} c^t_j
+      \Bigr)
+    \,, \label{eq:t1t2K_norm}
+\end{align}
+For $t_1 = 0$ and $t_2 = t$, we get
+\begin{align*}
   \|g^0_K - g^*\|^2 - \|g^t_K - g^*\|^2
-    % &= \sum_{s=1}^t \|g^{s-1}_K - g^*\|^2 - \|g^s_K - g^*\|^2
-    %   \\
-    &= \sum_{s=1}^t \sum_{k=1}^K (b^s_k - b^{s-1}_k)
-      + \sum_{s=1}^t \sum_{k=1}^K \bigl(
-        a^{s-1}_k + \| \delta^s_k - \delta^{s-1}_k \|^2
-      \bigr)
-    %   \\
-    % &= \sum_{k=1}^K b^t_k - b^0_k
-    %   + \sum_{s=1}^t \sum_{k=1}^K a^{s-1}_k
-    %   + \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
-      \\
     &= \sum_{k=1}^K b^t_k
-      - \sum_{k=1}^K b^0_k
-      + \sum_{k=1}^K \sum_{s=0}^{t-1} a^s_k
-      + \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
+        + \sum_{k=1}^K \sum_{s=1}^{t-1} a^s_k
+        + \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
       \\
     &\geq
       \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
@@ -227,9 +237,7 @@ $(g^t_p)_{t\geq 1}$ for any $p=1,\,\ldots,\,K$: indeed
 \end{equation*}
 Therefore proving the convergence of $(g^t_K)_{t\geq 1}$ is sufficient.
 
-% subsection* limiting_properties (end)
-
-For any $f\in \bigcap_{k=1}^K C_k$ we have $\langle \delta^t_k,  g^t_k - f \rangle
+For any $f\in C = \bigcap_{k=1}^K C_k$ we have $\langle \delta^t_k,  g^t_k - f \rangle
 \geq 0$ by \eqref{eq:dykstra_prop}, whence
 \begin{equation*}
   \langle g^t_1 - f, g^t_K - g \rangle
@@ -239,23 +247,23 @@ For any $f\in \bigcap_{k=1}^K C_k$ we have $\langle \delta^t_k,  g^t_k - f \rang
     \leq \sum_{k=2}^K \langle g^t_k - g^t_1, \delta^t_k \rangle
       \,.
 \end{equation*}
-If we put $a_t = \sum_{k=2}^K \| g^t_{k-1} - g^t_k \|$, then we get
+If we put $d_t = \sum_{k=2}^K \| g^t_{k-1} - g^t_k \|$, then we get
 \begin{align*}
   \sum_{k=2}^K \bigl\lvert \langle g^t_k - g^t_1, \delta^t_k \rangle \bigr\rvert
     &\leq \sum_{k=2}^K \|\delta^t_k\| \| g^t_k - g^t_1 \|
     \leq \sum_{k=2}^K \|\delta^t_k\| \sum_{j=2}^k \| g^t_{j-1} - g^t_j \|
     \\
-    &\leq \sum_{k=2}^K \|\delta^t_k\| \, a_t
-    = \sum_{k=2}^K a_t \Bigl\| \sum_{s=1}^t (\delta^s_k - \delta^{s-1}_k) \Bigr\|
+    &\leq \sum_{k=2}^K \|\delta^t_k\| \, d_t
+    = \sum_{k=2}^K d_t \Bigl\| \sum_{s=1}^t (\delta^s_k - \delta^{s-1}_k) \Bigr\|
     \\
-    &\leq \sum_{k=2}^K \sum_{s=1}^t a_t \|\delta^s_k - \delta^{s-1}_k \|
-    = \sum_{s=1}^t \sum_{k=2}^K a_t \|g^s_{k-1} - g^s_k \|
-    = \sum_{s=1}^t a_t a_s
+    &\leq \sum_{k=2}^K \sum_{s=1}^t d_t \|\delta^s_k - \delta^{s-1}_k \|
+    = \sum_{s=1}^t \sum_{k=2}^K d_t \|g^s_{k-1} - g^s_k \|
+    = \sum_{s=1}^t d_t d_s
       \,.
 \end{align*}
 Observe that by Cauchy-Schwartz (H{\"o}lder for $p=q=2$) inequality we have
 \begin{equation*}
-  a_t
+  d_t
     \leq \sum_{k=1}^K 1 \cdot \| g^t_{k-1} - g^t_k \|
     \leq K^{\tfrac12} \biggl(
       \sum_{k=1}^K \| g^t_{k-1} - g^t_k \|^2
@@ -264,49 +272,181 @@ Observe that by Cauchy-Schwartz (H{\"o}lder for $p=q=2$) inequality we have
 \end{equation*}
 which implies that
 \begin{equation*}
-  \sum_{t\geq 1} a^2_t
+  \sum_{t\geq 1} d^2_t
     \leq K \sum_{t\geq 1} \sum_{k=1}^K \| g^t_{k-1} - g^t_k \|^2
       < +\infty
-    \,,
+    \,.
 \end{equation*}
-For such series there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} a_s
-a_{t_n} \to 0$ ({\bf \color{red} WHY?}). Hence
+For such series there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} d_s
+d_{t_n} \to 0$ ({\bf \color{red} WHY?}). Hence
 \begin{equation*}
   \lim_{n \to \infty} \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-    \leq \lim_{n \to \infty} \sum_{s=1}^{t_n} a_s a_{t_n}
+    \leq \lim_{n \to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
     = 0
     \,.
 \end{equation*}
-Since $\|g^t_{k-1} - g^t_k \| \to 0$, $\|g^*-g\|<+\infty$ and $\|g^0_K - g^*\|^2
-\geq \|g^t_k - g^*\|^2$ for all $t\geq 1$ and $k=1,\,\ldots,\,K$, we have that
+
+Since $\|g^t_{k-1} - g^t_k \| \to 0$ as $t\to \infty$ and $(g^t_k)_{t\geq1}$ is
+bounded for all $k$, we have
 \begin{align*}
   \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle
-    &= \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-      + \sum_{j=2}^K \langle g^{t_n}_j - g^{t_n}_{j-1}, g^{t_n}_K - g \rangle
+    &= \Bigl(
+      \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+        + \sum_{j=2}^K \langle g^{t_n}_j - g^{t_n}_{j-1}, g^{t_n}_K - g \rangle
+      \Bigr)
       \\
     &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-      + \|g^{t_n}_K - g\| \sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
-      \\
-    &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-      + \bigl(\|g^0_K - g^*\| + \|g^* - g\| \bigr)\sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
-      \,,
+      + \bigl(
+        \|g\| + \sup_{t,k\geq 1} \|g^t_k\|
+      \bigr) \sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
+      \,.
 \end{align*}
-and the $\limsup_{n\to \infty}$ of the right-hand side is zero. Thus there exsits
-$(t_n)_{n\geq1} \uparrow$ such that $\lim_{n\to 0} \langle g^{t_n}_K - f, g^{t_n}_K - g
-\rangle \leq 0$ for all $f\in \bigcap_{k=1}^K C_k$.
+Hence the right-hand side not greater than zero in the limit.
 
-The sequence $(g^{t_n}_K)_{n\geq 1}$ is bounded from the main bound above, whence
-by weak compactness it must have another subsequence that weakly converges to some
-$h\in \Hcal$. This subsequence can be further refined to make $\|g^t_k\|$ converge
-in $\real$. Ultimately, there is a subsequence $(t_n)_{n\geq1}\uparrow$ such that
+Next, since $\|g^{t_n}_k\|$ is bounded, it has a convergent subsequence in $\real$.
+We can assume that $t_n$ itself is this subsequence, since refining convergent
+sequences does not affect its limiting properties.
+
+Finally, by weak compactness the bounded sequence $(g^{t_n}_K)_{n\geq 1}$ has another
+subsequence that weakly converges to some $h \in \Hcal$. Again, we are free to let
+$(t_n)_{n\geq 1}$ be that subsequence.
+
+% So far we have shown that the iterates $g^t_k$ have the following properties:
+% \begin{itemize}
+%   \item $(g^t_k)_{t\geq 1}$ is bounded for all $k$;
+%   \item if $(g^t_K)_{t\geq 1}$ converges strongly then so do $(g^t_k)_{\geq t}$ for $k=1..K$;
+%   \item there is $(t_n)_{n\geq1} \uparrow$ with $\lim_{n\to 0} \langle g^{t_n}_K - f,
+%   g^{t_n}_K - g \rangle \leq 0$ for all $f\in C$.
+% \end{itemize}
+
+% subsection* limiting_properties (end)
+
+\subsection*{Finding a convergent sequence} % (fold)
+\label{sub:finding_a_convergent_sequence}
+
+We have shown that the iterates $g^t_k$ of \eqref{eq:dykstra_iter} admit
+$(t_n)_{n \geq 1} \uparrow$ such that
 \begin{itemize}
-  \item there is $h\in \Hcal$ such that $g^{t_n}_K \rightharpoonup h$;
+  \item there is $h\in \Hcal$ with $g^{t_n}_K \rightharpoonup h$;
+  \item there exists $L \in \real$ with $\|g^{t_n}_K\| \to L$;
   \item $\lim_{n\to \infty} \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle \leq 0$
-  for all $f\in \bigcap_{k=1}^K C_k$;
-  \item $\lim_{n \to \infty} \|g^{t_n}_K\| \in [0, +\infty)$.
+  for all $f\in C = \bigcap_{k=1}^K C_k$.
+\end{itemize}
+Observe also, that if $x_n \rightharpoonup x$ and $\|x_n\| \to L$, then from
+\begin{equation*}
+  \|x\|^2
+    = \limsup_{n\to \infty} \langle x_n, x\rangle
+    \leq \limsup_{n\to \infty} \|x_n\| \|x\|
+    = L \|x\|
+    \,,
+\end{equation*}
+we conclude that $\|x\| \leq L$. We apply this to $x_n = g^{t_n}_K$ and $x = h$ to
+get $\|h\|\leq L$.
+
+From the properties of $(t_n)_{n\geq1}$ we have
+\begin{align} \label{eq:weak_lim_equ}
+  \lim_{n\to \infty}
+    \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle
+    &= \lim_{n\to \infty} \|g^{t_n}_K\|^2
+      - \lim_{n\to \infty} \langle g^{t_n}_K, g \rangle
+      - \lim_{n\to \infty} \langle f, g^{t_n}_K \rangle
+      + \langle f, g \rangle
+    \notag \\
+    &= L^2 \pm \|h\|^2 - \langle h, g \rangle - \langle h, g \rangle
+      + \langle f, g \rangle
+    \notag \\
+    &= L^2 - \|h\|^2 + \langle h - f, h - g \rangle
+  \,,
+\end{align}
+and thus $\langle h - f, h - g \rangle \leq 0$ for any $f \in C$.
+
+Next, for any $f\in \Hcal$ and $k=1..K$ we have the following inequality
+\begin{equation*}
+  \limsup_{n\to\infty}\,
+    \bigl\lvert
+      \langle g^{t_n}_K, f \rangle - \langle g^{t_n}_k, f \rangle
+    \bigr\rvert
+    \leq
+      \|f\| \sum_{j=k+1}^K \limsup_{n\to\infty}
+        \bigl \|g^{t_n}_{j-1} - g^{t_n}_j \bigr \|
+      \,,
+\end{equation*}
+which implies that $g^{t_n}_k \rightharpoonup h$ for any $k$. However, for any $k$
+from the weak convergence of $x_n = g^{t_n}_k$ to $h$ it is possible to deduce that
+there is a subsequence $(n^k_i)_{i\geq1}$ with $\tfrac1m \sum_{i=1}^m x_{n^k_i} \to h$
+strongly ({\bf \color{red} WHY?}). Therefore $h \in C_k$, since $x_{n^k_i} \in C_k$
+for all $i$, and $C_k$ is convex and {\bf strongly closed}.
+
+Therefore, the weak limit of $g^{t_n}_k$ is in $C$. From \eqref{eq:weak_lim_equ}
+for $f = h \in C$ we conclude that $0 \geq L^2 - \|h\|^2$, whence $\|h\| = L$.
+This implies that $g^{t_n}_k \to h$, because
+\begin{equation*}
+  \limsup_{n\to\infty} \| g^{t_n}_k - h \|^2
+    = \| h \|^2 + \limsup_{n\to\infty} \|g^{t_n}_k\|^2 - 2\langle g^{t_n}_k, h \rangle
+    = \| h \|^2 + L^2 - 2 \| h \|^2
+    \,.
+\end{equation*}
+To conclude, we have found a subsequence $(t_n)_{n\geq1} \uparrow$ such that
+\begin{itemize}
+  \item $g^{t_n}_k \to h$ strongly for any $k$ and $h=g^*$, since $h \in C$ and
+  satisfies \eqref{eq:proj_prop}.
 \end{itemize}
 
-Therefore
+% subsection* finding_a_convergent_sequence (end)
+
+\subsection*{Back to the iterations} % (fold)
+\label{sub:back_to_the_iterations}
+
+From \eqref{eq:t1t2K_norm} for any $m \geq 1$ we get
+\begin{align*}
+  \bigl \| g^{t_n}_K - g^* \bigr \|^2 - \bigl \| g^{t_n+m}_K - g^* \bigr \|^2
+    &= \sum_{j=1}^K (b^{t_n+m}_j - b^{t_n}_j)
+        + \sum_{j=1}^K \Bigl(
+          \sum_{i=0}^{m-1} a^{t_n+i}_j
+          + \sum_{i=1}^m c^{t_n+i}_j
+      \Bigr)
+      \\
+    &\geq - \sum_{j=1}^K b^{t_n}_j
+      = 2 \sum_{j=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle
+    \,,
+\end{align*}
+Since \eqref{eq:tK_iterate} implies that $g - g^t_K = \sum_{k=1}^K \delta^t_k$, we
+can get the following upper bound
+\begin{align*}
+  \Bigl \lvert \sum_{k=1}^K \langle \delta^t_k, g^* - g^t_k \rangle \Bigr \rvert
+    &= \Bigl \lvert
+      \Bigl\langle \sum_{k=1}^K \delta^t_k, g^* - g^t_1 \Bigr \rangle
+      + \sum_{k=1}^K \langle \delta^t_k, g^t_1 - g^t_k \rangle
+      \Bigr \rvert
+      \\
+    &\leq \bigl\lvert \langle g^t_K - g, g^t_1 - g^* \rangle \bigr\rvert 
+      + \sum_{k=2}^K \bigl\lvert \langle \delta^t_k, g^t_k - g^t_1 \rangle \bigr\rvert 
+      \\
+    &\leq \bigl\lvert \langle g^t_K - g, g^t_1 - g^* \rangle \bigr\rvert 
+      + \sum_{s=1}^t d_t d_s
+      \,.
+\end{align*}
+Applying this bound to the subsequence $(t_n)_{n\geq1}$ we get in the limit
+\begin{align*}
+  \lim_{n\to \infty}
+    \Bigl \lvert \sum_{k=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle \Bigr \rvert
+    &\leq \lim_{n\to \infty}
+      \bigl\lvert \langle g^{t_n}_K - g, g^{t_n}_1 - g^* \rangle \bigr\rvert
+      + \lim_{n\to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
+      \\
+    &\leq \lim_{n\to \infty} \|g^{t_n}_K - g\| \|g^{t_n}_1 - g^* \|
+      = 0
+    \,,
+\end{align*}
+because $g^{t_n}_k \to g^*$ and $g^t_k$ is bounded. Therefore 
+\begin{equation*}
+  \limsup_{n\to\infty} \bigl \| g^{t_n+m}_K - g^* \bigr \|^2
+    \leq \limsup_{n\to\infty} \bigl \| g^{t_n}_K - g^* \bigr \|^2
+      + 2 \Bigl \lvert \sum_{k=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle \Bigr \rvert
+    \leq 0
+    \,.
+\end{equation*}
+
 \begin{equation*}
   g^t_k
     = \mathrm{proj}_{C_k}\bigl(
@@ -318,6 +458,8 @@ Therefore
     \biggr)
     \,.
 \end{equation*}
+
+% subsection* back_to_the_iterations (end)
 
 
 \paragraph{Application to the GLS estimate} % (fold)
