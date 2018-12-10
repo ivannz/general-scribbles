@@ -114,7 +114,7 @@ the projection property \eqref{eq:proj_prop} implies that $\delta^t_k$ in
   \,.
 \end{equation}
 In particular, $h$ can be $g^s_k \in C_k$ for any $s\geq 1$ or any element of
-$C = \bigcap_{j=1}^K C_j \subseteq C_k$.
+$\bigcap_{j=1}^K C_j \subseteq C_k$.
 
 Below we shall show that iterations \eqref{eq:dykstra_iter} converge to $g^*$, the
 solution of \eqref{eq:k-projection}.
@@ -202,17 +202,17 @@ with $b^0_k = 2 \langle \delta^0_k, g^0_k - g^* \rangle = 0$ and $a^0_k = 2 \lan
     \,, \label{eq:t1t2K_norm}
 \end{align}
 For $t_1 = 0$ and $t_2 = t$, we get
-\begin{align*}
+\begin{align}
   \|g^0_K - g^*\|^2 - \|g^t_K - g^*\|^2
     &= \sum_{k=1}^K b^t_k
         + \sum_{k=1}^K \sum_{s=1}^{t-1} a^s_k
         + \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
-      \\
+      \notag \\
     &\geq
       \sum_{s=1}^t \sum_{k=1}^K \| \delta^s_k - \delta^{s-1}_k \|^2
     = \sum_{s=1}^t \sum_{k=1}^K \| g^s_{k-1} - g^s_k \|^2
-    \,,
-\end{align*}
+    \,, \label{eq:gtk_bound}
+\end{align}
 since $b^t_k \geq 0$ and $a^t_k \geq 0$ for all $t\geq 0$ by \eqref{eq:dykstra_prop}.
 The first and the last lines imply that $\|g^0_K - g^*\| \geq \|g^t_k - g^*\|$, whence
 $(g^t_k)_{t\geq1}$ is bounded for all $k$.
@@ -222,13 +222,13 @@ $(g^t_k)_{t\geq1}$ is bounded for all $k$.
 \subsection*{Limiting properties} % (fold)
 \label{sub:limiting_properties}
 
-This section follows the proof in \cite{boyledykstra1986}.
+This section somewhat follows the proof in \cite{boyledykstra1986}.
 
-The partial sum in the hand side is bounded, and therefore the limit exists and the
-series $\sum_{t\geq 1} \sum_{k=1}^K \| g^t_{k-1} - g^t_k \|^2$ converge. This implies
-that for any $k$ we have $\|g^t_{k-1} - g^t_k\|^2 \to 0$ as $t\to \infty$.
-Furthermore, if $(g^t_k)_{t\geq 1}\in \Hcal$ converges strongly to $h$, then so does
-$(g^t_p)_{t\geq 1}$ for any $p=1,\,\ldots,\,K$: indeed
+The partial sum in the right hand side of \eqref{eq:gtk_bound} is bounded, therefore
+the limit exists and the series $\sum_{t\geq 1} \sum_{k=1}^K \| g^t_{k-1} - g^t_k \|^2$
+converge. This implies that for any $k$ we have $\|g^t_{k-1} - g^t_k\|^2 \to 0$ as
+$t\to \infty$. Furthermore, if $(g^t_k)_{t\geq 1}\in \Hcal$ converges strongly to
+$h$, then so does $(g^t_p)_{t\geq 1}$ for any $p=1,\,\ldots,\,K$: indeed
 \begin{equation*}
   \limsup_{t\to \infty} \| g^t_p - h \|
     \leq \limsup_{t\to \infty} \|g^t_k - h\|
@@ -280,20 +280,17 @@ which implies that
 For such series there is $(t_n)_{n\geq1} \uparrow$ such that $\sum_{s=1}^{t_n} d_s
 d_{t_n} \to 0$ ({\bf \color{red} WHY?}). Hence
 \begin{equation*}
-  \lim_{n \to \infty} \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
-    \leq \lim_{n \to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
+  \limsup_{n \to \infty} \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+    \leq \limsup_{n \to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
     = 0
     \,.
 \end{equation*}
-
 Since $\|g^t_{k-1} - g^t_k \| \to 0$ as $t\to \infty$ and $(g^t_k)_{t\geq1}$ is
 bounded for all $k$, we have
 \begin{align*}
   \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle
-    &= \Bigl(
-      \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
+    &= \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
         + \sum_{j=2}^K \langle g^{t_n}_j - g^{t_n}_{j-1}, g^{t_n}_K - g \rangle
-      \Bigr)
       \\
     &\leq \langle g^{t_n}_1 - f, g^{t_n}_K - g \rangle
       + \bigl(
@@ -301,7 +298,7 @@ bounded for all $k$, we have
       \bigr) \sum_{j=2}^K \|g^{t_n}_j - g^{t_n}_{j-1}\|
       \,.
 \end{align*}
-Hence the right-hand side not greater than zero in the limit.
+Therefore the right-hand side not greater than zero in the upper limit.
 
 Next, since $\|g^{t_n}_k\|$ is bounded, it has a convergent subsequence in $\real$.
 We can assume that $t_n$ itself is this subsequence, since refining convergent
@@ -329,7 +326,7 @@ $(t_n)_{n \geq 1} \uparrow$ such that
 \begin{itemize}
   \item there is $h\in \Hcal$ with $g^{t_n}_K \rightharpoonup h$;
   \item there exists $L \in \real$ with $\|g^{t_n}_K\| \to L$;
-  \item $\lim_{n\to \infty} \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle \leq 0$
+  \item $\limsup_{n\to \infty} \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle \leq 0$
   for all $f\in C = \bigcap_{k=1}^K C_k$.
 \end{itemize}
 Observe also, that if $x_n \rightharpoonup x$ and $\|x_n\| \to L$, then from
@@ -345,15 +342,14 @@ get $\|h\|\leq L$.
 
 From the properties of $(t_n)_{n\geq1}$ we have
 \begin{align} \label{eq:weak_lim_equ}
-  \lim_{n\to \infty}
+  \limsup_{n\to \infty}
     \langle g^{t_n}_K - f, g^{t_n}_K - g \rangle
-    &= \lim_{n\to \infty} \|g^{t_n}_K\|^2
-      - \lim_{n\to \infty} \langle g^{t_n}_K, g \rangle
-      - \lim_{n\to \infty} \langle f, g^{t_n}_K \rangle
-      + \langle f, g \rangle
+    &= \limsup_{n\to \infty} \bigl(
+        \|g^{t_n}_K\|^2 - \langle g^{t_n}_K, g \rangle - \langle f, g^{t_n}_K \rangle
+      \bigr) + \langle f, g \rangle
     \notag \\
-    &= L^2 \pm \|h\|^2 - \langle h, g \rangle - \langle h, g \rangle
-      + \langle f, g \rangle
+    &= L^2 - \langle h, g \rangle - \langle h, g \rangle
+      + \langle f, g \rangle \pm \|h\|^2
     \notag \\
     &= L^2 - \|h\|^2 + \langle h - f, h - g \rangle
   \,,
@@ -377,9 +373,9 @@ there is a subsequence $(n^k_i)_{i\geq1}$ with $\tfrac1m \sum_{i=1}^m x_{n^k_i} 
 strongly ({\bf \color{red} WHY?}). Therefore $h \in C_k$, since $x_{n^k_i} \in C_k$
 for all $i$, and $C_k$ is convex and {\bf strongly closed}.
 
-Therefore, the weak limit of $g^{t_n}_k$ is in $C$. From \eqref{eq:weak_lim_equ}
-for $f = h \in C$ we conclude that $0 \geq L^2 - \|h\|^2$, whence $\|h\| = L$.
-This implies that $g^{t_n}_k \to h$, because
+Therefore, the weak limit $h$ of $g^{t_n}_k$ is in $C$. From \eqref{eq:weak_lim_equ}
+for $f = h$ we conclude that $0 \geq L^2 - \|h\|^2$, whence $\|h\| = L$. This implies
+that $g^{t_n}_k \to h$, because
 \begin{equation*}
   \limsup_{n\to\infty} \| g^{t_n}_k - h \|^2
     = \| h \|^2 + \limsup_{n\to\infty} \|g^{t_n}_k\|^2 - 2\langle g^{t_n}_k, h \rangle
@@ -397,20 +393,29 @@ To conclude, we have found a subsequence $(t_n)_{n\geq1} \uparrow$ such that
 \subsection*{Back to the iterations} % (fold)
 \label{sub:back_to_the_iterations}
 
-From \eqref{eq:t1t2K_norm} for any $m \geq 1$ we get
-\begin{align*}
-  \bigl \| g^{t_n}_K - g^* \bigr \|^2 - \bigl \| g^{t_n+m}_K - g^* \bigr \|^2
-    &= \sum_{j=1}^K (b^{t_n+m}_j - b^{t_n}_j)
-        + \sum_{j=1}^K \Bigl(
-          \sum_{i=0}^{m-1} a^{t_n+i}_j
-          + \sum_{i=1}^m c^{t_n+i}_j
-      \Bigr)
-      \\
-    &\geq - \sum_{j=1}^K b^{t_n}_j
-      = 2 \sum_{j=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle
-    \,,
-\end{align*}
-Since \eqref{eq:tK_iterate} implies that $g - g^t_K = \sum_{k=1}^K \delta^t_k$, we
+For any $t \geq t_n$ the result in \eqref{eq:t1t2K_norm} implies
+% \begin{align*}
+%   \bigl \| g^{t_n}_K - g^* \bigr \|^2
+%     &= \bigl \| g^t_K - g^* \bigr \|^2
+%       + \sum_{j=1}^K (b^t_j - b^{t_n}_j)
+%       + \sum_{j=1}^K \sum_{s=t_n}^{t-1} a^s_j
+%       + \sum_{j=1}^K \sum_{s=t_n+1}^t c^s_j
+%       \\
+%     &\geq \bigl \| g^t_K - g^* \bigr \|^2
+%       - \sum_{j=1}^K b^{t_n}_j
+%     \,,
+% \end{align*}
+\begin{equation*}
+  \bigl \| g^t_K - g^* \bigr \|^2
+    \leq \bigl \| g^{t_n}_K - g^* \bigr \|^2
+    + \sum_{k=1}^K b^{t_n}_k
+    \leq \bigl \| g^{t_n}_K - g^* \bigr \|^2
+    + 2 \Bigl \lvert
+        \sum_{k=1}^K \langle \delta^{t_n}_k, g^{t_n}_k - g^* \rangle
+      \Bigr \rvert
+    \,.
+\end{equation*}
+Since \eqref{eq:tK_iterate} implies $g - g^t_K = \sum_{k=1}^K \delta^t_k$, we
 can get the following upper bound
 \begin{align*}
   \Bigl \lvert \sum_{k=1}^K \langle \delta^t_k, g^* - g^t_k \rangle \Bigr \rvert
@@ -428,42 +433,36 @@ can get the following upper bound
 \end{align*}
 Applying this bound to the subsequence $(t_n)_{n\geq1}$ we get in the limit
 \begin{align*}
-  \lim_{n\to \infty}
+  \limsup_{n\to \infty}
     \Bigl \lvert \sum_{k=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle \Bigr \rvert
-    &\leq \lim_{n\to \infty}
+    &\leq \limsup_{n\to \infty}
       \bigl\lvert \langle g^{t_n}_K - g, g^{t_n}_1 - g^* \rangle \bigr\rvert
-      + \lim_{n\to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
+      + \limsup_{n\to \infty} \sum_{s=1}^{t_n} d_s d_{t_n}
       \\
-    &\leq \lim_{n\to \infty} \|g^{t_n}_K - g\| \|g^{t_n}_1 - g^* \|
+    &\leq \limsup_{n\to \infty} \|g^{t_n}_K - g\| \|g^{t_n}_1 - g^* \|
       = 0
     \,,
 \end{align*}
-because $g^{t_n}_k \to g^*$ and $g^t_k$ is bounded. Therefore 
+because $g^{t_n}_k \to g^*$ and $g^t_k$ is bounded. Therefore for any $\varepsilon > 0$
+there is $N_\varepsilon \geq 1$ such that $\|g^{t_n}_K - g^*\|^2 < \tfrac\varepsilon2$
+and $\lvert \sum_{k=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle \rvert <
+\tfrac\varepsilon4$ for every $n \geq N_\varepsilon$. Hence for all $t \geq T_\varepsilon$,
+$T_\varepsilon = t_{N_\varepsilon + 1}$, we get
 \begin{equation*}
-  \limsup_{n\to\infty} \bigl \| g^{t_n+m}_K - g^* \bigr \|^2
-    \leq \limsup_{n\to\infty} \bigl \| g^{t_n}_K - g^* \bigr \|^2
-      + 2 \Bigl \lvert \sum_{k=1}^K \langle \delta^{t_n}_k, g^* - g^{t_n}_k \rangle \Bigr \rvert
-    \leq 0
+  \bigl \| g^t_K - g^* \bigr \|^2
+    \leq \bigl \| g^{t_n}_K - g^* \bigr \|^2
+    + 2 \Bigl \lvert
+        \sum_{k=1}^K \langle \delta^{t_n}_k, g^{t_n}_k - g^* \rangle
+      \Bigr \rvert
+    < \tfrac\varepsilon2 + 2 \tfrac\varepsilon4
     \,.
 \end{equation*}
-
-\begin{equation*}
-  g^t_k
-    = \mathrm{proj}_{C_k}\bigl(
-      g^t_{k-1} + \delta^{t-1}_k
-    \bigr)
-    %= g - \sum_{j=1}^{k-1} \delta^t_j - \sum_{j=k}^K \delta^{t-1}_j + \delta^{t-1}_k
-    = \mathrm{proj}_{C_k}\biggl(
-      g - \sum_{j=1}^{k-1} \delta^t_j - \sum_{j=k+1}^K \delta^{t-1}_j
-    \biggr)
-    \,.
-\end{equation*}
+Therefore $g^t_k$ converges strongly to $g^*$ for any $k=1\,, \ldots\,,K$.
 
 % subsection* back_to_the_iterations (end)
 
-
-\paragraph{Application to the GLS estimate} % (fold)
-\label{par:application_to_the_gls_estimate}
+\subsection*{Application to the GLS estimate} % (fold)
+\label{sub:application_to_the_gls_estimate}
 
 The GLS estimate of $y\sim X$ with weights $\Omega$ is $\hat{\beta} = \bigl(X^\T \Omega^{-1} X
 \bigr)^{-1} X^\T \Omega^{-1} y$ and solves the unconstrained problem
@@ -506,6 +505,6 @@ we get a reformulation of the constrained GLS problem
 \end{equation}
 as a projection of $\hat{\beta}$ onto $C$ with respect a special metric.
 
-% paragraph application_to_the_gls_estimate (end)
+% subsection* application_to_the_gls_estimate (end)
 
 \end{document}
