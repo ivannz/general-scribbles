@@ -1,0 +1,134 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\real}{\mathbb{R}}
+
+\title{Study of the constructive proof of weak compactness}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Let $(\Hcal, \langle\cdot,\cdot\rangle)$ be a Hilbert space. A sequence $(x_n)_{n\geq1} 
+\in \Hcal$ converges {\bf strongly} to $x\in\Hcal$ if $\|x_n - x\| \to 0$, and {\bf
+weakly} if $\langle x_n, z \rangle \to \langle x, z\rangle$ for all $z\in \Hcal$.
+Weak convergence is necessary for strong convergence, since for every $z\in \Hcal$
+by the Cauchy-Schwartz inequality
+\begin{equation*}
+  \liminf_{n\to \infty}
+    \lvert \langle x_n - x, z\rangle \rvert
+    \leq \limsup_{n\to \infty}
+      \lvert \langle x_n - x, z\rangle \rvert
+    \leq \|z\| \limsup_{n\to \infty} \|x_n - x \|
+    = 0
+    \,.
+\end{equation*}
+Let $(x_n)_{n\geq1} \in \Hcal$ be a bounded sequence $M = \sup_{n\geq1} \|x_n\| < +\infty$.
+Then there is $(n_k)_{k\geq1}\uparrow$ such that $x_{n_k}$ converges weakly to some
+$h \in \Hcal$, i.e. $x_{n_k}\rightharpoonup h$.
+
+\paragraph{Proof} % (fold)
+\label{par:proof}
+
+Let $\Hcal^0_0 = \{\sum_{i=1}^n \beta_i x_i \colon \beta_i \in \real,\,n\geq 0 \}$.
+The set $\Hcal^0_0$ is a linear subspace of $\Hcal$. It is a pre-Hilbert space with
+respect to $\langle\cdot, \cdot \rangle$, since it can be completed w.r.t. this inner
+product to get $\Hcal_0$ and $\Hcal^0_0$ is dense in its completion.
+
+Let's construct a subsequence, which could potentially weakly converge to something.
+Let $x^0_n = x_n$. Suppose for $k\geq 0$ we have $(x^k_n)_{n\geq 1} \subseteq (x_n)_{n\geq 1}$
+and $(\alpha_i)_{i\leq k}$, such that $\langle x_i, x^k_n\rangle \to \alpha_i$ for
+all $1\leq i\leq k$ as $n\to \infty$.
+
+A sequence $\alpha^{k+1}_n = \langle x_{k+1}, x^k_n \rangle$ in $\real$ is bounded,
+since $\lvert\alpha^{k+1}_n\rvert \leq \|x_{k+1}\| \|x^k_n\| \leq M^2$ and $x^k_n \in
+\{x_n\colon n\geq 1\}$. Therefore, it contains a subsequence $(n_p)_{p\geq1}$ such that
+$\alpha^{k+1}_{n_p}$ converges to some $\alpha^{k+1} \in \real$. If we let $x^{k+1}_p
+= x^k_{n_p}$, then
+\begin{itemize}
+  \item $\langle x_j, x^{k+1}_p \rangle \to \alpha^j$ since $(x^{k+1}_p)_{p\geq 1}
+  \subseteq (x^k_p)_{p\geq 1} \subseteq (x^j_p)_{p\geq 1}$ for $j\leq k$, and
+  subsequences converge to the same limit as the parent sequence;
+  \item $\langle x_{k+1}, x^{k+1}_p \rangle = \alpha^{k+1}_{n_p} \to \alpha^{k+1}$
+  by construction.
+\end{itemize}
+For the diagonal sequence $(x^p_p)_{p\geq1}$ there are indices $(n_p)_{p\geq1} \uparrow$
+such that $x^p_p = x_{n_p}$, and we have $(x^p_p)_{p\geq1} \subseteq (x^k_p)_{p\geq1}$
+for all $k\geq 0$, whence we must have  $\langle x_n, x^p_p \rangle \to \alpha^n$
+for all $n\geq 1$.
+
+Define a map $l(x) = \lim_{p\to \infty} \langle x, x_{n_p} \rangle$. First, we shall
+show that $l$ is well defined on $\Hcal$.
+
+Right from the start we know that $l(x_n) = \alpha^n$ for all $n\geq 1$. Since the
+inner product and the limit are linear, for any $z = \sum_{i=1}^n \beta_i x_i$ for
+some $n\geq 0$ and $\beta_i \in \real$, we have
+\begin{equation*}
+  l(z)
+    = \lim_{p\to \infty} \Bigl \langle \sum_{i=1}^n \beta_i x_i, x_{n_p} \Bigr \rangle
+    = \sum_{i=1}^n \beta_i \lim_{p\to \infty} \langle x_i, x_{n_p} \rangle
+    = \sum_{i=1}^n \beta_i l(x_i)
+    = \sum_{i=1}^n \beta_i \alpha^i
+    \in \real
+    \,.
+\end{equation*}
+Therefore $l$ is defined on $\Hcal^0_0$.
+
+Since $\Hcal^0_0$ is dense w.r.t the induced norm in $\Hcal_0$, for any $z\in \Hcal_0$
+there is $(z_n)_{n\geq1} \in \Hcal^0_0$ such that $\|z_n - z\|\to 0$. Thus for any
+$\varepsilon > 0$ there exits $n_\varepsilon \geq 1$ such that for all $n\geq n_\varepsilon$
+we have $\|z_n - z\| \leq \tfrac\varepsilon{M}$. Hence for every $p\geq 1$ we get
+\begin{align*}
+  \bigl\lvert \langle z, x_{n_p} \rangle -  \langle z_n, x_{n_p} \rangle \bigr\rvert
+    \leq \| z - z_n \| \|x_{n_p} \|
+    \leq \tfrac\varepsilon{M} M
+    \,.
+\end{align*}
+We conclude that $\sup_{p\geq 1} \lvert \langle z - z_n, x_{n_p} \rangle \rvert \to 0$
+as $n\to \infty$, since for any $\varepsilon > 0$ there is $n_\varepsilon \geq 1$ such
+that $\sup_{p\geq 1} \lvert \langle z - z_n, x_{n_p} \rangle \rvert \leq \varepsilon$ for
+all $n\geq n_\varepsilon$.
+
+Next observe that for any $k \geq j$ and all $p$ we have
+\begin{align*}
+  \lvert l(z_k) - l(z_j) \rvert
+    &\leq \lvert l(z_j) - \langle z_j, x_{n_p} \rangle \rvert
+      + \lvert l(z_k) - \langle z_k, x_{n_p} \rangle \rvert
+    \\
+    &+ \lvert \langle z_j - z, x_{n_p} \rangle \rvert
+      + \lvert \langle z_k - z, x_{n_p} \rangle \rvert
+      \,.
+\end{align*}
+From the convergence of the supremum above, we can pick $n_\varepsilon \geq1$ such
+that the last two terms are bounded each by $\tfrac\varepsilon2$ for all $j,k \geq
+n_\varepsilon$. Taking limit suprema of both sides with respect to $p$ eliminates
+the first two absolute terms of the right hand side, thereby implying that
+$\lvert l(z_k) - l(z_j) \rvert\leq \varepsilon$ for all such $j$ and $k$. Hence
+$(l(z_p))_{p\geq 1}$ is Cauchy in $\real$, and thus $l(z_p) \to \alpha$ for some
+$\alpha \in \real$.
+
+To show that $l(z) = \alpha$ we make the following observation:
+\begin{align*}
+  \lvert \langle z, x_{n_p} \rangle - \alpha \rvert
+    \leq \lvert \langle z, x_{n_p} \rangle - \langle z_j, x_{n_p} \rangle \rvert
+    + \lvert \langle z_j, x_{n_p} \rangle - l(z_j) \rvert
+    + \lvert l(z_j) - \alpha \rvert
+    \,.
+\end{align*}
+
+% paragraph proof (end)
+
+\end{document}
