@@ -1,0 +1,158 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\real}{\mathbb{R}}
+
+\title{Some notes on Sokal (2010)}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Uniform Boundedness Principle} % (fold)
+\label{sec:uniform_boundedness_principle}
+
+In this section we treat the Hilbert space $\Hcal$ with the natural inner product
+norm as a Banach space $(\Hcal, \|\cdot\|)$. Consider a collection $(l_n)_{n\geq1}$
+of bounded linear functionals $\Hcal\to\real$ that is bounded at every point:
+$\sup_{n\geq1} \lvert l_n(x)\rvert < +\infty$ for any $x \in \Hcal$. The following
+section follows the proof given in Sokal (2010).\footnotemark
+\footnotetext{arXiv:1005.1585 -- \url{https://arxiv.org/abs/1005.1585v2}}
+
+\paragraph{Lemma} % (fold)
+\label{par:lemma}
+
+For any $x\in \Hcal$ and $\delta > 0$ we have $\delta \|l\| \leq \sup_{z\in B(x, \delta)}
+\lvert l(z) \rvert$, where $B(x, \delta) = \{z\in \Hcal\colon \|z-x\| \leq \delta\}$.
+Indeed, for any $\|h\| \leq 1$ we have 
+\begin{equation*}
+  \lvert l(h) \rvert
+    = \tfrac1\delta \lvert l(\delta h) \rvert
+    \leq \tfrac1{2 \delta} \bigl(
+      \lvert l(x + \delta h) \rvert + \lvert l(x - \delta h) \rvert
+    \bigr)
+    \leq \tfrac1{2 \delta}
+      2 \sup\{\lvert l(z) \rvert \colon z\in B(x, \delta)\}
+      \,,
+\end{equation*}
+implying that the upper bound on rhs is not less than the supremum of the lhs.
+
+% paragraph lemma (end)
+
+\paragraph{Proof} % (fold)
+\label{par:proof}
+
+We proceed by contradiction and suppose that $\sup_{n\geq1} \|l_n\| = \infty$.
+
+Take a sequence $L_k \uparrow +\infty$, and a pair of values $\eta, q \in (0, 1)$,
+which will be specified and discussed along the proof. There exists $(n_k)_{k\geq1}
+\uparrow$ such that $\|l_{n_k}\| > L_k$. Let $x_0 = 0 \in \Hcal$ and $\delta_k = q^k$.
+For any $k\geq 1$ the norm $\|l_{n_k} \|$ is finite, therefore the lemma implies
+\begin{equation*}
+  \delta_k \eta \|l_{n_k}\|
+    < \delta_k \|l_{n_k}\|
+    \leq \sup\{\lvert l(z) \rvert \colon z\in B(x_{k-1}, \delta_k)\}
+      \,,
+\end{equation*}
+which further implies the existence of $x_k \in B(x_{k-1}, \delta_k)$ with $\delta_k
+\eta \|l_{n_k}\| < \lvert l_{n_k}(x_k) \rvert$. Thus, we define a sequence $(x_k)_{k\geq1}
+\in \Hcal$ with $\|x_k - x_{k-1}\| \leq \delta_k$ and the just mentioned bound on
+$\|l_{n_k}\|$. The constructed sequence is Cauchy: for any $p \geq k$
+\begin{equation*}
+  \|x_p - x_k \|
+    \leq \sum_{i=k+1}^p \|x_i - x_{i-1} \|
+    % \leq \sum_{i=1}^{p-k} \delta_{i+k}
+    \leq \sum_{i=1}^{p-k} q^{i+k}
+    % = q^{k+1} \tfrac{1 - q^{p-k}}{1-q}
+    < \frac{q \delta_k}{1-q}
+    \,.
+    % 1 - q^n = 1 + q^1 + .. + q^{n-1} - (q^1 + q^2 + .. + q^n)
+    %  = (1 - q)(1 + q^1 + .. + q^{n-1})
+\end{equation*}
+Since $\Hcal$ is complete, $\exists x_*\in \Hcal$ such that $\|x_k - x_*\| \to 0$.
+For any $p \geq k$ we get
+\begin{equation*}
+  \|x_k - x_* \|
+    \leq \| x_p - x_*\| + \sum_{i=k+1}^p \|x_i - x_{i-1} \|
+    \leq \| x_p - x_*\| + \frac{q \delta_k}{1-q}
+    \,,
+\end{equation*}
+and conclude that $\|x_k - x_* \| \leq \frac{q \delta_k}{1-q}$ for any $k\geq 1$.
+Observe that for all $k\geq 1$
+\begin{align*}
+  \delta_k \eta \|l_{n_k} \|
+    &< \lvert l_{n_k}(x_k) \rvert
+      \leq \lvert l_{n_k}(x_*) \rvert
+        + \lvert l_{n_k}(x_k - x_*) \rvert
+    \\
+    &\leq \lvert l_{n_k}(x_*) \rvert
+      + \|x_k - x_*\| \|l_{n_k}\|
+    \\
+    &\leq \lvert l_{n_k}(x_*) \rvert
+      + \tfrac{q}{1-q} \delta_k \|l_{n_k}\|
+      \,,
+\end{align*}
+whence $\bigl(\eta - \tfrac{q}{1-q} \bigr) \delta_k \|l_{n_k}\| \leq \lvert l_{n_k}(x_*) \rvert$
+for all $k\geq 1$.
+
+Here we shall make the necessary specifications, that, despite affecting the particular
+values, do not alter the key properties of the constructed sequence. We assume that
+$1 > \eta > \tfrac{q}{1-q}$ (this implies $q < \tfrac\eta{1 + \eta}$). Since $0 \leq
+L_k < \|l_{n_k}\|$ we finally get the following lower bound:
+\begin{equation*}
+  \tilde{L}_k
+    = \bigl(\eta - \tfrac{q}{1-q} \bigr) q^k L_k
+    \leq \lvert l_{n_k}(x_*) \rvert
+    \,.
+\end{equation*}
+We are also free to require that the original $L_k \uparrow \infty$ be such that
+$\tilde{L}_k \uparrow \infty$. For such choice we get the following statement: there
+is $(n_k)_{k\geq1} \uparrow$ and $x_* \in \Hcal$ such that $\sup_{k\geq 1} \lvert
+l_{n_k}(x_*) \rvert = +\infty$. This contradicts the original assumption that
+$\sup_{n\geq 1}\lvert l_n(x) \rvert$ is bounded for any given $x\in \Hcal$.
+
+So is it possible to meet all the requirements, outlined in the specifications above?
+It is, if we pick any $\alpha, \beta > 1$ and set
+\begin{itemize}
+  \item $q = \tfrac1{2 (1 + \alpha)}$ and $\eta = \tfrac{\alpha q}{1-q}$
+  \item $L_k = \bigl(\eta - \tfrac{q}{1-q}\bigr)^{-1} q^{-k} \beta^k$
+\end{itemize}
+then $L_k = \tfrac{1 + 2\alpha}\alpha (2 (1 + \alpha) \beta)^k \to \infty$, $\eta < 1$,
+$\eta - \tfrac{q}{1-q} = \tfrac\alpha{1 + 2\alpha} > 0$, $\delta_k = q^k \to 0$,
+and $\tilde{L}_k = \beta^k \to \infty$.
+
+% paragraph proof (end)
+
+\paragraph{Other proofs} % (fold)
+\label{par:other_proofs}
+
+There is another proof of this principle, using explicitly the continuity of the
+linear functionals and the Baire Category theorem, to get a point that violates
+the orignal assumptions.
+
+% paragraph other_proofs (end)
+
+\paragraph{Notes} % (fold)
+\label{par:notes}
+
+The uniform boundedness principle holds for arbitrarily large collection of linear
+functionals and can be extended to boundned linear operators.
+
+% paragraph notes (end)
+
+% section* uniform_boundedness_principle (end)
+
+\end{document}
