@@ -48,6 +48,9 @@ The set $\Hcal^0_0$ is a linear subspace of $\Hcal$. It is a pre-Hilbert space w
 respect to $\langle\cdot, \cdot \rangle$, since it can be completed w.r.t. this inner
 product to get $\Hcal_0$ and $\Hcal^0_0$ is dense in its completion.
 
+\paragraph{Subsequence} % (fold)
+\label{par:subsequence}
+
 Let's construct a subsequence, which could potentially weakly converge to something.
 Let $x^0_n = x_n$. Suppose for $k\geq 0$ we have $(x^k_n)_{n\geq 1} \subseteq (x_n)_{n\geq 1}$
 and $(\alpha_i)_{i\leq k}$, such that $\langle x_i, x^k_n\rangle \to \alpha_i$ for
@@ -70,12 +73,17 @@ such that $x^p_p = x_{n_p}$, and we have $(x^p_p)_{p\geq1} \subseteq (x^k_p)_{p\
 for all $k\geq 0$, whence we must have  $\langle x_n, x^p_p \rangle \to \alpha^n$
 for all $n\geq 1$.
 
-Define a map $l(x) = \lim_{p\to \infty} \langle x, x_{n_p} \rangle$. First, we shall
-show that $l$ is well defined on $\Hcal$.
+% paragraph subsequence (end)
+
+\paragraph{A mapping} % (fold)
+\label{par:a_mapping}
+
+We shall show that a map $l(x) = \lim_{p\to \infty} \langle x, x_{n_p} \rangle$ is
+well defined.
 
 Right from the start we know that $l(x_n) = \alpha^n$ for all $n\geq 1$. Since the
-inner product and the limit are linear, for any $z = \sum_{i=1}^n \beta_i x_i$ for
-some $n\geq 0$ and $\beta_i \in \real$, we have
+inner product is bilinear and the limit is additive, for any $z = \sum_{i=1}^n \beta_i x_i$
+we have
 \begin{equation*}
   l(z)
     = \lim_{p\to \infty} \Bigl \langle \sum_{i=1}^n \beta_i x_i, x_{n_p} \Bigr \rangle
@@ -87,20 +95,20 @@ some $n\geq 0$ and $\beta_i \in \real$, we have
 \end{equation*}
 Therefore $l$ is defined on $\Hcal^0_0$.
 
-Since $\Hcal^0_0$ is dense w.r.t the induced norm in $\Hcal_0$, for any $z\in \Hcal_0$
-there is $(z_n)_{n\geq1} \in \Hcal^0_0$ such that $\|z_n - z\|\to 0$. Thus for any
-$\varepsilon > 0$ there exits $n_\varepsilon \geq 1$ such that for all $n\geq n_\varepsilon$
-we have $\|z_n - z\| \leq \tfrac\varepsilon{M}$. Hence for every $p\geq 1$ we get
+Since $\Hcal^0_0$ is dense in $\Hcal_0$ w.r.t the induced norm, for any $z\in \Hcal_0$
+there is $(z_k)_{k\geq1} \in \Hcal^0_0$ such that $\|z_k - z\|\to 0$. Thus for any
+$\varepsilon > 0$ there is $n_\varepsilon \geq 1$ such that for all $n\geq n_\varepsilon$
+we have $\|z_k - z\| \leq \tfrac\varepsilon{M}$. Hence for every $p\geq 1$ we get
 \begin{align*}
-  \bigl\lvert \langle z, x_{n_p} \rangle -  \langle z_n, x_{n_p} \rangle \bigr\rvert
-    \leq \| z - z_n \| \|x_{n_p} \|
+  \bigl\lvert \langle z, x_{n_p} \rangle -  \langle z_k, x_{n_p} \rangle \bigr\rvert
+    \leq \| z - z_k \| \|x_{n_p} \|
     \leq \tfrac\varepsilon{M} M
     \,.
 \end{align*}
-We conclude that $\sup_{p\geq 1} \lvert \langle z - z_n, x_{n_p} \rangle \rvert \to 0$
-as $n\to \infty$, since for any $\varepsilon > 0$ there is $n_\varepsilon \geq 1$ such
-that $\sup_{p\geq 1} \lvert \langle z - z_n, x_{n_p} \rangle \rvert \leq \varepsilon$ for
-all $n\geq n_\varepsilon$.
+We conclude that $\sup_{p\geq 1} \lvert \langle z - z_k, x_{n_p} \rangle \rvert \to 0$
+as $k\to \infty$, since for any $\varepsilon > 0$ there is $k_\varepsilon \geq 1$ such
+that $\sup_{p\geq 1} \lvert \langle z - z_k, x_{n_p} \rangle \rvert \leq \varepsilon$ for
+all $k\geq k_\varepsilon$.
 
 Next observe that for any $k \geq j$ and all $p$ we have
 \begin{align*}
@@ -112,22 +120,78 @@ Next observe that for any $k \geq j$ and all $p$ we have
       + \lvert \langle z_k - z, x_{n_p} \rangle \rvert
       \,.
 \end{align*}
-From the convergence of the supremum above, we can pick $n_\varepsilon \geq1$ such
+From the convergence of the supremum above we can pick $k_\varepsilon \geq1$ such
 that the last two terms are bounded each by $\tfrac\varepsilon2$ for all $j,k \geq
-n_\varepsilon$. Taking limit suprema of both sides with respect to $p$ eliminates
+k_\varepsilon$. Taking limit suprema of both sides with respect to $p$ eliminates
 the first two absolute terms of the right hand side, thereby implying that
-$\lvert l(z_k) - l(z_j) \rvert\leq \varepsilon$ for all such $j$ and $k$. Hence
-$(l(z_p))_{p\geq 1}$ is Cauchy in $\real$, and thus $l(z_p) \to \alpha$ for some
+$\lvert l(z_k) - l(z_j) \rvert \leq \varepsilon$ for all such $j$ and $k$. Hence
+$(l(z_k))_{k\geq 1}$ is Cauchy in $\real$, and thus $l(z_k) \to \alpha$ for some
 $\alpha \in \real$.
 
-To show that $l(z) = \alpha$ we make the following observation:
-\begin{align*}
+To show that $l(z) = \alpha$ we make the following observation: for all $k,p\geq 1$
+\begin{equation*}
   \lvert \langle z, x_{n_p} \rangle - \alpha \rvert
-    \leq \lvert \langle z, x_{n_p} \rangle - \langle z_j, x_{n_p} \rangle \rvert
-    + \lvert \langle z_j, x_{n_p} \rangle - l(z_j) \rvert
-    + \lvert l(z_j) - \alpha \rvert
+    \leq \lvert l(z_k) - \alpha \rvert
+    + \lvert \langle z_k, x_{n_p} \rangle - l(z_k) \rvert
+    + \sup_{p\geq 1} \lvert \langle z - z_k, x_{n_p} \rangle \rvert
     \,.
-\end{align*}
+\end{equation*}
+For any $\varepsilon > 0$ there is $k_\varepsilon \geq 1$ such that the sum of the
+first and last terms on the right hand side is not greater than $\varepsilon$ at
+$k_\varepsilon$. Hence the $\limsup_{p\to \infty}$ of the expression in the left
+is not greater than $\varepsilon$, since
+\begin{equation*}
+  \limsup_{p\to \infty} \lvert \langle z, x_{n_p} \rangle - \alpha \rvert
+    \leq \varepsilon
+    + \limsup_{p\to \infty} \lvert
+        \langle z_{k_\varepsilon}, x_{n_p} \rangle - l(z_{k_\varepsilon})
+      \rvert
+    \,,
+\end{equation*}
+and $\langle z_k, x_{n_p} \rangle \to l(z_k)$ in $\real$ as $p\to \infty$ for any
+$k \geq 1$. Since the last bound holds for arbitrarily small $\varepsilon > 0$,
+$\langle z, x_{n_p} \rangle \to \alpha$, and therefore $l$ is defined on $\Hcal_0$.
+
+What about $z\in \Hcal_0^\perp$, the orthogonal complement of $\Hcal_0$ in $\Hcal$?
+For any $z\in \Hcal_0^\perp$ by orthogonality $\langle z, x_n \rangle = 0$ for all
+$n\geq 1$, whence $\lim_{p\to\infty} \langle z, x_{n_p} \rangle = 0$. Therefore $l$
+is defined on $\Hcal_0^\perp$.
+
+% paragraph a_mapping (end)
+
+\paragraph{Linearity and continuity} % (fold)
+\label{par:linearity_and_continuity}
+ 
+Thus $z\mapsto l(z) = \lim_{p\to\infty} \langle z, x_{n_p} \rangle$ is a well defined
+$\Hcal \to \real$ map. Furthermore, it is linear, since the inner product is bilinear:
+\begin{equation*}
+  l(z + \alpha x)
+    = \lim_{p\to\infty} \langle z + \alpha x, x_{n_p} \rangle
+    = \lim_{p\to\infty} \langle z, x_{n_p} \rangle
+    + \alpha \lim_{p\to\infty} \langle x, x_{n_p} \rangle
+    = l(z) + \alpha l(x)
+    \,.
+\end{equation*}
+Finally, $l$ is also a bounded map, since for all $z\in \Hcal$
+\begin{equation*}
+  \lvert l(z) \rvert
+    = \lim_{p\to\infty} \lvert \langle z, x_{n_p} \rangle \rvert
+    \leq \sup_{p\geq 1} \|z\| \| x_{n_p}\|
+    \leq M \|z\|
+    \,.
+\end{equation*}
+So the map $l$ is linear and bounded, hence continuous.
+
+% paragraph linearity_and_continuity (end)
+
+\paragraph{Weak limit} % (fold)
+\label{par:weak_limit}
+
+Riesz representer theorem therefore implies the existence of some $h\in \Hcal$ such
+that $l(z) = \langle z, h\rangle$ for any $z\in \Hcal$. Therefore $x_{n_p} \rightharpoonup
+h$ for this $(x_{n_p})_{p\geq 1} \subseteq (x_n)_{n\geq 1}$.
+
+% paragraph weak_limit (end)
 
 % paragraph proof (end)
 
