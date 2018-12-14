@@ -1,0 +1,207 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+
+\usepackage{url}
+
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\inter}{{\mathtt{int}}}
+
+\title{Notes on Minkowski Functional and Hahn-Banach}
+\author{Nazarov Ivan}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Cosnsider a Banach space $(\Hcal, \|\cdot\|)$. For any $C \subseteq \Hcal$ define
+the {\it Minkowski Functional} $p\colon \Hcal \to [0, +\infty]$ by
+\begin{equation*}
+  p(x)
+    = \inf \bigl\{ \lambda > 0\,:\, x \in \lambda C\bigr\}
+  \,,
+\end{equation*}
+where $\lambda C = \{\lambda z \,:\, z\in C\}$ is the $\lambda$-inflation of $C$,
+$\lambda \in\real$. This functional has many useful properties when $C$ is convex
+and the interior of $C$ contains $0$:
+\begin{itemize}
+  \item $p$ is real-valued, positively homogeneous, continuous and subadditive
+  \item $p^{-1}([0, 1]) = C$ if $C$ is closed in $\Hcal$
+\end{itemize}
+
+\paragraph{Properties of $\lambda$-inflation} % (fold)
+\label{par:properties_of_lambda_inflation}
+
+Consider any $C\subseteq \Hcal$, any $t \neq 0$ and any $x\in \Hcal$. Then $x\in t C$
+means that there exists $z \in C$ such that $x = t z$. Therefore $\tfrac1t x = z
+\in C$, since $\Hcal$ is a vector space. For such $(C, x, t)$ we have the implication
+$x \in t C \Rightarrow \tfrac1t x \in C$.
+
+We get the reverse implication by applying the forward one above to the tuple $(C, x, t)
+= (\alpha K, \tfrac1\alpha z, \tfrac1\alpha)$, noting that $z = \alpha x$. Therefore
+$x\in t C$ iff $\tfrac1t x \in C$ for any $C\subseteq \Hcal$, $x\in \Hcal$ and $t > 0$.
+Furthermore, for any $\alpha, \beta \neq 0$ we have
+\begin{equation*}
+  \alpha x \in \beta C \Leftrightarrow
+  \beta^{-1} \alpha x \in C \Leftrightarrow
+  \beta^{-1} x \in \alpha^{-1} C \Leftrightarrow
+  x \in \beta \alpha^{-1} C
+  \,.
+\end{equation*}
+
+Suppose $C$ is convex, then $\beta C$ is convex for any $\beta$. Indeed, for $x_1,
+x_0 \in \beta C$ and $\theta\in [0, 1]$ there are $z_1, z_0 \in C$ such that $x_i
+= \beta z_i$. But then $x_\theta \in \beta C$, since we have $z_\theta = \theta z_1
++ (1-\theta) z_0 \in C$ and
+\begin{equation*}
+  x_\theta
+  = \theta x_1 + (1-\theta) x_0
+  = \theta \beta z_1 + (1-\theta) \beta z_0
+  = \beta z_\theta
+  \,.
+\end{equation*}
+
+Suppose $C$ is convex and $0\in C$. Then for any $\theta \in (0, 1)$ and $x\in C$
+we have $\theta x = (1 - \theta)\, 0 + \theta x \in C$, hence $x \in \theta^{-1} C$.
+Therefore $C \subseteq \lambda C$ for all $\lambda \geq 1$.
+
+Next, if $\alpha > \beta$, then the $\beta$-inflation of $C$ is convex, and $0 \in
+\beta C$. Therefore $\beta C \subseteq \tfrac\alpha\beta (\beta C) = \alpha C$.
+
+% paragraph properties_of_lambda_inflation (end)
+
+\paragraph{Zero} % (fold)
+\label{par:zero}
+
+The Minkowski functional is zero on $0$ if $0\in C$. Indeed, for any $\lambda > 0$
+we have $0 \in \lambda C$, since $0 = \lambda 0$. Therefore, $p(0) \leq \lambda$
+for all $\lambda > 0$, whence $p(0) = 0$.
+
+% paragraph zero (end)
+
+\paragraph{Positive homogeneity} % (fold)
+\label{par:pos_homogeneity}
+
+Let $t > 0$. If $x\in\Hcal$ is such that $p(x) = +\infty$, then $x\notin \lambda C$
+for any $\lambda>0$. In particular $t x\notin t \tfrac\lambda{t} C$, whence $p(tx)
+= +\infty$.
+
+If $x \in \Hcal$ such that $p(x) < +\infty$, then for any $U > p(x)$ there exists
+$\lambda < U$ with $x\in \lambda C$. Hence $t x \in t \lambda C$ and $p(t x) \leq
+t \lambda < t U$. Therefore $p(t x) < +\infty$ and $p(t x) \leq t p(x)$.
+
+The opposite inequality follows from applying the direct one to $(x, t) = (\alpha
+z, \alpha^{-1})$ for any $\alpha > 0$ and $z \in \Hcal$. Indeed, since $\alpha^{-1}
+x = z$, $p(\alpha^{-1} x) \leq \alpha^{-1} p(x)$ implies $\alpha p(z) \leq p(\alpha z)$.
+Therefore $p(t x) = t p(x)$ for any $x \in \Hcal$ and every $t > 0$.
+
+% paragraph pos_homogeneity (end)
+
+\paragraph{Homogeneity via balancedness} % (fold)
+\label{par:homogeneity_via_balancedness}
+
+If $C$ is balanced then $p(x)$ is homogenous.
+
+A set is $C$ is balanced if $\beta C \subset C$ for all $\lvert \beta \rvert \leq 1$.
+For any balanced $C$ we have $\lambda C \subset C$ in particular for $\lambda = 0$,
+whence $\{0\} = 0 C \subset C$. Note that for any $\alpha \neq 0$ the set $\alpha C$
+is balanced as well. Indeed, we have $\beta (\alpha C) = \alpha (\beta C) \subset
+\alpha C$.
+
+Suppose $\alpha x \in \lambda C$ for $\alpha \neq 0$ and $\lambda > 0$. Then we have
+\begin{equation*}
+  \lvert \alpha \rvert x
+    = \tfrac{\lvert \alpha \rvert}\alpha (\alpha x)
+    \in \tfrac{\lvert \alpha \rvert}\alpha (\lambda C)
+    = \lambda \Bigl( \tfrac{\lvert \alpha \rvert}\alpha C \Bigr)
+    \subset \lambda C
+    \subseteq \lambda C
+    \,,
+\end{equation*}
+by definition of the set inflation, vector space $\Hcal$ and from balancedness of
+$C$. Conversely $\lvert \alpha \rvert x \in \lambda C$ implies $\alpha x \in \lambda
+C$:
+\begin{equation*}
+  \alpha x
+    = \tfrac\alpha{\lvert \alpha \rvert} (\lvert \alpha \rvert x)
+    \in \tfrac\alpha{\lvert \alpha \rvert} (\lambda C)
+    = \lambda \Bigl( \tfrac\alpha{\lvert \alpha \rvert} C \Bigr)
+    \subset \lambda C
+    \subseteq \lambda C
+    \,.
+\end{equation*}
+For $t = 0$ we have $0 = p(0 x) = 0 p(x) = 0$ and for $t\neq 0$ we consider the
+following:
+\begin{equation*}
+  p(t x)
+    = \inf\{\lambda > 0\colon t x \in \lambda C\}
+    = \inf\{\lambda > 0\colon \lvert t \rvert x \in \lambda C\}
+    = p\bigl( \lvert t \rvert x \bigr) = \lvert t \rvert p(x)
+    \,.
+\end{equation*}
+
+% paragraph homogeneity_via_balancedness (end)
+
+\paragraph{Subadditivity} % (fold)
+\label{par:subadditivity}
+
+We claim that $p$ is subadditive if $C$ is convex.
+
+Consider $x_1, x_2 \in \Hcal$. If $p(x_i) = +\infty$, then trivially $p\bigl( x_1
++ x_2 \bigr) \leq +\infty =  p(x_1) + p(x_2)$. Suppose $p(x_i) < + \infty$. Then
+for any $\varepsilon > 0$ there are $\lambda_i > 0$ with $x_i \in \lambda_i C$ such
+that $\lambda_i < p(x_i) + \tfrac12\varepsilon$ for any $i$. We argue that $x_1 + x_2
+\in (\lambda_1 + \lambda_2) C$, since $C$ is convex, $\tfrac{x_i}{\lambda_i} \in C$,
+and
+\begin{equation*}
+  \tfrac1{\lambda_1 + \lambda_2} (x_1 + x_2)
+    = \tfrac{\lambda_1}{\lambda_1 + \lambda_2} \frac{x_1}{\lambda_1}
+      + \tfrac{\lambda_2}{\lambda_1 + \lambda_2} \frac{x_2}{\lambda_2}
+    \,.
+\end{equation*}
+Therefore $p\bigl( x_1 + x_2 \bigr) \leq p(x_1) + p(x_2)$, since for all $\varepsilon
+> 0$
+\begin{equation*}
+  p\bigl( x_1 + x_2 \bigr)
+    \leq \lambda_1 + \lambda_2
+    < p(x_1) + p(x_2) + \varepsilon
+    \,.
+\end{equation*}
+
+% paragraph subadditivity (end)
+
+\paragraph{Sublinearity} % (fold)
+\label{par:sublinearity}
+
+If $C$ is convex and balanced (or just $0 \in C$), then we have $p(t x) = t p(x)$
+for any $t\geq 0$ and $x\in \Hcal$ such that $p(x) < +\infty$. This implies that
+$p(-t x)$ is finite when $p(-x)$ is finite. Hence is $p(x), p(-x) < +\infty$ then
+for $t \leq 0$
+\begin{equation*}
+  0 = p(0)
+    = p\bigl( t x + (- t) x \bigr)
+    \leq p\bigl( t x \bigr) + p\bigl( (- t) x \bigr)
+    = p\bigl( t x \bigr) + (- t) p( x )
+    \,,
+\end{equation*}
+and therefore $t p(x) \leq p(t x)$ for any $t\in \real$.
+
+% paragraph sublinearity (end)
+
+\paragraph{Finite values} % (fold)
+\label{par:finite_values}
+
+We claim that $p\colon \Hcal \to \real$ if $ \,.$
+
+% paragraph finite_values (end)
+
+\end{document}
