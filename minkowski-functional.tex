@@ -200,7 +200,28 @@ and therefore $t p(x) \leq p(t x)$ for any $t\in \real$.
 \paragraph{Finite values} % (fold)
 \label{par:finite_values}
 
-We claim that $p\colon \Hcal \to \real$ if $ \,.$
+Obviously, if the set $\{\lambda > 0\colon x \in \lambda C\}$ is non-empty for any
+$x \in \Hcal$, then $p(x)$ is finite-valued, because every $x$ is covered by at least
+one $\lambda$-inflation.
+
+We claim that for this condition to hold it is sufficient that there is $a$ in the
+$C$ topological interior of $C$, the largest open set thats fits inside $C$. Indeed,
+for such $a$ there would be $\varepsilon > 0$, such that $B(a, \varepsilon) \subseteq
+C$, where $B(a, \varepsilon) = \{z\colon \|z-a\| < \varepsilon\}$. Hence, for a fixed
+$\eta \in(0, 1)$ and any $x \in \Hcal$ we have $z = (1 - \lambda) a + \lambda x \in
+B(a, \varepsilon)$, where $\lambda = \tfrac{\eta \varepsilon}{\|x - a\|}$. Therefore,
+if we put $\lambda = \tfrac{\|x\|}{\eta \varepsilon}$, then
+\begin{equation*}
+  \|x - a\| < \tfrac{\|x - a\|}\eta
+  \Rightarrow
+  x \in B\Bigl( a, \tfrac{\|x - a\|}{\eta} \Bigr)
+    \subset B(a, \lambda \varepsilon)
+    = \lambda B(0, \varepsilon)
+    \subset \lambda C
+    \,.
+\end{equation*}
+
+
 
 % paragraph finite_values (end)
 
