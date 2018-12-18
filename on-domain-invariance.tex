@@ -1,0 +1,60 @@
+% https://terrytao.wordpress.com/2011/06/13/brouwers-fixed-point-and-invariance-of-domain-theorems-and-hilberts-fifth-problem/#more-4937
+
+Consider a subset $U$ which is open in $\Omega$ and an injective continuous map
+$f\colon (U, \Tcal_U) \to (S, \Tcal_S)$. Then $V = f(U)$ is open in $S$ and $f$
+is a homeomorphism $U \to V$. Here $\Tcal_U$ is subspace topologies, but $\Tcal_S$
+is an unfortunate notation.
+
+Since $U$ is open in $(\Omega, \Tcal)$ the subspace topology $\Tcal_U$ is coarser
+than $\Tcal$: $\Tcal_U \subseteq \Tcal$.
+
+The map $f^V \colon U \to V$ defined as $f^V(\omega) = f(\omega)$ for all $\omega
+\in U$ is $(U, \Tcal_U)$-$(V, \Tcal_V)$ continuous. Indeed, if $W$ is open in
+$(V, \Tcal_V)$, then there is $O$ open in $S$ such that $W = V \cap O$. Hence 
+\begin{align*}
+  \Bigl(f^V\Bigr)^{-1}(W)
+    &= \Bigl(f^V\Bigr)^{-1}\bigl(V \cap W\bigr)
+    = f^{-1}\bigl(V\cap W\bigr)
+    = f^{-1}\bigl(V\cap O\bigr)
+    \\
+    &= f^{-1}\bigl(f(U)\bigr) \cap f^{-1}(O)
+    = U \cap f^{-1}(O)
+    \in \Tcal_U
+  \,.
+\end{align*}
+The map $f^V$ is also a bijection, since for any $x\in V$ by definition, there is
+$\omega \in U$ such that $f^V(\omega) = f(\omega) = x$. Therefore without losing
+generality we may consider a continuous bijection $f\colon (U, \Tcal_U) \to (S, \Tcal_S)$.
+
+So, consider a continuous bijection $f\colon (U, \Tcal_U) \to (V, \Tcal_V)$, where
+$U, V$ are open in $\real^n$ and $\Tcal_U$ and $\Tcal_V$ are subspace topologies on
+$U$ and $V$, repectively.
+
+The space $\real^n$ is homeomorphic to itself, so there must be a continuous bijection
+$\phi\colon \real^n \to \real^n$ with continuous inverse.
+
+% $\real^n$ is a normed space, Hausdorf, separable, countable topological base, closed
+% subsets of a compact set are compact, has vector space structure over the field of
+% $\real$, 
+
+% for any $a\in \real^n$ let $\tau_a(v) = v + a$ be the translation map. $\tau_a$ is
+% an $\real^n\leftrightarrow \real^n$ homeomorphism for any $a$ with $\tau_a^{-1} = \tau_{-a}$.
+% Similar properties hold for the scaling map $v\mapsto \sigma_\alpha(x) = \tfrac1\alpha x$
+% for any $\alpha \neq 0$
+
+% \tilde{f} = f \circ \tau_a^{-1} is a continuous bijection $\tau_a^{-1}(U)\to V$. However,
+% $0 \in \tau_a^{-1}(U)$
+
+% consider a homeomorphism $\psi\colon (-1, +1) \to \real$. Then $\psi_+\Big\vert_{[0, +1)}$
+% is a homeomorphism between $[0, +1)$ and $\real_+$ (seen as topological subspaces).
+
+% Do we need $\psi_+^{-1}$ to be linear or $o(x)$ for $x$ sufficiently close to $0$?
+
+% The map $\phi(x) = \psi_+^{-1}\bigl(\|x\|\bigr) \tfrac{x}{\|x\|}$ is a product of 
+% continuous maps $\alpha \mapsto \tfrac{\psi_+^{-1}(\alpha)}{\alpha}$ and the identity,
+% and its inverse is continuous: $y = \phi(x)$ $\Rightarrow$ $\|y\| = \psi_+^{-1}(\|x\|)$,
+% whence $\|x\| = \psi_+(\|y\|)$ and $\phi^{-1}(y) = \tfrac{\psi_+(\|y\|)}{\|y\|} y$.
+
+% Thus $\phi$ is a homeomorphism between $\{x\in\real^n\colon \|x\| < 1\}$ and $\real^n$.
+
+% a continuous bijection between compact Hausdorff spaces and is thus a homeomorphism.
