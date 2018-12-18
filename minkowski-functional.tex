@@ -35,7 +35,7 @@ $\lambda \in\real$. This functional has many useful properties when $C$ is conve
 and the interior of $C$ contains $0$:
 \begin{itemize}
   \item $p$ is real-valued, positively homogeneous, continuous and subadditive
-  \item $p^{-1}([0, 1]) = C$ if $C$ is closed in $\Hcal$
+  \item $p^{-1}\bigl([0, 1]\bigr) = C$ if $C$ is closed in $\Hcal$
 \end{itemize}
 
 \paragraph{Properties of $\lambda$-inflation} % (fold)
@@ -72,10 +72,9 @@ x_0 \in \beta C$ and $\theta\in [0, 1]$ there are $z_1, z_0 \in C$ such that $x_
 
 Suppose $C$ is convex and $0\in C$. Then for any $\theta \in (0, 1)$ and $x\in C$
 we have $\theta x = (1 - \theta)\, 0 + \theta x \in C$, hence $x \in \theta^{-1} C$.
-Therefore $C \subseteq \lambda C$ for all $\lambda \geq 1$.
-
-Next, if $\alpha > \beta$, then the $\beta$-inflation of $C$ is convex, and $0 \in
-\beta C$. Therefore $\beta C \subseteq \tfrac\alpha\beta (\beta C) = \alpha C$.
+Therefore $C \subseteq \lambda C$ for all $\lambda \geq 1$. Next, if $\alpha > \beta$,
+then the $\beta$-inflation of $C$ is convex, and $0 \in \beta C$. Therefore $\beta C
+\subseteq \tfrac\alpha\beta (\beta C) = \alpha C$.
 
 % paragraph properties_of_lambda_inflation (end)
 
@@ -197,32 +196,105 @@ and therefore $t p(x) \leq p(t x)$ for any $t\in \real$.
 
 % paragraph sublinearity (end)
 
-\paragraph{Finite values} % (fold)
-\label{par:finite_values}
+\paragraph{the sufficient condition for finite values} % (fold)
+\label{par:the_sufficient_condition_for_finite_values}
 
-Obviously, if the set $\{\lambda > 0\colon x \in \lambda C\}$ is non-empty for any
-$x \in \Hcal$, then $p(x)$ is finite-valued, because every $x$ is covered by at least
-one $\lambda$-inflation.
+Obviously, if the set $\{ \lambda > 0 \colon x \in \lambda C \}$ is non-empty for
+any $x \in \Hcal$, then $p(x)$ is finite-valued, because every $x$ is covered by
+at least one $\lambda$-inflation.
 
-We claim that for this condition to hold it is sufficient that there is $a$ in the
-$C$ topological interior of $C$, the largest open set thats fits inside $C$. Indeed,
-for such $a$ there would be $\varepsilon > 0$, such that $B(a, \varepsilon) \subseteq
-C$, where $B(a, \varepsilon) = \{z\colon \|z-a\| < \varepsilon\}$. Hence, for a fixed
-$\eta \in(0, 1)$ and any $x \in \Hcal$ we have $z = (1 - \lambda) a + \lambda x \in
-B(a, \varepsilon)$, where $\lambda = \tfrac{\eta \varepsilon}{\|x - a\|}$. Therefore,
-if we put $\lambda = \tfrac{\|x\|}{\eta \varepsilon}$, then
+This condition implies that $0\in C$. Indeed, under it there must be $\lambda > 0$
+such that $0 \in \lambda C$, which in turn means that $\exists z\in C$ such that
+$0 = \lambda z$. Since $\lambda > 0$, we get $z\in C$.
+
+So $0\in C$ seems necessary for finiteness. However, it is not sufficient. Consider
+a cone $C = \{t z\colon z\in A\} = \bigcup_{t\geq 0} t A$ for $A = \{z\colon \|z - a\|
+\leq \|a\|\}$ for a given $a \neq 0$. Since $t A = \{z\colon \|z - t a\| \leq t \|a\| \}$
+for any $t\geq 0$, we still have $-a \notin C$: if it were otherwise, then $\tfrac{- a}t
+\in A$ for some $t > 0$ with $1 + \tfrac1t \leq 1$ --- a contradiction.
+
+With this counterexample in mind we can formulate the following conjecture: $p(\Hcal)
+\subseteq \real$ it is sufficient that $0$ be in the topological interior of $C$,
+i.e. the largest open set thats fits inside $C$. Indeed, in this case there would
+be a $\varepsilon > 0$, such that $B(0, \varepsilon) = \{z\colon \|z\| < \varepsilon\}
+\subseteq C$, implying that for a given $\eta \in (0, 1)$ we have
 \begin{equation*}
-  \|x - a\| < \tfrac{\|x - a\|}\eta
-  \Rightarrow
-  x \in B\Bigl( a, \tfrac{\|x - a\|}{\eta} \Bigr)
-    \subset B(a, \lambda \varepsilon)
-    = \lambda B(0, \varepsilon)
-    \subset \lambda C
+  \tfrac{\eta}{\|x\|} x \in B(0, 1) = \varepsilon^{-1} B(0, \varepsilon)
+  \Leftrightarrow
+  \tfrac{\varepsilon \eta}{\|x\|} x \in B(0, \varepsilon)
+  \subseteq C
+  \Leftrightarrow
+  x \in \tfrac{\|x\|}{\eta \varepsilon} C
+  \,,
+\end{equation*}
+for any $x\neq 0$. Therefore $p(x) < +\infty$ for any $x\in \Hcal$ for such $C$.
+
+% paragraph the_sufficient_condition_for_finite_values (end)
+
+\paragraph{Continuity} % (fold)
+\label{par:continuity}
+
+We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
+for $C$ to have $0$ in its interior, be closed and convex. Note that balancedness
+does not imply these properties: take a union of a closed convex cone and its mirrored
+counterpart.
+
+First, note that since $C$ is convex for any $x \in \Hcal$ and $h\in V$ we have
+\begin{equation*}
+  % p(x)
+  %   \leq p(x+h) + p(-h)
+  %   \,, \text{ and }
+  % p(x + h)
+  %   \leq p(x) + p(h)
+  %   \,,
+  \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    \leq p(h) \vee p(-h)
+    \leq \sup_{h\in V} p(h)
+    \,,
+\end{equation*}
+where it is assumed that $h\in V$ iff $-h\in V$. If for any $x$ and any $\varepsilon
+> 0$ we could find $V$ such that $\sup_{h\in V} p(h) \leq \varepsilon$.
+
+Indeed, let $C$ be such a set and pick any $\alpha > 0$. If $x \in \alpha C$, then
+that $p(x) \leq \alpha$ and thus $\alpha C \subseteq p^{-1}\bigl([0, \alpha]\bigr)$.
+On the other hand, if $x\in p^{-1}\bigl([0, \alpha)\bigr)$, then $x \in \lambda_x C
+\subseteq \alpha C$ for some $\lambda_x \in [p(x), \alpha)$. Therefore
+\begin{equation*}
+  p^{-1}\bigl([0, \alpha)\bigr)
+    \subseteq \alpha C
+    \subseteq p^{-1}\bigl([0, \alpha]\bigr)
     \,.
 \end{equation*}
+Note that $\lambda_x C \subseteq \alpha C$ for $\lambda_x < \alpha$ follows from
+$0\in C$ and convexity of $C$.
+
+There is $\delta > 0$, such that $B(0, \delta) \subseteq C$, which means that for
+any $\eta \in (0, 1)$
+\begin{equation*}
+  0 \in  B(0, \alpha \eta \delta)
+    = \alpha \eta B(0, \delta)
+    \subseteq \alpha \eta C
+    \subseteq p^{-1}\bigl([0, \alpha \eta] \bigr)
+    \subseteq p^{-1}\bigl([0, \alpha) \bigr)
+    \,,
+\end{equation*}
+since $[0, \alpha \eta] \subset [0, \alpha)$. Hence for $\alpha > 0$ there is $\delta
+> 0$ with $B(0, \delta) \subseteq p^{-1}\bigl([0, \alpha) \bigr)$. 
+
+\begin{align*}
+  p(x)
+    &\leq p(x+h) + p(-h) < p(x+h) + \alpha
+    \,, \\
+  p(x + h)
+    &\leq p(x) + p(h) < p(x) + \alpha
+    \,,
+\end{align*}
+Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \alpha)\bigr)$
 
 
+First of all $p(\Hcal) \subseteq \real$.
 
-% paragraph finite_values (end)
+
+% paragraph continuity (end)
 
 \end{document}
