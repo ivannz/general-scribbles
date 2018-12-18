@@ -239,7 +239,8 @@ for $C$ to have $0$ in its interior, be closed and convex. Note that balancednes
 does not imply these properties: take a union of a closed convex cone and its mirrored
 counterpart.
 
-First, note that since $C$ is convex for any $x \in \Hcal$ and $h\in V$ we have
+Let $C$ be such a set. Note that by convexity of $C$ for any $x, h\in \Hcal$ we
+have
 \begin{equation*}
   % p(x)
   %   \leq p(x+h) + p(-h)
@@ -247,49 +248,60 @@ First, note that since $C$ is convex for any $x \in \Hcal$ and $h\in V$ we have
   % p(x + h)
   %   \leq p(x) + p(h)
   %   \,,
-  \bigl\lvert p(x + h) - p(x) \bigr\rvert
-    \leq p(h) \vee p(-h)
     \leq \sup_{h\in V} p(h)
-    \,,
-\end{equation*}
-where it is assumed that $h\in V$ iff $-h\in V$. If for any $x$ and any $\varepsilon
-> 0$ we could find $V$ such that $\sup_{h\in V} p(h) \leq \varepsilon$.
-
-Indeed, let $C$ be such a set and pick any $\alpha > 0$. If $x \in \alpha C$, then
-that $p(x) \leq \alpha$ and thus $\alpha C \subseteq p^{-1}\bigl([0, \alpha]\bigr)$.
-On the other hand, if $x\in p^{-1}\bigl([0, \alpha)\bigr)$, then $x \in \lambda_x C
-\subseteq \alpha C$ for some $\lambda_x \in [p(x), \alpha)$. Therefore
-\begin{equation*}
-  p^{-1}\bigl([0, \alpha)\bigr)
-    \subseteq \alpha C
-    \subseteq p^{-1}\bigl([0, \alpha]\bigr)
     \,.
 \end{equation*}
-Note that $\lambda_x C \subseteq \alpha C$ for $\lambda_x < \alpha$ follows from
-$0\in C$ and convexity of $C$.
-
-There is $\delta > 0$, such that $B(0, \delta) \subseteq C$, which means that for
-any $\eta \in (0, 1)$
+Therefore, if we consider $h \in V$, with $V$ being {\it symmetric about $0$}, i.e.
+$h\in V$ iff $-h\in V$, then we conclude that
 \begin{equation*}
-  0 \in  B(0, \alpha \eta \delta)
-    = \alpha \eta B(0, \delta)
-    \subseteq \alpha \eta C
-    \subseteq p^{-1}\bigl([0, \alpha \eta] \bigr)
-    \subseteq p^{-1}\bigl([0, \alpha) \bigr)
+  \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    \leq \max\{p(h), p(-h)\}
+    \leq \sup_{h\in V} p(h)
+    \,.
+\end{equation*}
+Hence, if for any $x$ and any $\varepsilon > 0$ we can find an open $V$ such that
+the right hand side supremum does not exceeed $\varepsilon$, then  we shall conclude
+that $V \subseteq p^{-1}\bigl(B(p(x), \varepsilon))\bigr)$, and $p$ is continuous
+at $x$.
+
+To construct such $V$ let's fix some $\varepsilon > 0$. Observe that if $x \in \alpha
+C$ for some $\alpha > 0$, then $p(x) \leq \alpha$ and thus $\alpha C \subseteq p^{-1}
+\bigl([0, \alpha] \bigr)$. Since $0$ is in the interior of $C$, there is $\delta > 0$,
+such that $B(0, \delta) \subseteq C$, which means that for any $\eta \in (0, 1)$
+\begin{equation*}
+  0 \in B(0, \varepsilon \eta \delta)
+    = \varepsilon \eta B(0, \delta)
+    \subseteq \varepsilon \eta C
+    \subseteq p^{-1}\bigl([0, \varepsilon \eta] \bigr)
+    \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)
     \,,
 \end{equation*}
-since $[0, \alpha \eta] \subset [0, \alpha)$. Hence for $\alpha > 0$ there is $\delta
-> 0$ with $B(0, \delta) \subseteq p^{-1}\bigl([0, \alpha) \bigr)$. 
+since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence for any $\varepsilon > 0$
+there is $\delta > 0$ with $B(0, \delta) \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)$. 
+
+
+
+On the other hand, if $x\in p^{-1}\bigl([0, \varepsilon)\bigr)$, then $x \in \lambda_x C
+\subseteq \varepsilon C$ for some $\lambda_x \in [p(x), \varepsilon)$. Therefore
+\begin{equation*}
+  p^{-1}\bigl([0, \varepsilon)\bigr)
+    \subseteq \varepsilon C
+    \subseteq p^{-1}\bigl([0, \varepsilon]\bigr)
+    \,.
+\end{equation*}
+Note that $\lambda_x C \subseteq \varepsilon C$ for $\lambda_x < \varepsilon$ follows from
+$0\in C$ and convexity of $C$.
+
 
 \begin{align*}
   p(x)
-    &\leq p(x+h) + p(-h) < p(x+h) + \alpha
+    &\leq p(x+h) + p(-h) < p(x+h) + \varepsilon
     \,, \\
   p(x + h)
-    &\leq p(x) + p(h) < p(x) + \alpha
+    &\leq p(x) + p(h) < p(x) + \varepsilon
     \,,
 \end{align*}
-Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \alpha)\bigr)$
+Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \varepsilon)\bigr)$
 
 
 First of all $p(\Hcal) \subseteq \real$.
