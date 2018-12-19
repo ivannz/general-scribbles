@@ -13,7 +13,10 @@
 
 \newcommand{\Hcal}{\mathcal{H}}
 \newcommand{\real}{\mathbb{R}}
-\newcommand{\inter}{{\mathtt{int}}}
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\Tcal}{\mathcal{T}}
 
 \title{Notes on Minkowski Functional and Hahn-Banach}
 \author{Nazarov Ivan}
@@ -23,8 +26,14 @@
 \begin{document}
 \maketitle
 
-Cosnsider a Banach space $(\Hcal, \|\cdot\|)$. For any $C \subseteq \Hcal$ define
-the {\it Minkowski Functional} $p\colon \Hcal \to [0, +\infty]$ by
+Consider a Banach space $(\Hcal, \|\cdot\|)$ with the norm $\Tcal^{\|\cdot\|}_\Hcal$
+on it $\Hcal$. In the following $[C]$ is the closure of a set $C$ in the topology
+of $\Hcal$: $[C]$ the smallest closed set covering $C$, $[C] = [[C]]$, and monotone.
+In contrast, $\interior{C}$ --- the topological interior of $C$ in $\Hcal$, --- is
+the largest open set contained within $C$.
+
+For any $C \subseteq \Hcal$ define the {\it Minkowski Functional} $p\colon \Hcal \to
+[0, +\infty]$ by
 \begin{equation*}
   p(x)
     = \inf \bigl\{ \lambda > 0\,:\, x \in \lambda C\bigr\}
@@ -32,11 +41,7 @@ the {\it Minkowski Functional} $p\colon \Hcal \to [0, +\infty]$ by
 \end{equation*}
 where $\lambda C = \{\lambda z \,:\, z\in C\}$ is the $\lambda$-inflation of $C$,
 $\lambda \in\real$. This functional has many useful properties when $C$ is convex
-and the interior of $C$ contains $0$:
-\begin{itemize}
-  \item $p$ is real-valued, positively homogeneous, continuous and subadditive
-  \item $p^{-1}\bigl([0, 1]\bigr) = C$ if $C$ is closed in $\Hcal$
-\end{itemize}
+and the interior of $C$ contains $0$.
 
 \paragraph{Properties of $\lambda$-inflation} % (fold)
 \label{par:properties_of_lambda_inflation}
@@ -199,25 +204,11 @@ and therefore $t p(x) \leq p(t x)$ for any $t\in \real$.
 \paragraph{the sufficient condition for finite values} % (fold)
 \label{par:the_sufficient_condition_for_finite_values}
 
-Obviously, if the set $\{ \lambda > 0 \colon x \in \lambda C \}$ is non-empty for
-any $x \in \Hcal$, then $p(x)$ is finite-valued, because every $x$ is covered by
-at least one $\lambda$-inflation.
-
-This condition implies that $0\in C$. Indeed, under it there must be $\lambda > 0$
-such that $0 \in \lambda C$, which in turn means that $\exists z\in C$ such that
-$0 = \lambda z$. Since $\lambda > 0$, we get $0 = z\in C$.
-
-So $0\in C$ seems necessary for finiteness. However, it is not sufficient. Consider
-a cone $C = \{t z\colon z\in A\} = \bigcup_{t\geq 0} t A$ for $A = \{z\colon \|z - a\|
-\leq \|a\|\}$ for a given $a \neq 0$. Since $t A = \{z\colon \|z - t a\| \leq t \|a\| \}$
-for any $t\geq 0$, we still have $-a \notin C$: if it were otherwise, then $\tfrac{- a}t
-\in A$ for some $t > 0$ with $1 + \tfrac1t \leq 1$ --- a contradiction.
-
-With this counterexample in mind we can formulate the following conjecture: $p(\Hcal)
-\subseteq \real$ it is sufficient that $0$ be in the topological interior of $C$,
-i.e. the largest open set thats fits inside $C$. Indeed, in this case there would
-be a $\varepsilon > 0$, such that $B(0, \varepsilon) = \{z\colon \|z\| < \varepsilon\}
-\subseteq C$, implying that for a given $\eta \in (0, 1)$ we have
+We conjecture that $p(\Hcal) \subseteq \real$ requires $0$ to be in the topological
+interior of $C$, i.e. the largest open set that fits inside $C$. Indeed, in this
+case there would be a $\varepsilon > 0$, such that $B(0, \varepsilon) = \{z\colon
+\|z\| < \varepsilon\} \subseteq C$, implying that for a given $\eta \in (0, 1)$ we
+have
 \begin{equation*}
   \tfrac{\eta}{\|x\|} x \in B(0, 1) = \varepsilon^{-1} B(0, \varepsilon)
   \Leftrightarrow
@@ -311,7 +302,7 @@ on $C$, such that $p(u) \leq M$ for any $u \in B[0, 1]$.
 \label{par:continuity}
 
 We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
-for $C$ to have $0$ in its interior and be convex. Indeed, since $0\in C$ for such
+for $C$ to have $0\in \interior{C}$ and be convex. Indeed, since $0\in C$ for such
 $C$ and $p$ is real-valued, the upper bounds derived earlier hold true. Hence for
 any $h \in \Hcal$ with $\|h\| < \tfrac\varepsilon{M}$ and uniformly over $x$ we have
 \begin{equation*}
@@ -337,94 +328,127 @@ turn there exists $\delta_x = \delta_{\varepsilon_x} > 0$ with
     \subseteq \{ p \in U \}
     \,.
 \end{equation*}
+% Assume the norm topology $\Tcal = \Tcal^{\|\cdot\|}_\Hcal$ on $\Hcal$.
 Therefore $\{ p \in U \} = \bigcup_{x\in \{ p \in U \}} B(x, \delta_x)$, which
 establishes the continuity of $p$.
 
 % paragraph continuity (end)
 
-\bigskip
-\bigskip
-
-Note that balancedness
-alone does not imply the first in the list of these properties, e.g. taking a union
-of a closed convex cone and its mirrored counterpart.
-
-We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
-for $C$ to have $0$ in its interior, be closed and convex.
-
-Let $C$ be such a set. Note that by convexity of $C$ for any $x, h\in \Hcal$ we have
-\begin{equation*}
-  p(x)
-    \leq p(x+h) + p(-h)
-    \,, \text{ and }
-  p(x + h)
-    \leq p(x) + p(h)
-    \,.
-\end{equation*}
-Therefore, if we consider $h \in V$, with $V$ being {\it symmetric about $0$}, i.e.
-$h\in V$ iff $-h\in V$, then we conclude that
-\begin{equation*}
-  \bigl\lvert p(x + h) - p(x) \bigr\rvert
-    \leq \max\{p(h), p(-h)\}
-    \leq \sup_{h\in V} p(h)
-    \,.
-\end{equation*}
-For instance, $V = B(0, \delta)$ for a $\delta > 0$ -- an open ball in Banach space
-$\Hcal$ has all the necessary froperties. Hence if for any $x$ and any $\varepsilon
-> 0$ we can find a $\delta$ such that the right hand side supremum does not exceed
-$\varepsilon$, then we shall conclude that $B(x, \delta) \subseteq p^{-1}\bigl(B(p(x),
-\varepsilon))\bigr)$. % in topological vector spaces the translation of an open set
-% is open, since translation is a homeomorphism.
-
-To find such $\delta > 0$ let's fix some $\varepsilon > 0$, and observe that if $x
-\in \alpha C$ for some $\alpha > 0$, then $p(x) \leq \alpha$ and thus $\alpha C \subseteq
-p^{-1}\bigl([0, \alpha] \bigr)$. In particular we have $C \subseteq p^{-1}([0, 1])$. On
-the other hand, if $x\in p^{-1}\bigl([0, \varepsilon)\bigr)$, then $x \in \lambda_x
-C \subseteq \varepsilon C$ for some $\lambda_x \in [p(x), \varepsilon)$. Therefore
-\begin{equation*}
-  p^{-1}\bigl([0, \varepsilon)\bigr)
-    \subseteq \varepsilon C
-    \subseteq p^{-1}\bigl([0, \varepsilon]\bigr)
-    \,.
-\end{equation*}
-Note that $\lambda_x C \subseteq \varepsilon C$ for $\lambda_x < \varepsilon$ follows
-from $0\in C$ and convexity of $C$.
-
-Now, since $0$ is in the interior of $C$, there is $\delta > 0$, such that $B(0,
-\delta) \subseteq C$, which means that for any $\eta \in (0, 1)$
-\begin{equation*}
-  0 \in B(0, \varepsilon \eta \delta)
-    % scaling and translation of balls (continuous)
-    = \varepsilon \eta B(0, \delta)
-    % inflation is a monotone set-automorphism
-    \subseteq \varepsilon \eta C
-    % proven fact that $p(\alpha C) \subseteq [0, \alpha]$
-    \subseteq p^{-1}\bigl([0, \varepsilon \eta] \bigr)
-    % preimage is monotone
-    \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)
-    \,,
-\end{equation*}
-since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence by fixing $\eta =
-\tfrac12$ for any $\varepsilon > 0$ there is $\delta > 0$ with $B(0, \delta) \subseteq
-p^{-1}\bigl([0, \varepsilon) \bigr)$.
-
-The continuity of $p$ at $x$ follows. Indeed, for any $\varepsilon > 0$ we pick
-$\delta > 0$ be like the one above and observe that
-\begin{equation*}
-  \bigl\lvert p(x + h) - p(x) \bigr\rvert
-    \leq \sup_{h\in B(0, \delta)} p(h)
-    < \varepsilon
-    \,.
-\end{equation*}
-Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \varepsilon)\bigr)$. Note that $\delta$
-depends only on $\varepsilon$, implying that $p$ is in fact uniformly continuous on
-$\Hcal$.
-
 \paragraph{Various preimages} % (fold)
 \label{par:various_preimages}
 
+Let's study how values of $p$ are related to the underlying $C$, when $C$ has {\bf
+nice} properties: $C$ is convex and has $0\in \interior{C}$.
 
 % paragraph various_preimages (end)
+
+\paragraph{Preimage of $[0, 1]$} % (fold)
+\label{par:preimage_of_0_1_closed}
+
+Suppose $C$ is such, that $p$ is continuous. Thus the set $\{p\leq 1\}$ is closed in
+$\Hcal$, whence we must have $[C] \subseteq \{p\leq 1\}$, since $\{p\leq 1\} \subseteq
+C$.
+
+Suppose $x\in \{p\leq 1\}$. By the assumptions on $C$ we have $x = 0 \in C \subseteq [C]$,
+so suppose $x\neq 0$. For any $\lambda > 1$ we have $x\in \lambda C$, implying that
+$t x \in C$ for all $t \in (0, 1)$. If for an arbitrary open ball $B(x, \delta)$ we
+can find $t < 1$, such that $t x \in B(x, \delta)$, then $B(x, \delta) \cap C \neq
+\emptyset$, and hence $x \in [C]$. Indeed, for any $\delta > 0$
+\begin{equation*}
+  t \in\Bigl(
+    \max\bigl\{1 - \tfrac\delta{\|x\|}, 0\bigr\}, 1
+  \Bigr)
+    \Rightarrow
+      \lvert t - 1\rvert < \tfrac\delta{\|x\|}
+      \, \& \, t \in (0, 1)
+    \Rightarrow
+      t x \in B(x, \delta) \cap C
+      \,.
+\end{equation*}
+Therefore, $[C] = \{p \leq 1\}$.
+% Positive homogeneity implies that $\alpha [C] $
+
+% paragraph preimage_of_0_1_closed (end)
+
+\paragraph{Preimage of $[0, 1)$} % (fold)
+\label{par:preimage_of_0_1_open}
+
+Suppose $C$ is such, that $p$ is continuous. Since $\{p < 1\}$ is open by continuity
+of $p$ and $\{p < 1\} \subseteq C$, we must have $\{p < 1\} \subseteq \interior{C}$.
+
+Conversely, suppose $x \notin \{p < 1\}$. Then $x\in \{p \geq 1\}$ and in particular
+$x\neq 0$. Hence for any $\lambda < 1$ we have $x \notin \lambda C$, or, equivalently,
+$t x \notin C$ for all $t > 1$. If we could show that $B(x, \delta) \not\subseteq C$
+for any $\delta > 0$, then $x \notin \interior{C}$. Let's make sure that there is
+$t$ with $t x \in B(x, \delta)$ and $tx \notin C$:
+\begin{equation*}
+  t \in\Bigl(1, 1 + \tfrac\delta{\|x\|} \Bigr)
+    \Rightarrow
+      \lvert t - 1\rvert < \tfrac\delta{\|x\|}
+      \, \& \, t \in (1, +\infty)
+    \Rightarrow
+      t x \in B(x, \delta) \cap \Hcal \setminus C
+      % \, \& \, t x \notin C
+      \,.
+\end{equation*}
+Therefore, $x \notin \interior{C}$, and $\interior{C} \subseteq \{p < 1\}$.
+
+% paragraph preimage_of_0_1_open (end)
+
+\paragraph{Preimage of $\{1\}$} % (fold)
+\label{par:preimage_of_1}
+
+We claim that for a {\bf nice} $C$, $\partial C = \{p = 1\}$. Indeed, the result
+follows immediately from
+\begin{equation}
+  \{p = 1\}
+    = \{p \leq 1\} \setminus \{p < 1\}
+    = [C] \setminus \interior{C}
+    = \partial C
+    \,.
+\end{equation}
+Positive homogeneity implies, that the preimages of $[0, \alpha)$ and $[0, \alpha]$
+for any $\alpha > 0$ are given by $\alpha$-inflations of the interior and the closure
+of $C$, respectively. Indeed, preimages of such intervals are completely defined by
+$\{p < 1\}$ and $\{p \leq 1\}$:
+\begin{align*}
+  \{p \leq \alpha \}
+    &= \alpha \{p \leq 1\}
+    = \alpha [C]
+    \,, \\
+  \{p < \alpha \}
+    &= \alpha \{p < 1\}
+    = \alpha \interior{C}
+    \,, \\
+  \{p = \alpha \}
+    &= \alpha \{p = 1\}
+    = \alpha \partial C
+    \,.
+\end{align*}
+
+% paragraph preimage_of_1 (end)
+
+\paragraph{Discussion} % (fold)
+\label{par:discussion}
+
+Obviously, if the set $\{ \lambda > 0 \colon x \in \lambda C \}$ is non-empty for
+any $x \in \Hcal$, then $p(x)$ is finite-valued, because every $x$ is covered by
+at least one $\lambda$-inflation.
+
+This condition implies that $0 \in C$. Indeed, under it there must be $\lambda > 0$
+such that $0 \in \lambda C$, which in turn means that $\exists z\in C$ such that
+$0 = \lambda z$. Since $\lambda > 0$, we get $0 = z\in C$.
+
+So $0 \in C$ seems necessary for finiteness. However, it is not sufficient. Consider
+a cone $C = \{t z\colon z\in A\} = \bigcup_{t\geq 0} t A$ for $A = \{z\colon \|z - a\|
+\leq \|a\|\}$ for a given $a \neq 0$. Since $t A = \{z\colon \|z - t a\| \leq t \|a\| \}$
+for any $t\geq 0$, we still have $-a \notin C$: if it were otherwise, then $\tfrac{- a}t
+\in A$ for some $t > 0$ with $1 + \tfrac1t \leq 1$ --- a contradiction.
+
+Note that balancedness alone does not imply that $0 \in \interior{C}$, as exemplified
+by taking a union of a closed convex cone and its mirrored counterpart.
+
+% paragraph discussion (end)
 
 \paragraph{Summary} % (fold)
 \label{par:summary}
