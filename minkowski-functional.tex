@@ -32,8 +32,8 @@ of $\Hcal$: $[C]$ the smallest closed set covering $C$, $[C] = [[C]]$, and monot
 In contrast, $\interior{C}$ --- the topological interior of $C$ in $\Hcal$, --- is
 the largest open set contained within $C$.
 
-For any $C \subseteq \Hcal$ define the {\it Minkowski Functional} $p\colon \Hcal \to
-[0, +\infty]$ by
+For any nonempty $C \subseteq \Hcal$ define the {\it Minkowski Functional} $p\colon
+\Hcal \to [0, +\infty]$ by
 \begin{equation*}
   p(x)
     = \inf \bigl\{ \lambda > 0\,:\, x \in \lambda C\bigr\}
@@ -113,7 +113,7 @@ Therefore $p(t x) = t p(x)$ for any $x \in \Hcal$ and every $t > 0$.
 \paragraph{Homogeneity via balancedness} % (fold)
 \label{par:homogeneity_via_balancedness}
 
-If $C$ is balanced then $p(x)$ is homogenous.
+If $C$ is balanced then $p(x)$ is homogeneous.
 
 A set is $C$ is balanced if $\beta C \subset C$ for all $\lvert \beta \rvert \leq 1$.
 For any balanced $C$ we have $\lambda C \subset C$ in particular for $\lambda = 0$,
@@ -271,6 +271,41 @@ homogeneity
     = \{p \leq \alpha\}
     \,.
 \end{equation*}
+Furthermore, for any $U \subseteq [0, +\infty)$ and $\alpha > 0$ we get
+% \begin{equation*}
+%   \{p\in \alpha U\}
+%     = \bigl\{ \alpha^{-1} p \in U \bigr\}
+%     = \bigl\{x \colon p(x \alpha^{-1} ) \in U \bigr\}
+%     = \bigl\{\alpha z \colon p(z) \in U \bigr\}
+%     = \alpha \{ p\in U \}
+%     \,.
+% \end{equation*}
+\begin{equation*}
+  \{p \in \alpha U\}
+    = \{ p \in \sigma_\alpha(U) \}
+    = \{ \sigma_\alpha^{-1} \circ p \in U \}
+    = \{ p \circ \sigma_\alpha^{-1} \in U \}
+    = \sigma_\alpha^{-1}\bigl(\{p \in U \}\bigr)
+    = \alpha \{ p\in U \}
+    \,,
+\end{equation*}
+% \begin{align*}
+%   \{p \in \alpha U\}
+%     &= p^{-1} \bigl( \alpha U \bigr)
+%     = p^{-1} \bigl( \sigma_\alpha (U) \bigr)
+%     = \bigl(p^{-1} \circ \sigma_\alpha \bigr)(U)
+%     = \bigl(\sigma_\alpha^{-1} \circ p\bigr)^{-1}(U)
+%     \\
+%     &= \bigl(p \circ \sigma_\alpha^{-1} \bigr)^{-1}(U)
+%     = \bigl(\sigma_\alpha \circ p^{-1} \bigr)(U)
+%     = \sigma_\alpha \bigl(p^{-1}(U)\bigr)
+%     = \alpha \{p\in U\}
+%     \,,
+% \end{align*}
+where $\sigma_\alpha\colon \Hcal\to \Hcal$ given by $x\mapsto \alpha x$ is the
+``scaling'' homeomorphism, for which $\sigma_\alpha^{-1} = \sigma_{\alpha^{-1}}$.
+Indeed, by positive homogeneity of $p$ the maps $\sigma_\alpha$ and $p$ commute:
+$\sigma_\alpha \circ p = p \circ \sigma_\alpha$.
 
 % paragraph preimage_inclusion (end)
 
@@ -337,8 +372,10 @@ establishes the continuity of $p$.
 \paragraph{Various preimages} % (fold)
 \label{par:various_preimages}
 
-Let's study how values of $p$ are related to the underlying $C$, when $C$ has {\bf
-nice} properties: $C$ is convex and has $0\in \interior{C}$.
+Let's study how values of $p$ are related to the underlying set $C$, when the set
+has {\bf nice} properties: $C$ is convex and has $0\in \interior{C}$, i.e. when
+$p(\Hcal) \subseteq \real$, $p$ is continuous, and when $\alpha \leq \beta$ implies
+$\alpha C \subseteq \beta C$. % See \ref{pr01}, \ref{pr03}, and \ref{pr05} in summary.
 
 % paragraph various_preimages (end)
 
