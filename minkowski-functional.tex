@@ -28,7 +28,7 @@ the {\it Minkowski Functional} $p\colon \Hcal \to [0, +\infty]$ by
 \begin{equation*}
   p(x)
     = \inf \bigl\{ \lambda > 0\,:\, x \in \lambda C\bigr\}
-  \,,
+    \,,
 \end{equation*}
 where $\lambda C = \{\lambda z \,:\, z\in C\}$ is the $\lambda$-inflation of $C$,
 $\lambda \in\real$. This functional has many useful properties when $C$ is convex
@@ -205,7 +205,7 @@ at least one $\lambda$-inflation.
 
 This condition implies that $0\in C$. Indeed, under it there must be $\lambda > 0$
 such that $0 \in \lambda C$, which in turn means that $\exists z\in C$ such that
-$0 = \lambda z$. Since $\lambda > 0$, we get $z\in C$.
+$0 = \lambda z$. Since $\lambda > 0$, we get $0 = z\in C$.
 
 So $0\in C$ seems necessary for finiteness. However, it is not sufficient. Consider
 a cone $C = \{t z\colon z\in A\} = \bigcup_{t\geq 0} t A$ for $A = \{z\colon \|z - a\|
@@ -236,19 +236,16 @@ for any $x\neq 0$. Therefore $p(x) < +\infty$ for any $x\in \Hcal$ for such $C$.
 
 We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
 for $C$ to have $0$ in its interior, be closed and convex. Note that balancedness
-does not imply these properties: take a union of a closed convex cone and its mirrored
-counterpart.
+alone does not imply the first in the list of these properties, e.g. taking a union
+of a closed convex cone and its mirrored counterpart.
 
-Let $C$ be such a set. Note that by convexity of $C$ for any $x, h\in \Hcal$ we
-have
+Let $C$ be such a set. Note that by convexity of $C$ for any $x, h\in \Hcal$ we have
 \begin{equation*}
-  % p(x)
-  %   \leq p(x+h) + p(-h)
-  %   \,, \text{ and }
-  % p(x + h)
-  %   \leq p(x) + p(h)
-  %   \,,
-    \leq \sup_{h\in V} p(h)
+  p(x)
+    \leq p(x+h) + p(-h)
+    \,, \text{ and }
+  p(x + h)
+    \leq p(x) + p(h)
     \,.
 \end{equation*}
 Therefore, if we consider $h \in V$, with $V$ being {\it symmetric about $0$}, i.e.
@@ -259,54 +256,123 @@ $h\in V$ iff $-h\in V$, then we conclude that
     \leq \sup_{h\in V} p(h)
     \,.
 \end{equation*}
-Hence, if for any $x$ and any $\varepsilon > 0$ we can find an open $V$ such that
-the right hand side supremum does not exceeed $\varepsilon$, then  we shall conclude
-that $V \subseteq p^{-1}\bigl(B(p(x), \varepsilon))\bigr)$, and $p$ is continuous
-at $x$.
+For instance, $V = B(0, \delta)$ for a $\delta > 0$ -- an open ball in Banach space
+$\Hcal$ has all the necessary froperties. Hence, if for any $x$ and any $\varepsilon
+> 0$ we can find a $\delta$ such that the right hand side supremum does not exceed
+$\varepsilon$, then we shall conclude that $B(x, \delta) \subseteq p^{-1}\bigl(B(p(x),
+\varepsilon))\bigr)$. % in topological vector spaces the translation of an open set
+% is open, since translation is a homeomorphism.
 
-To construct such $V$ let's fix some $\varepsilon > 0$. Observe that if $x \in \alpha
-C$ for some $\alpha > 0$, then $p(x) \leq \alpha$ and thus $\alpha C \subseteq p^{-1}
-\bigl([0, \alpha] \bigr)$. Since $0$ is in the interior of $C$, there is $\delta > 0$,
-such that $B(0, \delta) \subseteq C$, which means that for any $\eta \in (0, 1)$
-\begin{equation*}
-  0 \in B(0, \varepsilon \eta \delta)
-    = \varepsilon \eta B(0, \delta)
-    \subseteq \varepsilon \eta C
-    \subseteq p^{-1}\bigl([0, \varepsilon \eta] \bigr)
-    \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)
-    \,,
-\end{equation*}
-since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence for any $\varepsilon > 0$
-there is $\delta > 0$ with $B(0, \delta) \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)$. 
-
-
-
-On the other hand, if $x\in p^{-1}\bigl([0, \varepsilon)\bigr)$, then $x \in \lambda_x C
-\subseteq \varepsilon C$ for some $\lambda_x \in [p(x), \varepsilon)$. Therefore
+To find such $\delta > 0$ let's fix some $\varepsilon > 0$, and observe that if $x
+\in \alpha C$ for some $\alpha > 0$, then $p(x) \leq \alpha$ and thus $\alpha C \subseteq
+p^{-1}\bigl([0, \alpha] \bigr)$. In particular we have $C \subseteq p^{-1}([0, 1])$. On
+the other hand, if $x\in p^{-1}\bigl([0, \varepsilon)\bigr)$, then $x \in \lambda_x
+C \subseteq \varepsilon C$ for some $\lambda_x \in [p(x), \varepsilon)$. Therefore
 \begin{equation*}
   p^{-1}\bigl([0, \varepsilon)\bigr)
     \subseteq \varepsilon C
     \subseteq p^{-1}\bigl([0, \varepsilon]\bigr)
     \,.
 \end{equation*}
-Note that $\lambda_x C \subseteq \varepsilon C$ for $\lambda_x < \varepsilon$ follows from
-$0\in C$ and convexity of $C$.
+Note that $\lambda_x C \subseteq \varepsilon C$ for $\lambda_x < \varepsilon$ follows
+from $0\in C$ and convexity of $C$.
 
-
-\begin{align*}
-  p(x)
-    &\leq p(x+h) + p(-h) < p(x+h) + \varepsilon
-    \,, \\
-  p(x + h)
-    &\leq p(x) + p(h) < p(x) + \varepsilon
+Now, since $0$ is in the interior of $C$, there is $\delta > 0$, such that $B(0,
+\delta) \subseteq C$, which means that for any $\eta \in (0, 1)$
+\begin{equation*}
+  0 \in B(0, \varepsilon \eta \delta)
+    % scaling and translation of balls (continuous)
+    = \varepsilon \eta B(0, \delta)
+    % inflation is a monotone set-automorphism
+    \subseteq \varepsilon \eta C
+    % proven fact that $p(\alpha C) \subseteq [0, \alpha]$
+    \subseteq p^{-1}\bigl([0, \varepsilon \eta] \bigr)
+    % preimage is monotone
+    \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)
     \,,
-\end{align*}
-Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \varepsilon)\bigr)$
+\end{equation*}
+since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence, by fixing $\eta =
+\tfrac12$ for any $\varepsilon > 0$ there is $\delta > 0$ with $B(0, \delta) \subseteq
+p^{-1}\bigl([0, \varepsilon) \bigr)$.
 
-
-First of all $p(\Hcal) \subseteq \real$.
-
+The continuity of $p$ at $x$ follows. Indeed, for any $\varepsilon > 0$ we pick
+$\delta > 0$ be like the one above and observe that
+\begin{equation*}
+  \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    \leq \sup_{h\in B(0, \delta)} p(h)
+    < \varepsilon
+    \,.
+\end{equation*}
+Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \varepsilon)\bigr)$. Note that $\delta$
+depends only on $\varepsilon$, implying that $p$ is in fact unifromly continuous on
+$\Hcal$.
 
 % paragraph continuity (end)
+
+\paragraph{Summary} % (fold)
+\label{par:summary}
+
+List of properties
+\begin{enumerate}
+  \item \label{pr01}
+    $C$ is nonempty
+  \item \label{pr02}
+    $C$ is closed
+  \item \label{pr03}
+    $C$ is convex
+  \item \label{pr04}
+    $0 \in C$
+  \item \label{pr05}
+    $0$ is in the topological interior of $C$
+  \item \label{pr06}
+    $C$ is balanced: $\lambda C \subset C$ for all $\lvert \lambda \rvert \leq 1$
+  \item \label{pr07}
+    $C$ is absorbing at $0$: $\{\lambda>0\colon x \in \lambda C \} \neq \emptyset$
+    for all $x\in \Hcal$
+  \item \label{pr08}
+    $\alpha C \subseteq \beta C$ whenever $\alpha \leq \beta$
+  \item \label{pr09}
+    $p(x) < +\infty$
+  \item \label{pr10}
+    $p(tx) = t p(x)$ for all $t > 0$
+  \item \label{pr11}
+    $p(tx) = \lvert t \rvert p(x)$ for all $t \in \real$
+  \item \label{pr12}
+    $t p(x) \leq p(t x)$ for all $t \in \real$
+  \item \label{pr13}
+    $p(x_1 + x_2) \leq p(x_1) + p(x_2)$ for any $x_1, x_2 \in \Hcal$
+  \item \label{pr14}
+    $p(0) = 0$
+  \item \label{pr15}
+    $A \subseteq B$ implies $\alpha A \subseteq \alpha B$
+  \item \label{pr16}
+    $\alpha x \in \lambda C$ iff $\lvert \alpha \rvert x \in \lambda C$ for any
+    $\alpha \neq 0$ and $\lambda > 0$
+  \item \label{pr17}
+    $h \in C$ if and only if $-h \in C$
+  \item \label{pr18}
+    $p\colon \Hcal \to [0, +\infty)$ is a continuous map
+\end{enumerate}
+All implications tacitly assume $\{\ref{pr01}\}$:
+$\{\ref{pr01}\} \Rightarrow \ref{pr10}$,
+$\{\ref{pr03}, \ref{pr04}\} \Rightarrow \{\ref{pr08}, \ref{pr12}\}$,
+$\{\ref{pr04}\} \Rightarrow \ref{pr14}$,
+$\{\ref{pr06}\} \Rightarrow \{\ref{pr11}, \ref{pr16}\}$,
+$\{\ref{pr03}, \ref{pr17}\} \Rightarrow \{\ref{pr04}, \ref{pr06}\}$,
+% Shown directly: if $x\in \lambda C$, then $x = \lambda z$ for some $z\in C$.
+% if $\lambda > 0$, then $h = z\in C$, if $\lambda = 0$, then $\{\ref{pr17}\}$
+% implies $0\in C$. Otherwise, $x = -\lvert \lambda\rvert z$ and $h = -z\in C$
+% since $z\in C$. Therefore $x = (1 - \lvert \lambda\rvert) 0 + \lvert \lambda\rvert h$
+% for $0, h\in C$, whence $x\in C$.
+% for any $h\in C$ we have $0 = \tfrac12 (-h) + \tfrac12 h$.
+$\{\ref{pr05}\} \Rightarrow \{\ref{pr04}, \ref{pr07}, \ref{pr09}\}$,
+$\{\ref{pr07}\} \Rightarrow \ref{pr09}$,
+$\emptyset \Rightarrow \ref{pr15}$,
+$\{\ref{pr11}\} \Rightarrow \{\ref{pr10}, \ref{pr12}\}$,
+$\{\ref{pr03}\} \Rightarrow \ref{pr13}$,
+$\{\ref{pr03}, \ref{pr05}\} \Rightarrow \ref{pr18}$.
+
+% paragraph summary (end)
+
 
 \end{document}
