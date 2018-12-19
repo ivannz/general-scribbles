@@ -231,13 +231,126 @@ for any $x\neq 0$. Therefore $p(x) < +\infty$ for any $x\in \Hcal$ for such $C$.
 
 % paragraph the_sufficient_condition_for_finite_values (end)
 
+\paragraph{Upper bound for continuity} % (fold)
+\label{par:upper_bound_for_continuity}
+
+Suppose $C$ is convex and such that $p(\Hcal)\subseteq \real$. Then for any $x, h
+\in \Hcal$ we have $p(x) \leq p(x+h) + p(-h)$ and $p(x + h) \leq p(x) + p(h)$ by
+subadditivity. Together with positive homogeneity, this implies that for any $x \in
+\Hcal$ and $h\neq 0$
+\begin{equation*}
+  % the rhs is of the form $\|h\| \ldots$, implying that the bound holds for $h=0$
+  \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    % \leq \max\{p(h), p(- h)\}
+    \leq \| h \| \max\Bigl\{
+        p\Bigl(\tfrac{h}{\|h\|}\Bigr),
+        p\Bigl(- \tfrac{h}{\|h\|}\Bigr)
+      \Bigr\}
+    \leq \| h \| \sup \{p(u)\colon \|u\|\leq 1\}
+    % \Big\vert_{u = \|h\|^{-1} h}
+    \,.
+\end{equation*}
+Since the right-hand side does not depend on $x$, we note that the bound holds
+uniformly over $x \in \Hcal$. Therefore in order to show continuity (uniform) it
+is enough to prove that $p$ is bounded within $B[0, 1] = \{u\colon \|u\| \leq 1\}$
+-- the closed unit ball in $\Hcal$.
+
+% paragraph upper_bound_for_continuity (end)
+
+\paragraph{Preimage inclusion} % (fold)
+\label{par:preimage_inclusion}
+
+Consider a convex $C$ with $0\in C$. Then for any $\alpha > 0$ we have the following.
+If $x \in \alpha C$ for some $\alpha > 0$, then by definition $p(x) \leq \alpha$ and
+thus $\alpha C \subseteq \{p \leq \alpha\}$. Conversely, if $x\in \{p < \alpha\}$,
+then $x \in \lambda_x C$ for some $p(x) \leq \lambda_x < \alpha$. Since $C$ is convex
+and $0\in C$, it must hold $\lambda_x C \subseteq \alpha C$. Therefore
+\begin{equation*}
+  \{p < \alpha \}
+    \subseteq \alpha C
+    \subseteq \{p \leq \alpha \}
+    \,,
+\end{equation*}
+for any $\alpha > 0$. In particular we have $C \subseteq \{p \leq 1\}$ and by positive
+homogeneity
+\begin{equation*}
+  \alpha \{p\leq 1\}
+    = \{\alpha x \in \Hcal \colon p(x) \leq 1\}
+    = \bigl\{z \in \Hcal \colon \tfrac1{\alpha} p(z) \leq 1\bigr\}
+    = \{p \leq \alpha\}
+    \,.
+\end{equation*}
+
+% paragraph preimage_inclusion (end)
+
+\paragraph{Boundedness} % (fold)
+\label{par:boundedness}
+
+Consider $C$ that is convex and has $0$ in its topological interior. This means that
+there is $\delta > 0$, such that $B(0, \delta) \subseteq C$. Thus for any $\eta \in
+(0, 1)$
+\begin{equation*}
+  B[0, 1]
+    = \{u\colon \|u\| \leq 1\}
+    % since [0, ]
+    \subseteq B\bigl( 0, \tfrac1\eta \bigr)
+    % scaling and translation of balls (continuous)
+    = \tfrac1{\delta \eta} B(0, \delta)
+    % inflation is a monotone set-automorphism
+    \subseteq \tfrac1{\delta \eta} C
+    % proven fact that $\alpha C \subseteq \{p \leq \alpha\}$
+    \subseteq \bigl\{p \leq \tfrac1{\delta\eta} \bigr\}
+    \,,
+\end{equation*}
+since $[0, 1] \subset [0, \eta^{-1})$. Hence there exists $M > 0$ that depends only
+on $C$, such that $p(u) \leq M$ for any $u \in B[0, 1]$.
+
+% paragraph boundedness (end)
+
 \paragraph{Continuity} % (fold)
 \label{par:continuity}
 
 We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
-for $C$ to have $0$ in its interior, be closed and convex. Note that balancedness
+for $C$ to have $0$ in its interior and be convex. Indeed, since $0\in C$ for such
+$C$ and $p$ is real-valued, the upper bounds derived earlier hold true. Hence for
+any $h \in \Hcal$ with $\|h\| < \tfrac\varepsilon{M}$ and uniformly over $x$ we have
+\begin{equation*}
+  \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    \leq
+      \sup_{x\in \Hcal}
+        \bigl\lvert p(x + h) - p(x) \bigr\rvert
+    \leq M \| h \| < \varepsilon
+      \,.
+\end{equation*}
+Therefore $B(x, \delta) \subseteq \bigl\{ p\in B(p(x), \varepsilon)\bigr\}$ over
+all $x\in \Hcal$ for a certain $\delta_\varepsilon > 0$, that depends on $C$ and
+$\varepsilon$, but {\bf not on} $x$. Hence $p$ is uniformly continuous on $\Hcal$.
+
+As a reminder, let $U$ be open in $\real_+ = [0, +\infty)$. For any $x\in \{p\in U\}$
+there is $\varepsilon_x > 0$, such that $B(p(x), \varepsilon_x) \subseteq U$. In
+turn there exists $\delta_x = \delta_{\varepsilon_x} > 0$ with
+\begin{equation*}
+  x \in B\bigl(x, \delta_x\bigr)
+    % continuity at $x$
+    \subseteq \bigl\{ p\in B(p(x), \varepsilon_x)\bigr\}
+    % preimage is monotone
+    \subseteq \{ p \in U \}
+    \,.
+\end{equation*}
+Therefore $\{ p \in U \} = \bigcup_{x\in \{ p \in U \}} B(x, \delta_x)$, which
+establishes the continuity of $p$.
+
+% paragraph continuity (end)
+
+\bigskip
+\bigskip
+
+Note that balancedness
 alone does not imply the first in the list of these properties, e.g. taking a union
 of a closed convex cone and its mirrored counterpart.
+
+We claim that for $p\colon \Hcal \to [0, +\infty]$ to be continuous, it suffices
+for $C$ to have $0$ in its interior, be closed and convex.
 
 Let $C$ be such a set. Note that by convexity of $C$ for any $x, h\in \Hcal$ we have
 \begin{equation*}
@@ -257,7 +370,7 @@ $h\in V$ iff $-h\in V$, then we conclude that
     \,.
 \end{equation*}
 For instance, $V = B(0, \delta)$ for a $\delta > 0$ -- an open ball in Banach space
-$\Hcal$ has all the necessary froperties. Hence, if for any $x$ and any $\varepsilon
+$\Hcal$ has all the necessary froperties. Hence if for any $x$ and any $\varepsilon
 > 0$ we can find a $\delta$ such that the right hand side supremum does not exceed
 $\varepsilon$, then we shall conclude that $B(x, \delta) \subseteq p^{-1}\bigl(B(p(x),
 \varepsilon))\bigr)$. % in topological vector spaces the translation of an open set
@@ -291,7 +404,7 @@ Now, since $0$ is in the interior of $C$, there is $\delta > 0$, such that $B(0,
     \subseteq p^{-1}\bigl([0, \varepsilon) \bigr)
     \,,
 \end{equation*}
-since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence, by fixing $\eta =
+since $[0, \varepsilon \eta] \subset [0, \varepsilon)$. Hence by fixing $\eta =
 \tfrac12$ for any $\varepsilon > 0$ there is $\delta > 0$ with $B(0, \delta) \subseteq
 p^{-1}\bigl([0, \varepsilon) \bigr)$.
 
@@ -304,10 +417,14 @@ $\delta > 0$ be like the one above and observe that
     \,.
 \end{equation*}
 Thus $B(x, \delta) \in p^{-1}\bigl(B(p(x), \varepsilon)\bigr)$. Note that $\delta$
-depends only on $\varepsilon$, implying that $p$ is in fact unifromly continuous on
+depends only on $\varepsilon$, implying that $p$ is in fact uniformly continuous on
 $\Hcal$.
 
-% paragraph continuity (end)
+\paragraph{Various preimages} % (fold)
+\label{par:various_preimages}
+
+
+% paragraph various_preimages (end)
 
 \paragraph{Summary} % (fold)
 \label{par:summary}
@@ -366,7 +483,7 @@ $\{\ref{pr03}, \ref{pr17}\} \Rightarrow \{\ref{pr04}, \ref{pr06}\}$,
 % for $0, h\in C$, whence $x\in C$.
 % for any $h\in C$ we have $0 = \tfrac12 (-h) + \tfrac12 h$.
 $\{\ref{pr05}\} \Rightarrow \{\ref{pr04}, \ref{pr07}, \ref{pr09}\}$,
-$\{\ref{pr07}\} \Rightarrow \ref{pr09}$,
+$\{\ref{pr07}\} \Rightarrow \{\ref{pr04}, \ref{pr09}\}$,
 $\emptyset \Rightarrow \ref{pr15}$,
 $\{\ref{pr11}\} \Rightarrow \{\ref{pr10}, \ref{pr12}\}$,
 $\{\ref{pr03}\} \Rightarrow \ref{pr13}$,
