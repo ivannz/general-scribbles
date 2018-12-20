@@ -271,41 +271,29 @@ homogeneity
     = \{p \leq \alpha\}
     \,.
 \end{equation*}
-Furthermore, for any $U \subseteq [0, +\infty)$ and $\alpha > 0$ we get
-% \begin{equation*}
-%   \{p\in \alpha U\}
-%     = \bigl\{ \alpha^{-1} p \in U \bigr\}
-%     = \bigl\{x \colon p(x \alpha^{-1} ) \in U \bigr\}
-%     = \bigl\{\alpha z \colon p(z) \in U \bigr\}
-%     = \alpha \{ p\in U \}
-%     \,.
-% \end{equation*}
-\begin{equation*}
-  \{p \in \alpha U\}
-    = \{ p \in \sigma_\alpha(U) \}
-    = \{ \sigma_\alpha^{-1} \circ p \in U \}
-    = \{ p \circ \sigma_\alpha^{-1} \in U \}
-    = \sigma_\alpha^{-1}\bigl(\{p \in U \}\bigr)
-    = \alpha \{ p\in U \}
+Consdier the scaling map $x\mapsto \sigma_\alpha(x) = \alpha x$ on a vector space.
+Its inverse is $\sigma_\alpha^{-1} = \sigma_{\alpha^{-1}}$, and it is easy to see
+that $\sigma_\alpha$ is bouded linear map. By positive homogeneity of $p$ the maps
+$\sigma_\alpha$ and $p$ commute: $\sigma_\alpha \circ p = p \circ \sigma_\alpha$
+for all $\alpha > 0$. Therefore, for any $U \subseteq [0, +\infty)$ and $\alpha > 0$
+we get $\{p\in \alpha U\} = \alpha \{ p\in U \}$:
+\begin{align*}
+    \sigma_\alpha \bigl( \{p \in U\} \bigr)
+    &= \bigl\{\sigma_\alpha^{-1} \circ p \in U\bigr\}
+    = \bigl\{\sigma_{\alpha^{-1}} \circ p \in U\bigr\}
+    \\
+    &= \bigl\{p \circ \sigma_{\alpha^{-1}} \in U\bigr\}
+    = \bigl\{p \in \sigma_{\alpha^{-1}}^{-1}(U)\bigr\}
+    = \bigl\{p \in \sigma_\alpha(U)\bigr\}
     \,,
+\end{align*}
+because for any maps $f$ and $h$ the preimages of their composition is
+\begin{equation*}
+  \{f\circ h \in U\}
+    = \bigl\{ h \in f^{-1}(U) \bigr\}
+    = h^{-1}\bigl(\{f \in U \}\bigr)
+    \,.
 \end{equation*}
-% \begin{align*}
-%   \{p \in \alpha U\}
-%     &= p^{-1} \bigl( \alpha U \bigr)
-%     = p^{-1} \bigl( \sigma_\alpha (U) \bigr)
-%     = \bigl(p^{-1} \circ \sigma_\alpha \bigr)(U)
-%     = \bigl(\sigma_\alpha^{-1} \circ p\bigr)^{-1}(U)
-%     \\
-%     &= \bigl(p \circ \sigma_\alpha^{-1} \bigr)^{-1}(U)
-%     = \bigl(\sigma_\alpha \circ p^{-1} \bigr)(U)
-%     = \sigma_\alpha \bigl(p^{-1}(U)\bigr)
-%     = \alpha \{p\in U\}
-%     \,,
-% \end{align*}
-where $\sigma_\alpha\colon \Hcal\to \Hcal$ given by $x\mapsto \alpha x$ is the
-``scaling'' homeomorphism, for which $\sigma_\alpha^{-1} = \sigma_{\alpha^{-1}}$.
-Indeed, by positive homogeneity of $p$ the maps $\sigma_\alpha$ and $p$ commute:
-$\sigma_\alpha \circ p = p \circ \sigma_\alpha$.
 
 % paragraph preimage_inclusion (end)
 
