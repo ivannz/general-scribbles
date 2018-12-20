@@ -90,6 +90,9 @@ The Minkowski functional is zero on $0$ if $0\in C$. Indeed, for any $\lambda > 
 we have $0 \in \lambda C$, since $0 = \lambda 0$. Therefore, $p(0) \leq \lambda$
 for all $\lambda > 0$, whence $p(0) = 0$.
 
+Alternatively, if $p(0) = 0$, then $0\in \lambda C$ for any $\lambda > 0$, which
+means that for $\lambda=1$ there is $z\in C$ such that $z = 0$. Hence $0\in C$.
+
 % paragraph zero (end)
 
 \paragraph{Positive homogeneity} % (fold)
@@ -107,6 +110,10 @@ The opposite inequality follows from applying the direct one to $(x, t) = (\alph
 z, \alpha^{-1})$ for any $\alpha > 0$ and $z \in \Hcal$. Indeed, since $\alpha^{-1}
 x = z$, $p(\alpha^{-1} x) \leq \alpha^{-1} p(x)$ implies $\alpha p(z) \leq p(\alpha z)$.
 Therefore $p(t x) = t p(x)$ for any $x \in \Hcal$ and every $t > 0$.
+
+By positive homogeneity we have $p(0) = p(t \cdot 0) = t p(0)$ for any $t > 0$, which
+can be satisfied only if $p(0) \in \{0, \infty\}$. Hence, $p(0) = 0$ iff $0\in C$, 
+and $p(0)\neq 0$ iff $0\notin C$, in which case $p(0) = +\infty$.
 
 % paragraph pos_homogeneity (end)
 
@@ -271,7 +278,7 @@ homogeneity
     = \{p \leq \alpha\}
     \,.
 \end{equation*}
-Consdier the scaling map $x\mapsto \sigma_\alpha(x) = \alpha x$ on a vector space.
+Consider the scaling map $x\mapsto \sigma_\alpha(x) = \alpha x$ on a vector space.
 Its inverse is $\sigma_\alpha^{-1} = \sigma_{\alpha^{-1}}$, and it is easy to see
 that $\sigma_\alpha$ is bouded linear map. By positive homogeneity of $p$ the maps
 $\sigma_\alpha$ and $p$ commute: $\sigma_\alpha \circ p = p \circ \sigma_\alpha$
@@ -300,9 +307,8 @@ because for any maps $f$ and $h$ the preimages of their composition is
 \paragraph{Boundedness} % (fold)
 \label{par:boundedness}
 
-Consider $C$ that is convex and has $0$ in its topological interior. This means that
-there is $\delta > 0$, such that $B(0, \delta) \subseteq C$. Thus for any $\eta \in
-(0, 1)$
+Consider $C$ that has $0$ in its topological interior. This means that there is $\delta
+> 0$, such that $B(0, \delta) \subseteq C$. Thus for any $\eta \in (0, 1)$
 \begin{equation*}
   B[0, 1]
     = \{u\colon \|u\| \leq 1\}
@@ -317,7 +323,19 @@ there is $\delta > 0$, such that $B(0, \delta) \subseteq C$. Thus for any $\eta 
     \,,
 \end{equation*}
 since $[0, 1] \subset [0, \eta^{-1})$. Hence there exists $M > 0$ that depends only
-on $C$, such that $p(u) \leq M$ for any $u \in B[0, 1]$.
+on $C$, such that $p(u) \leq M$ for any $u \in B[0, 1]$. It is worth reminding that
+the rightmost set inclusion follows from the definition of $p$, and does not require
+convexity of $C$.
+
+If a positively homogeneous $p$ is bounded on $\{u\colon \|u\|\leq 1\}$, then it
+is finite:
+\begin{equation*}
+  p(x)
+    \leq \|x\| p\Bigl(\tfrac{x}{\|x\|}\Bigr)
+    \leq \|x\| \sup\{p(u)\colon \|u\|\leq 1\}
+    < +\infty
+    \,.
+\end{equation*}
 
 % paragraph boundedness (end)
 
@@ -453,6 +471,34 @@ $\{p < 1\}$ and $\{p \leq 1\}$:
 
 % paragraph preimage_of_1 (end)
 
+\paragraph{Bounding linear functionals} % (fold)
+\label{par:bounding_linear_functionals}
+
+Let $l$ be a linear functional and $p$ be a positively homogeneous function taking
+values in $[0, \infty]$. Suppose $l \leq p$ on $\Hcal$. Then for any $x\in \Hcal$ we
+have $l(x) \leq p(x)$, whence $- p(x) \leq - l(x) = l(- x)$ by linearity of $l$. At
+the same time $- x \in \Hcal$, implying $l(- x) \leq p(- x)$. If $x=0$, then trivially
+$l(0) = 0 \leq 0 \cdot p(0)$. However, for $x\neq 0$ we get the following bound
+\begin{multline*}
+  - p(- x) \leq l(x) \leq p(x)
+  \Rightarrow
+    \\
+    \lvert l(x) \rvert
+    % \leq (p(x) \vee p(- x))
+      \leq \| x \| \max\Bigl\{
+          p\Bigl(\tfrac{x}{\|x\|}\Bigr),
+          p\Bigl(- \tfrac{x}{\|x\|}\Bigr)
+        \Bigr\}
+      \leq \|x\| \, \sup\{p(u)\colon \|u\|\leq 1\}
+    \,.
+\end{multline*}
+% Note that there has been no need for $p(\Hcal)\subseteq \real$ in deriving this bound.
+If $p$ is the Minkowski functional of a set $C$ with $0\in \interior{C}$, then $p$
+is bounded on $B[0, 1]$ and positively homogeneous. Therefore this upper bound implies
+that $l$ is a bounded linear functional.
+
+% paragraph bounding_linear_functionals (end)
+
 \paragraph{Discussion} % (fold)
 \label{par:discussion}
 
@@ -518,11 +564,14 @@ List of properties
     $h \in C$ if and only if $-h \in C$
   \item \label{pr18}
     $p\colon \Hcal \to [0, +\infty)$ is a continuous map
+  \item \label{pr19}
+    $\sup\{p(u)\colon \|u\|\leq 1\} < +\infty$
 \end{enumerate}
 All implications tacitly assume $\{\ref{pr01}\}$:
 $\{\ref{pr01}\} \Rightarrow \ref{pr10}$,
 $\{\ref{pr03}, \ref{pr04}\} \Rightarrow \{\ref{pr08}, \ref{pr12}\}$,
 $\{\ref{pr04}\} \Rightarrow \ref{pr14}$,
+$\{\ref{pr14}\} \Rightarrow \ref{pr04}$,
 $\{\ref{pr06}\} \Rightarrow \{\ref{pr11}, \ref{pr16}\}$,
 $\{\ref{pr03}, \ref{pr17}\} \Rightarrow \{\ref{pr04}, \ref{pr06}\}$,
 % Shown directly: if $x\in \lambda C$, then $x = \lambda z$ for some $z\in C$.
@@ -536,7 +585,8 @@ $\{\ref{pr07}\} \Rightarrow \{\ref{pr04}, \ref{pr09}\}$,
 $\emptyset \Rightarrow \ref{pr15}$,
 $\{\ref{pr11}\} \Rightarrow \{\ref{pr10}, \ref{pr12}\}$,
 $\{\ref{pr03}\} \Rightarrow \ref{pr13}$,
-$\{\ref{pr03}, \ref{pr05}\} \Rightarrow \ref{pr18}$.
+$\{\ref{pr05}\} \Rightarrow \ref{pr19}$,
+$\{\ref{pr03}, \ref{pr19}\} \Rightarrow \ref{pr18}$.
 
 % paragraph summary (end)
 
