@@ -28,12 +28,12 @@
 
 Consider a Banach space $(\Hcal, \|\cdot\|)$ with the norm $\Tcal^{\|\cdot\|}_\Hcal$
 on it $\Hcal$. In the following $[C]$ is the closure of a set $C$ in the topology
-of $\Hcal$: $[C]$ the smallest closed set covering $C$, $[C] = [[C]]$, and monotone.
-In contrast, $\interior{C}$ --- the topological interior of $C$ in $\Hcal$, --- is
-the largest open set contained within $C$.
+of $\Hcal$: $[C]$ the smallest closed set covering $C$, $[C] = \bigl[[C]\bigr]$,
+and monotone. In contrast, $\interior{C}$ --- the topological interior of $C$ in
+$\Hcal$, --- is the largest open set contained within $C$.
 
-For any nonempty $C \subseteq \Hcal$ define the {\it Minkowski Functional} $p\colon
-\Hcal \to [0, +\infty]$ by
+For a nonempty $C \subseteq \Hcal$ the {\it Minkowski Functional} $p\colon \Hcal
+\to [0, +\infty]$ is
 \begin{equation*}
   p(x)
     = \inf \bigl\{ \lambda > 0\,:\, x \in \lambda C\bigr\}
@@ -400,7 +400,7 @@ can find $t < 1$, such that $t x \in B(x, \delta)$, then $B(x, \delta) \cap C \n
   t \in\Bigl(
     \max\bigl\{1 - \tfrac\delta{\|x\|}, 0\bigr\}, 1
   \Bigr)
-    \Rightarrow
+    \Leftrightarrow
       \lvert t - 1\rvert < \tfrac\delta{\|x\|}
       \, \& \, t \in (0, 1)
     \Rightarrow
@@ -418,22 +418,22 @@ Therefore, $[C] = \{p \leq 1\}$.
 Suppose $C$ is such, that $p$ is continuous. Since $\{p < 1\}$ is open by continuity
 of $p$ and $\{p < 1\} \subseteq C$, we must have $\{p < 1\} \subseteq \interior{C}$.
 
-Conversely, suppose $x \notin \{p < 1\}$. Then $x\in \{p \geq 1\}$ and in particular
-$x\neq 0$. Hence for any $\lambda < 1$ we have $x \notin \lambda C$, or, equivalently,
-$t x \notin C$ for all $t > 1$. If we could show that $B(x, \delta) \not\subseteq C$
-for any $\delta > 0$, then $x \notin \interior{C}$. Let's make sure that there is
-$t$ with $t x \in B(x, \delta)$ and $tx \notin C$:
+Conversely, suppose $x\in \{p \geq 1\}$. Then for any for any $\lambda < 1$ we have
+$x \notin \lambda C$, or, equivalently, $t x \in \Hcal \setminus C$ for all $t > 1$.
+In particular $x\neq 0\in C$. For any $\delta > 0$ we make the following argument:
 \begin{equation*}
   t \in\Bigl(1, 1 + \tfrac\delta{\|x\|} \Bigr)
-    \Rightarrow
+    \Leftrightarrow
       \lvert t - 1\rvert < \tfrac\delta{\|x\|}
       \, \& \, t \in (1, +\infty)
     \Rightarrow
       t x \in B(x, \delta) \cap \Hcal \setminus C
-      % \, \& \, t x \notin C
       \,.
 \end{equation*}
-Therefore, $x \notin \interior{C}$, and $\interior{C} \subseteq \{p < 1\}$.
+Thus $x\in \bigl[\Hcal \setminus C \bigr]$. Note that $\Hcal\setminus \interior{C}$
+is a closed set covering $\Hcal \setminus C$, which implies that it also covers the
+closure. Therefore $\{p \geq 1\} \subseteq \Hcal\setminus \interior{C}$, and $\interior{C}
+\subseteq \{p < 1\}$.
 
 % paragraph preimage_of_0_1_open (end)
 
@@ -451,22 +451,17 @@ follows immediately from
 \end{equation}
 Positive homogeneity implies, that the preimages of $[0, \alpha)$ and $[0, \alpha]$
 for any $\alpha > 0$ are given by $\alpha$-inflations of the interior and the closure
-of $C$, respectively. Indeed, preimages of such intervals are completely defined by
-$\{p < 1\}$ and $\{p \leq 1\}$:
-\begin{align*}
+of $C$, respectively:
+\begin{equation*}
   \{p \leq \alpha \}
-    &= \alpha \{p \leq 1\}
+    = \alpha \{p \leq 1\}
     = \alpha [C]
-    \,, \\
+    \,, \text{ and }
   \{p < \alpha \}
-    &= \alpha \{p < 1\}
+    = \alpha \{p < 1\}
     = \alpha \interior{C}
-    \,, \\
-  \{p = \alpha \}
-    &= \alpha \{p = 1\}
-    = \alpha \partial C
     \,.
-\end{align*}
+\end{equation*}
 
 % paragraph preimage_of_1 (end)
 
@@ -476,7 +471,7 @@ $\{p < 1\}$ and $\{p \leq 1\}$:
 Let $l$ be a linear functional and $p$ be a positively homogeneous function taking
 values in $[0, \infty]$. Suppose $l \leq p$ on $\Hcal$. Then for any $x\in \Hcal$ we
 have $l(x) \leq p(x)$, whence $- p(x) \leq - l(x) = l(- x)$ by linearity of $l$. At
-the same time $- x \in \Hcal$, implying $l(- x) \leq p(- x)$. If $x=0$, then trivially
+the same time $- x \in \Hcal$ implies $l(- x) \leq p(- x)$. If $x=0$, then trivially
 $l(0) = 0 \leq 0 \cdot p(0)$. However, for $x\neq 0$ we get the following bound
 \begin{multline*}
   - p(- x) \leq l(x) \leq p(x)
@@ -494,7 +489,7 @@ $l(0) = 0 \leq 0 \cdot p(0)$. However, for $x\neq 0$ we get the following bound
 % Note that there has been no need for $p(\Hcal)\subseteq \real$ in deriving this bound.
 If $p$ is the Minkowski functional of a set $C$ with $0\in \interior{C}$, then $p$
 is bounded on $B[0, 1]$ and positively homogeneous. Therefore this upper bound implies
-that $l$ is a bounded linear functional.
+that $l$ is a bounded linear functional. Note that convexity of $C$ is not necessary.
 
 % paragraph bounding_linear_functionals (end)
 
