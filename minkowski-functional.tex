@@ -494,46 +494,6 @@ that $l$ is a bounded linear functional. Note that convexity of $C$ is not neces
 
 % paragraph bounding_linear_functionals (end)
 
-\paragraph{Hahn-Banach point-set separation} % (fold)
-\label{par:hahn_banach_point_set_separation}
-
-Let $C$ be a nonempty, closed, convex set with $0\in \interior{C}$. Then, for any
-$x_0\notin C$ there is $l_{x_0} \in \Hcal^*$, a continuous linear functional on
-$\Hcal$, such that $l_{x_0}(x) \leq 1 < l_{x_0}(x_0)$ for $x\in C$.
-
-Let $p$ be the Minkowski functional of the set $C$, and consider a linear subspace
-$\Lcal_{x_0} = \{t x_0\colon t\in \real\}$. $\Lcal_{x_0}$ is nontrivial, since $0\in C$
-and $x_0\notin C$. Observe that for a given $x\in \Lcal_{x_0}$ there is a unique
-$t_x \in \real$ such that $x = t_x x_0$. Indeed, $t_1\neq t_2$ with $t_1 x_0 = t_2 x_0$
-would imply $x_0 = 0$.
-
-The map $\tau\colon \Lcal_{x_0} \to \real$ defined by $\tau(x) = t_x$ is one-to-one
-and linear. Indeed, if $x, y\in \Lcal_{x_0}$, then $\tau(x) = \tau(y)$ implies that
-$x = \tau(x) x_0 = \tau(y) x_0 = y$, and for any $\alpha\in \real$
-\begin{equation}
-  \bigl( \tau(x) x_0 \bigr) + \bigl( \tau(y) x_0 \bigr) \alpha
-    % structure of $x$ and $y$
-    = x + y \alpha
-    % linearity of $\Lcal_{x_0}$
-    = \tau(x + y \alpha) x_0
-    % uniquenes of x\mapsto t_x
-  \,.
-\end{equation}
-
-Since $x_0 \notin C$ and $C$ is closed, we must have $x_0\notin \{p\leq 1\}$, whence
-$p(x_0) > 1$. Let $f(x) = \tau(x) p(x_0)$ for any $x \in \Lcal_{x_0}$. On $\Lcal_{x_0}$
-we have $f\leq p$ since $\tau(x) p(x_0) \leq p\bigl(\tau(x) x_0\bigr) = p(x)$ by
-sublinearity of $p$, which follows from the {\bf nice} properties of $C$. At the same
-time $f$ inherits linearity from $\tau$.
-
-By the {\it Hahn-Banach Extension Theorem} there must be linear extension $l_{x_0}$
-of $f$ from $\Lcal_{x_0}$ onto $\Hcal$ with $l_{x_0}\big\vert_{\Lcal_{x_0}} = f$ and
-$l_{x_0} \leq p$ everywhere on $\Hcal$. This extension is a bounded linear functional
-by an earlier result, and satisfies $l_{x_0}(x) \leq p(x) \leq 1$ for any $x\in C$
-and $1 < p(x_0) = \tau(x_0) p(x_0) = f(x_0) = l_{x_0}(x_0)$.
-
-% paragraph hahn_banach_point_set_separation (end)
-
 \paragraph{Discussion} % (fold)
 \label{par:discussion}
 
