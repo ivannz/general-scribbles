@@ -19,7 +19,7 @@
 \newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Lcal}{\mathcal{L}}
 
-\title{Notes on Minkowski Functional and Hahn-Banach}
+\title{Notes on Hahn-Banach}
 \author{Nazarov Ivan}
 
 \date{\today}
@@ -30,12 +30,203 @@
 Consider a Banach space $(\Hcal, \|\cdot\|)$ with the norm $\Tcal^{\|\cdot\|}_\Hcal$
 topology on it $\Hcal$.
 
-\paragraph{One dim extension} % (fold)
-\label{par:one_dim_extension}
+\paragraph{Linear spans} % (fold)
+\label{par:linear_spans}
+
+Let $M \subset \Hcal$ be a linear subspace of $(\Hcal, \|\cdot\|)$ and $x \notin M$.
+Consider $M_1 = \{\alpha x + y \colon \alpha\in \real\,,\, y \in M\}$.
+
+Observe that since $M$ is a linear space $0\in M$, whence $x \neq 0$.
+
+For any $z\in M_1$ we have $z = \alpha x + y$ for some $\alpha\in \real$ and $y\in M$.
+Suppose there are $(\alpha_1, y_1)$ and $(\alpha_2, y_2)$ such that
+\begin{equation*}
+  \alpha_1 x + y_1 = \alpha_2 x + y_2
+  \Leftrightarrow
+    y_1 - y_2 = (\alpha_2 - \alpha_1) x
+    \,,
+\end{equation*}
+If $\alpha_1 = \alpha_2$, then $y_1 - y_2 = 0$ and thus $y_1 = y_2$. If $\alpha_1
+\neq \alpha_2$, then we proceed by contradiction: dividing both sides by the difference
+yields $x = -\tfrac{y_1 - y_2}{\alpha_1 -\alpha_2}$, which implies $x\in M$, since
+$M$ is a linear subspace.
+
+Hence the $\alpha\in\real$ and $y\in M$ are unique for every $z \in M_1$. Thus we
+can define a pair of maps $\alpha\colon M_1\to \real$ and $y\colon M_1 \to M$, that
+are given, respectively, by the unique $\alpha\in\real$ and $y\in M$ that exist for
+each $z\in M_1$. These maps are injections, since $\alpha(z_1) = \alpha(z_2)$ and
+$y(z_1)=y(z_2)$ imply
+\begin{equation*}
+  z_1 = \alpha(z_1) x + y(z_1)
+    = \alpha(z_2) x + y(z_2)
+    = z_2
+    \,.
+\end{equation*}
+By definition of $M_1$ the maps are surjective, however it is much more important
+to note, that they are also linear: for $u, v\in M_1$ and $\beta
+\in \real$
+\begin{align*}
+  \alpha(u + \beta v) x + y(u + \beta v)
+    &= u + \beta v
+    = u + \beta (v)
+    \\
+    &= \alpha(u) x + y(u)
+      + \beta \bigl(\alpha(v) x + y(v) \bigr)
+    \\
+    &= \bigl( \alpha(u) + \beta\alpha(v) \bigr) x
+    + \bigl( y(u) + \beta y(v) \bigr)
+    \,,
+\end{align*}
+which implies linearity of $\alpha\colon M_1\to \real$ and $y\colon M_1\to M$ from
+uniqueness. Finally $M\subset M_1$, since $y = 0 x + y \in M_1$ for any $y\in M$.
+
+Therefore, the linear subspace $M_1$ is isomorphic to $\real \times M$ -- a linear
+space with addition and scaling over the field $\real$ defined naturally. One can
+also easily make it into a normed space, by additively composing the norms on $\real$
+and $M$. And if $M$ was complete, then $M_1$ would also be complete with respect to
+the newly defined norm.
+
+% paragraph linear_spans (end)
+
+\paragraph{Simple one dim extension} % (fold)
+\label{par:simple_one_dim_extension}
+
+Let $M_0 \subseteq \Hcal$ be a linear subspace of $(\Hcal, \|\cdot\|)$, and $l$
+-- a linear functional $M_0\to \real$.
+
+For a given arbitrary $x_1\notin M_0$ define $M_1$ as the lienar span of $M_0 \cup
+\{x_1\}$: $M_1 = \{\alpha x_1 + y \colon \alpha \in \real\,,\, y \in M_0\}$. Hence
+there exist linear bijections $\alpha\colon M_1\to \real$ and $y_0\colon M_1\to M_0$
+such that $z = \alpha(z) x_1 + y_0(z)$ for all $z\in M_1$.
+
+Define $\tilde{l}\colon M_1 \to \real$ as follows: for some $c \in \real$ for any 
+$z \in M_1$ put
+\begin{equation*}
+  \tilde{l}(z; c)
+    = \tilde{l}\bigl(\alpha(z) x_1 + y_0(z) \bigr)
+    = \alpha(z) \tilde{l}(x_1) + l(y_0(z))
+    = \alpha(z) c + l(y_0(z))
+    \,.
+\end{equation*}
+Note that $\tilde{l}(\cdot; c)$ inherits linearity from the maps $\alpha$ and $y_0$,
+$\tilde{l}(\cdot; c)\big\vert_{M_0} = l$, since $\alpha(z) = 0$ for any $z\in M_0$
+and $y_0(z) = z$ for such $z$.
+
+Thus $\tilde{l}(\cdot; c)$ for any $c\in \real$ is an extension of $l$ from $M_0
+\subset \Hcal$ to $\mathrm{span} \bigl(M_0 \cup \{x_1\}\bigr)$ for an $x_1\notin
+M_0$.
+
+Note that the map $c\mapsto \tilde{l}(\cdot; c)$ from $\real$ to $L_{M_0}(M_1, \real)$,
+i.e. the set of all extensions of $l$ to $M_1$, is a bijection. Indeed, consider some
+other linear functional $f\colon M_1 \to \real$ with $f\big\vert_{M_0} = l$. Then
+$\tilde{l}\bigl(\cdot; f(x_1)\bigr) = f$, since
+\begin{equation*}
+  f\bigl(\alpha x_1 + y \bigr)
+    = \alpha f(x_1) + f(y)
+    = \alpha f(x_1) + l(y)
+    = \tilde{l}\bigl(\alpha x_1 + y; f(x_1)\bigr)
+    \,.
+\end{equation*}
+For injectivity suppose $\tilde{l}(\cdot; c_1) = \tilde{l}(\cdot; c_2)$. This implies
+that $\alpha (c_1 - c_2) + l(y - y) = 0$ for any $\alpha \in \real$ and $y\in M_0$.
+But for $\alpha = c_1 - c_2$ we get $(c_1 - c_2)^2 = 0$, whence $c_1 = c_2$.
+
+% paragraph simple_one_dim_extension (end)
+
+\paragraph{Extension with continuity} % (fold)
+\label{par:extension_with_continuity}
+
+Let $M_0 \subseteq \Hcal$ be a linear subspace and $l \in M_0^*$ be a continuous
+linear functional on $M_0$ with $\|l\|_{M_0^*} = 1$, where
+\begin{equation*}
+  \|l\|_{M_0^*}
+    = \sup\bigl\{\lvert l(z) \rvert\colon
+        z\in M_0\,,
+        \,\|z\|\leq 1
+      \bigr\}
+    \,.
+\end{equation*}
+Pick and $x_0\notin M_0$ and let $\tilde{l}(\cdot; c)$ be an extension of $l$ from
+$M_0\subset \Hcal$ to $M_1 = \{\alpha x + y \colon \alpha \in \real\,,\, y \in M_0\}$.
+Since the any such extension is uniquely identified by $c$, i.e. its value on $x_1$,
+by carefully chosing $c$ we shall try to make $\tilde{l} = \tilde{l}(\cdot; c)$ a
+bounded linear functional.
+
+First, note that the definition of the norm of a linear functional (operator) $\phi
+\colon M\to \real$ implies that $\tfrac{\lvert \phi(z) \rvert}{\|z\|} \leq \|\phi\|$
+for any $z\in M$ with $z \neq 0$, and $\|\phi\|$ is the smallest $K\in [0, +\infty]$
+such that $\lvert \phi(z) \rvert \leq K \|z\|$ for all $z\in M$.
+
+Take $\tilde{l}$: even if its norm is $+\infty$ we still have $\lvert \tilde{l}(z)\rvert
+\leq \|\tilde{l}\|_{M_1^*} \|z\|$ for all $z\in M_1$. In particular, for $z\in M_0$
+we get $\lvert l(z)\rvert = \lvert \tilde{l}(z)\rvert \leq \|\tilde{l}\| \|z\|$,
+whence $\|l\|_{M_0^*} \leq \|\tilde{l}\|_{M_1^*}$.
+
+To get an upper bound on $\|\tilde{l}\|_{M_1^*}$, note the equivalence
+\begin{align*}
+  &\lvert \tilde{l}(z) \rvert \leq \|z\|
+      \quad \forall z \in M_1
+  \\ &\Leftrightarrow
+    - \|\alpha x_1 + y\|
+      \leq \alpha c + l(y)
+      \leq \|\alpha x_1 + y\|
+      \quad \forall \alpha \in \real\,, y \in M_0
+  \\ &\Leftrightarrow
+    - \bigl\|x_1 + \tfrac{y}\alpha\bigr\|
+      \leq c + l\bigl(\tfrac{y}\alpha\bigr) \leq
+        \bigl\|x_1 + \tfrac{y}\alpha\bigr\|
+      \quad \forall \alpha \neq 0\,, y \in M_0
+  \\ &\Leftrightarrow
+    - \|x_1 + y\| \leq c + l(y) \leq \|x_1 + y\|
+      \quad \forall y \in M_0
+    \,.
+\end{align*}
+The transition from $\alpha \in \real$ to $\alpha = 0$, is valid, since $\|l\|_{M_0^*}
+= 1$, $z = \alpha x_1 + y \in M_0$ whenever $\alpha = 0$, and $\tilde{l}\big\vert_{M_0}
+= l$. Dividing by $\alpha \neq 0$ effectively keeps the inequality signs intact, which
+can be seen by considering cases $\alpha > 0$ and $\alpha < 0$ separately. Final
+equivalence, stems $M_0$'s being a linear space.
+\begin{equation*}
+  - \|x_1 + y\| - l(y) \leq c \leq \|x_1 + y\| - l(y)
+    \,,
+\end{equation*}
+for any $y \in M_0$. So if we could find such $c$, then $\|\tilde{l}\|_{M_1^*} \leq 1$.
+
+For any $y_1, y_2 \in M_0$ we have
+\begin{align*}
+  l(y_1) - l(y_2)
+    % = l(y_1 - y_2)
+    &\leq \|l\|_{M_0^*} \|y_1 - y_2\|
+    % \leq \|l\|_{M_0^*} \|y_1 + x_1 - (y_2 + x_1)\|
+    \leq \|y_1 + x_1 \| + \|x_1 + y_2\|
+    \,, \\
+  &\Leftrightarrow
+  - \|x_1 + y_2\| - l(y_2)
+    \leq \|y_1 + x_1 \| - l(y_1)
+    \,.
+\end{align*}
+This implies that the left-hand side for any $y_2\in M_0$ is bounded by the right-%
+hand side at any given $y_1\in M_0$, which means that for
+\begin{equation*}
+  c_-
+    = \sup_{y_2\in M_0} - \|x_1 + y_2\| - l(y_2)
+    \,\text{ and }\,
+    c_+ = \inf_{y_1\in M_0} \|y_1 + x_1 \| - l(y_1)
+    \,,
+\end{equation*}
+we have $c_- \leq c_+$. Hence the $[c_-, c_+]$ is nonempty. Thus, if $c\in [c_-, c_+]$,
+then
+\begin{equation*}
+  - \|x_1 + y\| - l(y) \leq c_- \leq c \leq c_+ \leq \|x_1 + y\| - l(y)
+    \,,
+\end{equation*}
+for every $y \in M_0$. Therefore $1 = \|l\|_{M_0^*} \leq \|\tilde{l}\|_{M_1^*} \leq 1$, 
+and $\tilde{l} = \tilde{l}(\cdot; c)$ is a bounded linear functional on $M_0$ with
+$\tilde{l}\big\vert_{M_0} = l$ and $\|l\|_{M_0^*}=\|\tilde{l}\|_{M_1^*}$.
+
+% paragraph extension_with_continuity (end)
 
 
-
-% paragraph one_dim_extension (end)
 
 \paragraph{Hahn-Banach point-set separation} % (fold)
 \label{par:hahn_banach_point_set_separation}
