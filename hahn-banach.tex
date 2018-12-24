@@ -28,15 +28,15 @@
 \maketitle
 
 Consider a Banach space $(\Hcal, \|\cdot\|)$ with the norm $\Tcal^{\|\cdot\|}_\Hcal$
-topology on it $\Hcal$.
+topology on it.
 
 \paragraph{Linear spans} % (fold)
 \label{par:linear_spans}
 
 Let $M \subset \Hcal$ be a linear subspace of $(\Hcal, \|\cdot\|)$ and $x \notin M$.
-Consider $M_1 = \{\alpha x + y \colon \alpha\in \real\,,\, y \in M\}$.
-
-Observe that since $M$ is a linear space $0\in M$, whence $x \neq 0$.
+Observe that since $M$ is a linear space $0\in M$, whence $x \neq 0$. Define $M_1$
+as the linear span of $M_0 \cup \{x\}$: $M_1 = \{\alpha x + y \colon \alpha \in \real
+\,,\, y \in M_0\}$.
 
 For any $z\in M_1$ we have $z = \alpha x + y$ for some $\alpha\in \real$ and $y\in M$.
 Suppose there are $(\alpha_1, y_1)$ and $(\alpha_2, y_2)$ such that
@@ -49,22 +49,21 @@ Suppose there are $(\alpha_1, y_1)$ and $(\alpha_2, y_2)$ such that
 If $\alpha_1 = \alpha_2$, then $y_1 - y_2 = 0$ and thus $y_1 = y_2$. If $\alpha_1
 \neq \alpha_2$, then we proceed by contradiction: dividing both sides by the difference
 yields $x = -\tfrac{y_1 - y_2}{\alpha_1 -\alpha_2}$, which implies $x\in M$, since
-$M$ is a linear subspace.
+$M$ is a linear subspace. Hence for every $z\in M_1$ there is a unique decomposition
+$z = \alpha x + y$ with $\alpha\in\real$ and $y\in M$.
 
-Hence the $\alpha\in\real$ and $y\in M$ are unique for every $z \in M_1$. Thus we
-can define a pair of maps $\alpha\colon M_1\to \real$ and $y\colon M_1 \to M$, that
-are given, respectively, by the unique $\alpha\in\real$ and $y\in M$ that exist for
-each $z\in M_1$. These maps are injections, since $\alpha(z_1) = \alpha(z_2)$ and
-$y(z_1)=y(z_2)$ imply
+We can define a pair of maps $\alpha\colon M_1\to \real$ and $y\colon M_1 \to M$,
+that are given, respectively, by the $\alpha\in\real$ and $y\in M$ components of
+the decomposition $z = \alpha x + y$ for each $z\in M_1$. These maps are injections,
+since $\alpha(z_1) = \alpha(z_2)$ and $y(z_1) = y(z_2)$ imply
 \begin{equation*}
   z_1 = \alpha(z_1) x + y(z_1)
     = \alpha(z_2) x + y(z_2)
     = z_2
     \,.
 \end{equation*}
-By definition of $M_1$ the maps are surjective, however it is much more important
-to note, that they are also linear: for $u, v\in M_1$ and $\beta
-\in \real$
+By definition of $M_1$ the maps are also surjective. It is noteworthy that they are
+also linear: for $u, v\in M_1$ and $\beta \in \real$
 \begin{align*}
   \alpha(u + \beta v) x + y(u + \beta v)
     &= u + \beta v
@@ -77,27 +76,27 @@ to note, that they are also linear: for $u, v\in M_1$ and $\beta
     + \bigl( y(u) + \beta y(v) \bigr)
     \,,
 \end{align*}
-which implies linearity of $\alpha\colon M_1\to \real$ and $y\colon M_1\to M$ from
-uniqueness. Finally $M\subset M_1$, since $y = 0 x + y \in M_1$ for any $y\in M$.
+from which uniqueness of the decomposition implies linearity. Finally $M\subset M_1$,
+since $y = 0 x + y \in M_1$ for any $y\in M$.
 
-Therefore, the linear subspace $M_1$ is isomorphic to $\real \times M$ -- a linear
-space with addition and scaling over the field $\real$ defined naturally. One can
-also easily make it into a normed space, by additively composing the norms on $\real$
-and $M$. And if $M$ was complete, then $M_1$ would also be complete with respect to
-the newly defined norm.
+Therefore, the linear subspace $M_1$ is homomorphic to $\real \times M$ -- a linear
+product space with addition and scaling over the field $\real$ defined naturally.
+One can also easily make it into a normed space, by additively composing the norms
+on $\real$ and $M$. And if $M$ was complete, then $M_1$ would also be complete with
+respect to the newly defined norm.
 
 % paragraph linear_spans (end)
 
 \paragraph{Simple one dim extension} % (fold)
 \label{par:simple_one_dim_extension}
 
-Let $M_0 \subseteq \Hcal$ be a linear subspace of $(\Hcal, \|\cdot\|)$, and $l$
--- a linear functional $M_0\to \real$.
+Let $M_0\subseteq \Hcal$ be a linear subspace of $(\Hcal, \|\cdot\|)$, and $l$ be
+a linear functional $M_0\to \real$.
 
-For a given arbitrary $x_1\notin M_0$ define $M_1$ as the lienar span of $M_0 \cup
-\{x_1\}$: $M_1 = \{\alpha x_1 + y \colon \alpha \in \real\,,\, y \in M_0\}$. Hence
-there exist linear bijections $\alpha\colon M_1\to \real$ and $y_0\colon M_1\to M_0$
-such that $z = \alpha(z) x_1 + y_0(z)$ for all $z\in M_1$.
+For a given arbitrary $x_1\notin M_0$ let $M_1 = \{\alpha x_1 + y \colon \alpha \in
+\real\,,\, y \in M_0\}$. Hence there exist linear bijections $\alpha\colon M_1\to
+\real$ and $y_0\colon M_1\to M_0$ such that $z = \alpha(z) x_1 + y_0(z)$ for all
+$z\in M_1$.
 
 Define $\tilde{l}\colon M_1 \to \real$ as follows: for some $c \in \real$ for any 
 $z \in M_1$ put
@@ -108,13 +107,12 @@ $z \in M_1$ put
     = \alpha(z) c + l(y_0(z))
     \,.
 \end{equation*}
-Note that $\tilde{l}(\cdot; c)$ inherits linearity from the maps $\alpha$ and $y_0$,
-$\tilde{l}(\cdot; c)\big\vert_{M_0} = l$, since $\alpha(z) = 0$ for any $z\in M_0$
-and $y_0(z) = z$ for such $z$.
+Note that $\tilde{l}(\cdot; c)$ inherits linearity from the maps $\alpha$ and $y_0$.
+Also $\alpha(z) = 0$ and $y_0(z) = z$ on $z\in M_0$ imply that $\tilde{l}(\cdot; c)%
+\big\vert_{M_0} = l$.
 
 Thus $\tilde{l}(\cdot; c)$ for any $c\in \real$ is an extension of $l$ from $M_0
-\subset \Hcal$ to $\mathrm{span} \bigl(M_0 \cup \{x_1\}\bigr)$ for an $x_1\notin
-M_0$.
+\subset \Hcal$ to the linear span of $M_0 \cup \{x_1\}$ for an $x_1\notin M_0$.
 
 Note that the map $c\mapsto \tilde{l}(\cdot; c)$ from $\real$ to $L_{M_0}(M_1, \real)$,
 i.e. the set of all extensions of $l$ to $M_1$, is a bijection. Indeed, consider some
@@ -129,14 +127,14 @@ $\tilde{l}\bigl(\cdot; f(x_1)\bigr) = f$, since
 \end{equation*}
 For injectivity suppose $\tilde{l}(\cdot; c_1) = \tilde{l}(\cdot; c_2)$. This implies
 that $\alpha (c_1 - c_2) + l(y - y) = 0$ for any $\alpha \in \real$ and $y\in M_0$.
-But for $\alpha = c_1 - c_2$ we get $(c_1 - c_2)^2 = 0$, whence $c_1 = c_2$.
+In particular for $\alpha = c_1 - c_2$ we get $(c_1 - c_2)^2 = 0$, whence $c_1 = c_2$.
 
 % paragraph simple_one_dim_extension (end)
 
 \paragraph{Extension with continuity} % (fold)
 \label{par:extension_with_continuity}
 
-Let $M_0 \subseteq \Hcal$ be a linear subspace and $l \in M_0^*$ be a continuous
+Let $M_0 \subseteq \Hcal$ be a linear subspace and $l\in M_0^*$ be a continuous
 linear functional on $M_0$ with $\|l\|_{M_0^*} = 1$, where
 \begin{equation*}
   \|l\|_{M_0^*}
@@ -146,6 +144,9 @@ linear functional on $M_0$ with $\|l\|_{M_0^*} = 1$, where
       \bigr\}
     \,.
 \end{equation*}
+Note that if $\|l\|_{M_0^*} \neq 1$ is nonzero and finite then we define $\hat{l}$
+as $\tfrac1{\|l\|_{M_0^*}} l$, and work with that.
+
 Pick and $x_0\notin M_0$ and let $\tilde{l}(\cdot; c)$ be an extension of $l$ from
 $M_0\subset \Hcal$ to $M_1 = \{\alpha x + y \colon \alpha \in \real\,,\, y \in M_0\}$.
 Since the any such extension is uniquely identified by $c$, i.e. its value on $x_1$,
@@ -153,9 +154,9 @@ by carefully chosing $c$ we shall try to make $\tilde{l} = \tilde{l}(\cdot; c)$ 
 bounded linear functional.
 
 First, note that the definition of the norm of a linear functional (operator) $\phi
-\colon M\to \real$ implies that $\tfrac{\lvert \phi(z) \rvert}{\|z\|} \leq \|\phi\|$
-for any $z\in M$ with $z \neq 0$, and $\|\phi\|$ is the smallest $K\in [0, +\infty]$
-such that $\lvert \phi(z) \rvert \leq K \|z\|$ for all $z\in M$.
+\colon M\to \real$ implies that $\tfrac{\lvert \phi(z) \rvert}{\|z\|} \leq \|\phi\|_{M^*}$
+for any $z\in M$ with $z \neq 0$, and $\|\phi\|_{M^*}$ is the smallest $K\in [0,
++\infty]$ such that $\lvert \phi(z) \rvert \leq K \|z\|$ for all $z\in M$.
 
 Take $\tilde{l}$: even if its norm is $+\infty$ we still have $\lvert \tilde{l}(z)\rvert
 \leq \|\tilde{l}\|_{M_1^*} \|z\|$ for all $z\in M_1$. In particular, for $z\in M_0$
@@ -186,11 +187,13 @@ The transition from $\alpha \in \real$ to $\alpha = 0$, is valid, since $\|l\|_{
 = l$. Dividing by $\alpha \neq 0$ effectively keeps the inequality signs intact, which
 can be seen by considering cases $\alpha > 0$ and $\alpha < 0$ separately. Final
 equivalence, stems $M_0$'s being a linear space.
+
+So if we could find such $c$ that for every $y \in M_0$
 \begin{equation*}
   - \|x_1 + y\| - l(y) \leq c \leq \|x_1 + y\| - l(y)
     \,,
 \end{equation*}
-for any $y \in M_0$. So if we could find such $c$, then $\|\tilde{l}\|_{M_1^*} \leq 1$.
+then $\|\tilde{l}\|_{M_1^*} \leq 1$.
 
 For any $y_1, y_2 \in M_0$ we have
 \begin{align*}
@@ -214,8 +217,7 @@ hand side at any given $y_1\in M_0$, which means that for
     c_+ = \inf_{y_1\in M_0} \|y_1 + x_1 \| - l(y_1)
     \,,
 \end{equation*}
-we have $c_- \leq c_+$. Hence the $[c_-, c_+]$ is nonempty. Thus, if $c\in [c_-, c_+]$,
-then
+we have $c_- \leq c_+$ and that $[c_-, c_+]$ is nonempty. If $c\in [c_-, c_+]$, then
 \begin{equation*}
   - \|x_1 + y\| - l(y) \leq c_- \leq c \leq c_+ \leq \|x_1 + y\| - l(y)
     \,,
@@ -225,8 +227,6 @@ and $\tilde{l} = \tilde{l}(\cdot; c)$ is a bounded linear functional on $M_0$ wi
 $\tilde{l}\big\vert_{M_0} = l$ and $\|l\|_{M_0^*}=\|\tilde{l}\|_{M_1^*}$.
 
 % paragraph extension_with_continuity (end)
-
-
 
 \paragraph{Hahn-Banach point-set separation} % (fold)
 \label{par:hahn_banach_point_set_separation}
