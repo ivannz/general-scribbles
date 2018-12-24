@@ -150,7 +150,7 @@ as $\tfrac1{\|l\|_{M_0^*}} l$, and work with that.
 Pick and $x_0\notin M_0$ and let $\tilde{l}(\cdot; c)$ be an extension of $l$ from
 $M_0\subset \Hcal$ to $M_1 = \{\alpha x + y \colon \alpha \in \real\,,\, y \in M_0\}$.
 Since the any such extension is uniquely identified by $c$, i.e. its value on $x_1$,
-by carefully chosing $c$ we shall try to make $\tilde{l} = \tilde{l}(\cdot; c)$ a
+by carefully choosing $c$ we shall try to make $\tilde{l} = \tilde{l}(\cdot; c)$ a
 bounded linear functional.
 
 First, note that the definition of the norm of a linear functional (operator) $\phi
@@ -188,13 +188,12 @@ The transition from $\alpha \in \real$ to $\alpha = 0$, is valid, since $\|l\|_{
 can be seen by considering cases $\alpha > 0$ and $\alpha < 0$ separately. Final
 equivalence, stems $M_0$'s being a linear space.
 
-So if we could find such $c$ that for every $y \in M_0$
+We shall show that $\|\tilde{l}\|_{M_1^*} \leq 1$ if we could find such $c$ that for
+every $y \in M_0$
 \begin{equation*}
   - \|x_1 + y\| - l(y) \leq c \leq \|x_1 + y\| - l(y)
-    \,,
+    \,.
 \end{equation*}
-then $\|\tilde{l}\|_{M_1^*} \leq 1$.
-
 For any $y_1, y_2 \in M_0$ we have
 \begin{align*}
   l(y_1) - l(y_2)
@@ -228,6 +227,39 @@ $\tilde{l}\big\vert_{M_0} = l$ and $\|l\|_{M_0^*}=\|\tilde{l}\|_{M_1^*}$.
 
 % paragraph extension_with_continuity (end)
 
+\paragraph{Hahn-Banach extension discussion} % (fold)
+\label{par:hahn_banach_extension_discussion}
+
+Note that $M_0$ must be a linear space, but is not required to be a closed subset
+of $\Hcal$. If it is note closed, then it is possible to extend $l$ to $[M_0]$ by
+setting $\tilde{l}$ to the limits of Cauchy sequences in $M_0$, provided the linear
+functional (operator) $l$ is bounded.
+
+If the space $\Hcal$ is finite dimensional, then applying the one-dim extension
+until we run out of the dimensions will yield a continuous linear functional $\tilde{l}$
+that extends $l$ from $M_0$ to $\Hcal$.
+
+If the space is separable, then there is a countable subset $X$, which is everywhere
+dense in $\Hcal$. Then, assuming that $M_0$ is a closed subspace, we can construct
+a sequence of linear bounded extensions $\tilde{l}_n$ of $l$ from $M_0$ to the span
+$M_n$ of $M_0 \cup \{x_1,\,\ldots, \,x_n\}$ for each $n\geq 1$, where $(x_n)_{n\geq1}$
+enumerates the countable $X$. We get $M_n\subset M_{n+1}$ and $\tilde{l}_{n+1}\big\vert_{M_n}
+= \tilde{l}_{n}$. Then $M_\infty = \bigcup_{n\geq1} M_n$ is a linear subspace, that
+is also dense in $\Hcal$, since it contains $X$. At the same time $\tilde{l}_\infty$,
+the {\bf union} of linear functionals $(\tilde{l}_n)_{n\geq1}$, is a linear functional
+with $\tilde{l}_\infty\big\vert_{M_n} = \tilde{l}_{n}$. Thus $\tilde{l}_\infty$ can
+be extended from $M_\infty$ to $[M_\infty]$ via the same Cauchy sequence limit machinery.
+
+The core idea in the sketch of a proof resembles the main argument in the proof
+of the Hahn-Banach extension in the case of a general $\Hcal$ via Zorn's lemma. The
+Zornified version first claims that the family of all pairs $(M, f)$, where $M$ is
+a linear subspace of $\Hcal$ and $f\in M^*$ is an extension of $l$ to $M$, has a
+partially ordered set structure. In this family every totally ordered subset has
+an upper bound, which by Zorn's lemma implies that the whole family has at least
+one maximal element.
+
+% paragraph hahn_banach_extension_discussion (end)
+
 \paragraph{Hahn-Banach point-set separation} % (fold)
 \label{par:hahn_banach_point_set_separation}
 
@@ -244,7 +276,7 @@ would imply $x_0 = 0$.
 The map $\tau\colon \Lcal_{x_0} \to \real$ defined by $\tau(x) = t_x$ is one-to-one
 and linear. Indeed, if $x, y\in \Lcal_{x_0}$, then $\tau(x) = \tau(y)$ implies that
 $x = \tau(x) x_0 = \tau(y) x_0 = y$, and for any $\alpha\in \real$
-\begin{equation}
+\begin{equation*}
   \bigl( \tau(x) x_0 \bigr) + \bigl( \tau(y) x_0 \bigr) \alpha
     % structure of $x$ and $y$
     = x + y \alpha
@@ -252,7 +284,7 @@ $x = \tau(x) x_0 = \tau(y) x_0 = y$, and for any $\alpha\in \real$
     = \tau(x + y \alpha) x_0
     % uniquenes of x\mapsto t_x
   \,.
-\end{equation}
+\end{equation*}
 
 Since $x_0 \notin C$ and $C$ is closed, we must have $x_0\notin \{p\leq 1\}$, whence
 $p(x_0) > 1$. Let $f(x) = \tau(x) p(x_0)$ for any $x \in \Lcal_{x_0}$. On $\Lcal_{x_0}$
