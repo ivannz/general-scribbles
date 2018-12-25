@@ -323,10 +323,15 @@ Consider $C$ that has $0$ in its topological interior. This means that there is 
     \subseteq \bigl\{p \leq \tfrac1{\delta\eta} \bigr\}
     \,,
 \end{equation*}
-since $[0, 1] \subset [0, \eta^{-1})$. Hence there exists $M > 0$ that depends only
+since $[0, 1] \subset [0, \eta^{-1})$. Hence there exists $M \geq 0$ that depends only
 on $C$, such that $p(u) \leq M$ for any $u \in B[0, 1]$. It is worth reminding that
 the rightmost set inclusion follows from the definition of $p$, and does not require
 convexity of $C$.
+
+If $M = 0$, then $p(x) = 0$ for any $x\in \Hcal$, which means that $x\in \lambda C$
+for every $\lambda > 0$. Hence $\{t x\colon t > 0\} \subseteq C$ for any $x\in \Hcal$,
+and $\hcal \subseteq \bigcup_{x\in \Hcal} \{t x\colon t > 0\} \subseteq C$. Therefore
+$C\subset \Hcal$ guarantees $\sup\{p(u)\colon \|u\|\leq 1\} > 0$.
 
 If a positively homogeneous $p$ is bounded on $\{u\colon \|u\|\leq 1\}$, then it
 is finite:
