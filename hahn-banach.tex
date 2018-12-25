@@ -263,19 +263,19 @@ one maximal element.
 \paragraph{Hahn-Banach point-set separation} % (fold)
 \label{par:hahn_banach_point_set_separation}
 
-Let $C$ be a nonempty, closed, convex set with $0\in \interior{C}$. Then, for any
-$x_0\notin C$ there is $l_{x_0} \in \Hcal^*$, a continuous linear functional on
-$\Hcal$, such that $l_{x_0}(x) \leq 1 < l_{x_0}(x_0)$ for $x\in C$.
+Let $C$ be a closed, convex set with $0\in \interior{C}$. Then for any $x_0\notin C$
+there is $l_{x_0} \in \Hcal^*$, a continuous linear functional on $\Hcal$, such that
+$l_{x_0}(x) \leq 1 < l_{x_0}(x_0)$ for $x\in C$.
 
-Let $p$ be the Minkowski functional of the set $C$, and consider a linear subspace
-$\Lcal_{x_0} = \{t x_0\colon t\in \real\}$. $\Lcal_{x_0}$ is nontrivial, since $0\in C$
-and $x_0\notin C$. Observe that for a given $x\in \Lcal_{x_0}$ there is a unique
-$t_x \in \real$ such that $x = t_x x_0$. Indeed, $t_1\neq t_2$ with $t_1 x_0 = t_2 x_0$
-would imply $x_0 = 0$.
+Consider a linear subspace $\Lcal_{x_0} = \{t x_0\colon t\in \real\}$. $\Lcal_{x_0}$
+is nontrivial, since $0 \in C$ and $x_0\notin C$. Observe that for a given $x\in \Lcal_{x_0}$
+there is a unique $t_x \in \real$ such that $x = t_x x_0$ (if $(t_1 - t_2) x_0 = 0$,
+then $t_1 = t_2$ because $x_0 \neq 0$).
 
-The map $\tau\colon \Lcal_{x_0} \to \real$ defined by $\tau(x) = t_x$ is one-to-one
-and linear. Indeed, if $x, y\in \Lcal_{x_0}$, then $\tau(x) = \tau(y)$ implies that
-$x = \tau(x) x_0 = \tau(y) x_0 = y$, and for any $\alpha\in \real$
+Uniqueness implies the existence of a linear bijection $\tau\colon \Lcal_{x_0} \to
+\real$ such that $z = \tau(z) x_0$ for any $z\in \Lcal_{x_0}$. Indeed, if $x, y\in
+\Lcal_{x_0}$, then $\tau(x) = \tau(y)$ implies that $x = \tau(x) x_0 = \tau(y) x_0
+= y$, and for any $\alpha\in \real$
 \begin{equation*}
   \bigl( \tau(x) x_0 \bigr) + \bigl( \tau(y) x_0 \bigr) \alpha
     % structure of $x$ and $y$
@@ -286,17 +286,33 @@ $x = \tau(x) x_0 = \tau(y) x_0 = y$, and for any $\alpha\in \real$
   \,.
 \end{equation*}
 
-Since $x_0 \notin C$ and $C$ is closed, we must have $x_0\notin \{p\leq 1\}$, whence
-$p(x_0) > 1$. Let $f(x) = \tau(x) p(x_0)$ for any $x \in \Lcal_{x_0}$. On $\Lcal_{x_0}$
-we have $f\leq p$ since $\tau(x) p(x_0) \leq p\bigl(\tau(x) x_0\bigr) = p(x)$ by
-sublinearity of $p$, which follows from the {\bf nice} properties of $C$. At the same
-time $f$ inherits linearity from $\tau$.
+Let $p$ be the Minkowski functional of the set $C$. For this $C$ the functional $p$
+is finte-valued, subadditive, positively homogenous, and continuous. The functional
+$p$ is also sublinear: $0 = p(0) \leq p(t x) + p(-t x) = p(t x) - t p(x)$ for any
+$t < 0$, and $t p(x) = p(t x)$ for $t \geq 0$.
 
-By the {\it Hahn-Banach Extension Theorem} there must be linear extension $l_{x_0}$
-of $f$ from $\Lcal_{x_0}$ onto $\Hcal$ with $l_{x_0}\big\vert_{\Lcal_{x_0}} = f$ and
-$l_{x_0} \leq p$ everywhere on $\Hcal$. This extension is a bounded linear functional
-by an earlier result, and satisfies $l_{x_0}(x) \leq p(x) \leq 1$ for any $x\in C$
-and $1 < p(x_0) = \tau(x_0) p(x_0) = f(x_0) = l_{x_0}(x_0)$.
+Since $x_0\notin C$ and $C$ is closed, we must have $x_0\notin \{p\leq 1\}$, whence
+$p(x_0) > 1$. Let $f(x) = \tau(x) p(x_0)$ for any $x \in \Lcal_{x_0}$. On $\Lcal_{x_0}$
+we have $f\leq p$, since $\tau(x) p(x_0) \leq p\bigl(\tau(x) x_0\bigr) = p(x)$ by
+sublinearity of $p$. At the same time $f$ inherits linearity from $\tau$.
+
+Now, for such $C$ the Minkowski functional is bounded, i.e. there exists $0\leq M <
++\infty$, such that $p(x) \leq \|x\| M$ for any $x\in \Hcal$. Therefore if $f\leq p$,
+then by linearity of $f$ and we have
+\begin{equation*}
+  - \|x\| M
+    \leq - p(-x)
+    \leq l(x)
+    \leq p(x)
+    \leq \|x\| M
+    \,.
+\end{equation*}
+Hence the {\it Hahn-Banach Extension Theorem} (applied to $\tfrac1M f$, and then
+scale back) there must be linear extension $l_{x_0}$ of $f$ from $\Lcal_{x_0}$ onto
+$\Hcal$ with $l_{x_0}\big\vert_{\Lcal_{x_0}} = f$ and $l_{x_0} \leq p$ everywhere
+on $\Hcal$. This extension is a bounded linear functional by an earlier result, and
+satisfies $l_{x_0}(x) \leq p(x) \leq 1$ for any $x\in C$ and $1 < p(x_0) = \tau(x_0) p(x_0)
+= f(x_0) = l_{x_0}(x_0)$.
 
 % paragraph hahn_banach_point_set_separation (end)
 
