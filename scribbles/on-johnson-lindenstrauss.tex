@@ -1,0 +1,485 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
+
+\newcommand{\real}{\mathbb{R}}
+
+\title{Some notes on Johnson Lindenstrauss and generalization}
+\author{Nazarov Ivan}
+
+\begin{document}
+\maketitle
+
+
+\section{Bounding the tail probability of $\chi^2_p$} % (fold)
+\label{sec:bounding_the_tail_probability}
+
+In this section we shall provide some bounds on the probability of deviations for
+a $\chi^2_p$ random variable, which reflects the distribution of the squared
+$\ell_2$ norm of any unit-norm vector, transformed by an iid Gaussain matrix.
+
+% Chernoff's bound states that for any rv $y$ we have
+% $$
+%   \mathbb{P}\bigl( y \geq t \bigr)
+%     % = \mathbb{P}\bigl( e^{\lambda y} \geq e^{\lambda t} \bigr)
+%     \leq \inf_{\lambda > 0} e^{-\lambda t} \mathbb{E} e^{\lambda y}
+%     \,. $$
+% For $y \sim \chi^2_p$ the moment generating function $\mathbb{E} e^{\lambda y}$
+% is given by $\lambda \mapsto (1 - 2\lambda)^{-\tfrac{p}2}$ for $\lambda \leq \tfrac12$.
+
+\subsection{A bound from subexponentiality} % (fold)
+\label{sub:a_bound_from_subexponentiality}
+
+Consider a $\chi^2_p$ random variable $x$. Then $x$ is subexponential with parameters
+$(\sigma^2, b) = (4d, 4)$, i.e. for any $\lvert\lambda\rvert < \tfrac1b$ we have
+$$
+  \log \mathbb{E}_{x\sim \chi^2_p} e^{\lambda x}
+    \leq \lambda \mathbb{E} x + \frac{\sigma^2}2 \lambda^2
+    \,. $$
+Therefore, by Chernoff's inequality we have
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_p}\bigl( x \geq t \bigr)
+    % = \mathbb{P}_{x \sim \chi^2_d}\bigl(
+    %     e^{\lambda x} \geq e^{\lambda t}
+    % \bigr)
+    \leq \inf_{\lambda > 0} e^{- \lambda t} \mathbb{E}_{x \sim \chi^2_p} e^{\lambda x}
+    % \leq \inf_{0 < \lambda < \tfrac14} e^{- \lambda t} e^{\lambda p + \frac{4 p}2 \lambda^2}
+    \leq \inf\Bigl\{
+      e^{\lambda (p - t) + 2p \lambda^2}
+      \colon 0 < \lambda < \tfrac14
+    \Bigr\}
+    \,.
+\end{equation*}
+The optimal $\lambda = \tfrac{t - p}{4p} \in (0, \tfrac14)$ for $t > p$, whence
+for $t = (1 + \varepsilon) p$
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_p}\bigl( x \geq t \bigr)
+    \leq \exp{\Bigl\{
+        -\tfrac{(t - p)^2}{4p} + 2p \tfrac{(t - p)^2}{16 p^2}
+      \Bigr\}}
+    % = \exp{\Bigl\{
+    %     -\tfrac{(t - p)^2}{8 p}
+    %   \Bigr\}}
+    = e^{-\tfrac{p \varepsilon^2}8}
+    \,.
+\end{equation*}
+In the opposite direction, we get the following:
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_p}\bigl( x \leq t \bigr)
+    % = \mathbb{P}_{x \sim \chi^2_d}\bigl(
+    %     e^{-\lambda x} \geq e^{-\lambda t}
+    % \bigr)
+    \leq \inf_{\lambda > 0} e^{\lambda t} \mathbb{E}_{x \sim \chi^2_p} e^{- \lambda x}
+    % \leq \inf_{0 < \lambda < \tfrac14} e^{\lambda t} e^{-\lambda p + \frac{4 p}2 \lambda^2}
+    \leq \inf\Bigl\{
+      e^{\lambda (t - p) + 2p \lambda^2}
+      \colon 0 < \lambda < \tfrac14
+    \Bigr\}
+    \,.
+\end{equation*}
+The optimal $\lambda = \tfrac{p - t}{4p} \in (0, \tfrac14)$ for $t < p$, whence
+for $t = (1 - \varepsilon) p$
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_p}\bigl( x \leq t \bigr)
+    \leq \exp{\Bigl\{
+        -\tfrac{(p - t)^2}{4p} + 2p \tfrac{(p - t)^2}{16 p^2}
+      \Bigr\}}
+    % = \exp{\Bigl\{
+    %     -\tfrac{(p - t)^2}{8 p}
+    %   \Bigr\}}
+    = e^{-\tfrac{p \varepsilon^2}8}
+    \,.
+\end{equation*}
+Hence, for any $\varepsilon \in (0, 1)$ the union bound implies
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_p}\bigl(
+      \lvert x - p\rvert \geq \varepsilon p
+    \bigr)
+    % \leq \mathbb{P}_{x \sim \chi^2_p}\bigl(
+    %     x \geq (1 + \varepsilon) p
+    %   \bigr)
+    %   + \mathbb{P}_{x \sim \chi^2_p}\bigl(
+    %     x \leq (1 - \varepsilon) p
+    %   \bigr)
+    \leq 2 e^{-\tfrac{p}{12} \tfrac{3 \varepsilon^2}2}
+    \,.
+\end{equation*}
+% subsection a_bound_from_subexponentiality (end)
+
+
+\subsection{A tighter bound from the mgf} % (fold)
+\label{sub:a_tighter_bound_from_the_mgf}
+
+These lectures\footnotemark ~cite
+\footnotetext{\url{https://cs.stanford.edu/people/mmahoney/cs369m/Lectures/lecture1.pdf}}
+Dasgupta, Gupta (1999)\footnotemark ~and refer to
+\footnotetext{\url{http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.45.3654}}
+the moment generating function of a $\chi^2_p$ variable when bounding the absolute
+deviation of the sample mean from the theoretical. We shall follow the same steps,
+in order to derive the tail deviation bound for $\varepsilon > 0$
+$$
+  \mathbb{P}_{z \sim \mathcal{N}_p(0, I_p)}\bigl(
+    \lvert \|z\|^2 - p \rvert \geq \varepsilon p
+  \bigr)
+  \,. $$
+In the following $\|\cdot\|$ denotes the $\ell_2$ norm, unless specified otherwise.
+
+Consider a random variable $z\sim \mathcal{N}_p(0, I_p)$. Then $z_i$, $i=1,\,\ldots,\,p$
+are iid $\mathcal{N}(0, 1)$ and by definition $\|z\|^2 = \sum_{i=1}^p z_i^2 \sim \chi^2_p$.
+Then for $\lambda \in \mathbb{R}$ the moment generating function of $\chi^2_p$ is:
+\begin{align*}
+  \mathbb{E}_{x \sim \chi^2_p} e^{\lambda x}
+    &= \mathbb{E}_{z\sim \mathcal{N}_p(0, I_p)} e^{\lambda \|z\|^2}
+    = \mathbb{E}_{z\sim \mathcal{N}_p(0, I_p)} e^{\lambda \sum_{i=1}^p z_i^2}
+    \\
+    &= \prod_{i=1}^p \mathbb{E}_{z_i\sim \mathcal{N}(0, 1)} e^{\lambda z_i^2}
+    = \biggl( \mathbb{E}_{z\sim \mathcal{N}(0, 1)} e^{\lambda z^2} \biggr)^p
+    \,.
+\end{align*}
+Now for $2 \lambda < 1$ we have
+\begin{align*}
+  \mathbb{E}_{z\sim \mathcal{N}(0, 1)} e^{\lambda z^2}
+    &= \tfrac1{\sqrt{2 \pi}} \int_{- \infty}^{+ \infty}
+      e^{- (1 - 2 \lambda) \tfrac{z^2}2} dz
+    \\
+    &= \tfrac1{\sqrt{2 \pi}} \int_{-\infty}^{+\infty}
+      e^{-\tfrac{z^2}2} \tfrac1{\sqrt{1 - 2 \lambda}} dz
+    = \tfrac1{\sqrt{1 - 2 \lambda}}
+    \,,
+\end{align*}
+which implies that $\mathbb{E}_{x\sim \chi^2_p} e^{\lambda x} = \bigl(1 - 2 \lambda\bigr)^{-\tfrac{p}2}$.
+
+Let's apply Chernoff's bound to get a bound on the tail probability of $\chi^2_p$.
+\begin{equation*}
+  \mathbb{P}_{z \sim \mathcal{N}_p(0, I_p)}\bigl( \|z\|^2 \geq t \bigr)
+    % = \mathbb{P}_{x \sim \chi^2_d}\bigl(
+    %     e^{\lambda x} \geq e^{\lambda t}
+    % \bigr)
+    % \leq \inf_{\lambda > 0} e^{- \lambda t} \mathbb{E}_{x \sim \chi^2_d} e^{\lambda x}
+    % = \inf_{0 < \lambda < \tfrac12} (1 - 2\lambda)^{-\tfrac{p}2} e^{- \lambda t}
+    = \inf_{0 < \lambda < \tfrac12} \Bigl[(1 - 2\lambda) e^{\lambda \tfrac{2 t}{p}} \Bigr]^{-\tfrac{p}2}
+    \,.
+\end{equation*}
+The expression under the infimum is lower the higher the expression in the square
+brackets is. For $t > p$ its maximum is attained at $\lambda = \tfrac{t - p}{2 t} < \tfrac12$.
+and is equal to
+$$
+  \Bigl[(1 - 2\lambda) e^{\lambda \tfrac{2 t}{p}} \Bigr]^{-\tfrac{p}2}
+    % = \Bigl[\tfrac{p}{t} e^{\tfrac{t - p}{p}} \Bigr]^{-\tfrac{p}2}
+    = \Bigl[\tfrac{t}{p} e^{\tfrac{p - t}{p}} \Bigr]^{\tfrac{p}2}
+    = \Bigl( \exp{(\log{(1 + \varepsilon)} - \varepsilon)} \Bigr)^{\tfrac{p}2}
+    \,, $$
+where $\varepsilon = \tfrac{t-p}{p} > 0$. Note that for all $\varepsilon > 0$ the exponent
+can be bounded by
+$$
+  \log{(1 + \varepsilon)} - \varepsilon
+    \leq - \varepsilon + \varepsilon - \tfrac{\varepsilon^2}2 + \tfrac{\varepsilon^3}3
+    = \tfrac16 \bigl( 2\varepsilon^3 - 3\varepsilon^2 \bigr)
+    \,. $$
+Therefore, for $t = (1 + \varepsilon) p$ we have
+$$
+  \mathbb{P}_{x \sim\chi^2_p} \bigl( x \geq (1 + \varepsilon) p \bigr)
+    \leq e^{\tfrac{p}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,. $$
+This bound is non-vacuous for $\varepsilon < \tfrac32$, which well covers the region
+of interest that is $\varepsilon \in (0, 1)$. Although for $\varepsilon \approx 0$
+the exponent is close to $0$ from below.
+
+The bound for the opposite deviation can be derived in a similar fashion: for all
+admissible $\lambda > 0$ Chernoff's bound implies
+\begin{equation*}
+  \mathbb{P}_{z \sim \mathcal{N}_p(0, I_p)}\bigl(
+      \|z\|^2 \leq t
+  \bigr)
+    % = \mathbb{P}_{x \sim \chi^2_p}\bigl(
+    %     e^{-\lambda x} \geq e^{- \lambda t}
+    % \bigr)
+    \leq \inf_{\lambda > 0} \frac1{e^{-\lambda t}} \mathbb{E}_{x \sim \chi^2_p} e^{-\lambda x}
+    % \leq \inf_{\lambda > 0} (1 + 2\lambda)^{-\tfrac{p}2} e^{\lambda t}
+    = \inf_{\lambda > 0} \Bigl[(1 + 2\lambda) e^{- \lambda \tfrac{2 t}{p}} \Bigr]^{-\tfrac{p}2}
+    \,.
+\end{equation*}
+Therefore for $\lambda = \tfrac{p - t}{2 t}$, $t < p$, the right-hand side evaluates to
+$$
+  \Bigl[(1 + 2\lambda) e^{- \lambda \tfrac{2 t}{p}} \Bigr]^{-\tfrac{p}2}
+    % = \Bigl[(1 + 2 \tfrac{p-t}{2 t}) e^{- \tfrac{p-t}{2 t} \tfrac{2 t}{p}} \Bigr]^{-\tfrac{p}2}
+    % = \Bigl[\tfrac{p}{t} e^{\tfrac{t-p}{p}} \Bigr]^{-\tfrac{p}2}
+    = \Bigl[\tfrac{p}{t} e^{- \tfrac{p - t}{p}} \Bigr]^{-\tfrac{p}2}
+    % = \Bigl[ (1 - \varepsilon) e^\varepsilon \Bigr]^{\tfrac{p}2}
+    = \Bigl( \exp{(\log{(1 - \varepsilon)} + \varepsilon)} \Bigr)^{\tfrac{p}2}
+    \,, $$
+where $\varepsilon = \tfrac{p - t}{p} > 0$. For any $\varepsilon \in (0, 1)$ we have
+$$
+  \log{(1 - \varepsilon)} + \varepsilon
+    \leq \varepsilon - \varepsilon - \tfrac{\varepsilon^2}2
+    \,, $$
+whence for $t = (1 - \varepsilon) p$ we have
+$$
+  \mathbb{P}_{x \sim\chi^2_p} \bigl( x \leq (1 - \varepsilon) p \bigr)
+    \leq e^{\tfrac{p}{12} (- 3 \varepsilon^2)}
+    \,. $$
+Therefore, for $\varepsilon\approx 0$ the union bound implies
+\begin{align*}
+  \mathbb{P}_{z \sim \mathcal{N}_p(0, I_p)}\bigl(
+      \lvert \|z\|^2 - p \rvert \geq \varepsilon p
+  \bigr)
+    &\leq \mathbb{P}_{z}\bigl(
+        \|z\|^2 \geq (1 + \varepsilon) p
+      \bigr)
+      + \mathbb{P}_{z}\bigl(
+        \|z\|^2 \leq (1 - \varepsilon) p
+      \bigr)
+    \\
+    &\leq e^{\tfrac{p}{12} (2 \varepsilon^3 - 3 \varepsilon^2)} + e^{\tfrac{p}{12} (- 3 \varepsilon^2)}
+    \leq 2 e^{\tfrac{p}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,.
+\end{align*}
+
+% subsection a_tighter_bound_from_the_mgf (end)
+
+% section bounding_the_tail_probability (end)
+
+
+\section{Applying the bound to get a J-L result} % (fold)
+\label{sec:applying_the_bound_to_get_a_j_l_result}
+
+Suppose $A \subset \real^d$ is a finite collection of vectors. Then there exists
+a linear operator $L\colon\real^d\to \real^p$ with $d \gg p$ such that for all $\varepsilon > 0$
+the following holds with high probability depending on $\varepsilon$, $p$, and
+$\lvert A \rvert$:
+$$
+  (1 - \varepsilon) \|u - v\|^2
+    \leq \bigl\| L u - L v \bigr\|^2
+    \leq (1 + \varepsilon) \|u - v\|^2
+    \,, $$
+for all $u, v \in A$.
+
+\medskip
+Consider an iid sample $S = (z_i)_{i=1}^m$ from $\mathcal{D} = \mathcal{N}_d(0, I_d)$.
+Then for any $u \in \real^d$ with $\|u\| = 1$, then $z_i^\top u \sim \mathcal{N}(0, u^\top u)$
+are iid Gaussian, since linear combinations of Gaussians are Gaussian. Now, if the
+sample is collected into a $m\times d$ matrix $Z_\mathcal{S} = (z_i)_{i=1}^m$, then
+for any $u \in \real^d$ the rv $Z_\mathcal{S} u$ is $\mathcal{N}_m(0, \|u\|^2 I_m)$.
+Therefore the squared norm of the image of a unit-norm $u$ under the random linear
+transformation $Z_\mathcal{S}$ is a $\chi^2_m$ rv. For the random linear operator
+\begin{equation} \label{eq:random_operator}
+  L_\mathcal{S} \colon \real^d \to \real^m
+    \colon a \mapsto \tfrac1{\sqrt{m}} Z_\mathcal{S} a
+      = \Bigl(
+        \bigl\langle \tfrac{z_i}{\sqrt{m}}, a \bigr\rangle
+      \Bigr)_{i=1}^m
+    \,,
+\end{equation}
+depending on the sample $S \sim \mathcal{D}^m$, and for any $v \in \real^d$ with
+$u = \tfrac{v}{\|v\|}$ we have
+\begin{align*}
+  \mathbb{P}_{S \sim \mathcal{D}^m} \Bigl(
+    \bigl\lvert \| L_\mathcal{S} v \|^2 - \|v\|^2 \bigr \rvert
+      \geq \varepsilon \|v\|
+  \Bigr)
+    % &= \mathbb{P}_{S \sim \mathcal{D}^m} \biggl(
+    %   \Bigl\lvert \bigl\| L_\mathcal{S} \tfrac{v}{\|v\|} \bigr\|^2 - 1 \Bigr \rvert
+    %     \geq \varepsilon
+    % \biggr)
+    % \\
+    &= \mathbb{P}_{S \sim \mathcal{D}^m} \bigl(
+        \lvert \|Z_\mathcal{S} u\|^2 - m \rvert \geq \varepsilon m
+      \bigr)
+    \\
+    &= \mathbb{P}_{x \sim \chi^2_m} \bigl(
+        \lvert x - m \rvert \geq \varepsilon m
+      \bigr)
+      % \leq 2 e^{\tfrac{m}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,,
+\end{align*}
+and the $\chi^2_m$ distribution does not depend on $v$. Therefore, for a finite
+collection $A \subset \real^d$ the Union bound implies
+\begin{align*}
+  \mathbb{P}_\mathcal{S}\Bigl(
+    \exists{a, b\in A} \colon
+    \Bigl\lvert \tfrac{\| L_\mathcal{S} (a - b) \|^2}{\|a - b\|^2} - 1 \Bigr\rvert
+      \geq \varepsilon
+  \Bigr)
+    &= \mathbb{P}_\mathcal{S}\Bigl(
+      \cup_{v\in (A - A)} \Bigl\{
+        \Bigl\lvert \tfrac{\| L_\mathcal{S} v \|^2}{\|v\|^2} - 1 \Bigr\rvert
+          \geq \varepsilon
+      \Bigr\}
+    \Bigr)
+    \\
+    &\leq \sum_{v\in (A - A)}
+      \mathbb{P}_\mathcal{S}\Bigl(
+        \Bigl\lvert \| L_\mathcal{S} v \|^2 -  \|v\|^2 \Bigr\rvert
+          \geq \varepsilon\|v\|^2
+      \Bigr)
+    \\
+    &\leq \tfrac{n (n - 1)}2 \mathbb{P}_{x \sim \chi^2_m} \bigl(
+        \lvert x - m \rvert \geq \varepsilon m
+      \bigr)
+    \,,
+\end{align*}
+where $A - B = \{a - b\colon a\in A,\,b\in B\}$ and $n = \lvert A \rvert$.
+Section~\ref{sub:a_tighter_bound_from_the_mgf} implies
+\begin{equation*}
+  \mathbb{P}_{x \sim \chi^2_m} \bigl(
+      \lvert x - m \rvert \geq \varepsilon m
+    \bigr)
+    \leq 2 e^{\tfrac{m}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,,
+\end{equation*}
+whence for all $\varepsilon \in (0, 1)$
+\begin{equation*}
+  \mathbb{P}_\mathcal{S}\Bigl(
+      \exists{a, b\in A} \colon
+      \Bigl\lvert \tfrac{\| L_\mathcal{S} (a - b) \|^2}{\|a - b\|^2} - 1 \Bigr\rvert
+        \geq \varepsilon
+    \Bigr)
+    \leq n (n - 1) e^{\tfrac{m}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,.
+\end{equation*}
+The bound from sec.~\ref{sub:a_bound_from_subexponentiality} implies a slightly
+looser bound: for all $\varepsilon \in (0, 1)$
+\begin{equation*}
+  \mathbb{P}_\mathcal{S}\Bigl(
+      \exists{a, b\in A} \colon
+      \Bigl\lvert \tfrac{\| L_\mathcal{S} (a - b) \|^2}{\|a - b\|^2} - 1 \Bigr\rvert
+        \geq \varepsilon
+    \Bigr)
+    \leq n (n - 1) e^{- \tfrac{m}{8} \varepsilon^2}
+    \,.
+\end{equation*}
+
+Therefore for $\delta, \varepsilon \in (0, 1)$ the $(\varepsilon, \delta)$-PAC
+lower bounds on the required number of projected dimensions are given by
+\begin{align*}
+  m &\geq
+      \biggl( \log\frac{n (n-1)}{\delta} \biggr)
+      \frac{8}{\varepsilon^2}
+    \,, \tag{sec.~\ref{sub:a_bound_from_subexponentiality}}
+    \\
+  m &\geq
+      \biggl( \log\frac{n (n-1)}{\delta} \biggr)
+      \frac{12}{3 \varepsilon^2 - 2 \varepsilon^3}
+    \,, \tag{sec.~\ref{sub:a_tighter_bound_from_the_mgf}}
+\end{align*}
+These sample size lower bounds ensure that the linear operator $L_\mathcal{S}$
+in~\eqref{eq:random_operator} has the $\varepsilon$-near isometry property for all
+vectors in $A$ with probability at least $1 - \delta$. However, the one that uses
+sec.~\ref{sub:a_tighter_bound_from_the_mgf} is tighter than the other one for all
+$\varepsilon \in (0, \tfrac34)$.
+
+\bigskip\noindent
+The alternative forms of this sum are
+$$
+  \hat{\mathbb{E}}_{x\sim S} \frac{(u^\top x)^2}{\|u\|^2}
+    = \tfrac1{\|u\|^2} \tfrac1p \sum_{i=1}^p x_i^\top u u^\top x_i
+    = \tfrac{u^\top}{\|u\|}
+      \Bigl( \tfrac1p \sum_{i=1}^p x_i x_i^\top \Bigr)
+      \tfrac{u}{\|u\|} 
+    = \frac{\langle u, \hat{\Sigma} u \rangle}{\|u\|^2}
+    \,, $$
+where $\hat{\Sigma} = \tfrac1p \sum_{i=1}^p x_i x_i^\top$ is the sample covariance
+matrix of $S$. Note that $\mathbb{E}_{x\sim \mathcal{D}} \frac{(u^\top x)^2}{\|u\|^2} = 1$.
+\begin{align*}
+  \mathbb{P}_{S \sim \mathcal{D}^m} \Bigl(
+    \bigl\lvert \| L_\mathcal{S} a \|^2 - \|a\|^2 \bigr \rvert
+      \geq \varepsilon \|a\|
+  \Bigr)
+    % &= \mathbb{P}_{S \sim \mathcal{D}^m} \biggl(
+    %   \Bigl\lvert \bigl\| L_\mathcal{S} \tfrac{a}{\|a\|} \bigr\|^2 - 1 \Bigr \rvert
+    %     \geq \varepsilon
+    % \biggr)
+    % \\
+    &= \Bigl[u = \tfrac{a}{\|a\|}\Bigr]
+    = \mathbb{P}_{S \sim \mathcal{D}^m} \bigl(
+        \lvert \|Z_\mathcal{S} u\|^2 - m \rvert \geq \varepsilon m
+      \bigr)
+    \\
+    &= \mathbb{P}_{x \sim \chi^2_m} \bigl(
+        \lvert x - m \rvert \geq \varepsilon m
+      \bigr)
+      \leq 2 e^{\tfrac{m}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,.
+\end{align*}
+Therefore, for
+\begin{align*}
+  \mathbb{P}_\mathcal{S}\Bigl(
+    \exists{a, b\in A} \colon
+    \Bigl\lvert \tfrac{\| L_\mathcal{S} (a - b) \|^2}{\|a - b\|^2} - 1 \Bigr\rvert
+      \geq \varepsilon
+  \Bigr)
+    &= \mathbb{P}_\mathcal{S}\Bigl(
+      \cup_{v\in (A - A)} \Bigl\{
+        \Bigl\lvert \tfrac{\| L_\mathcal{S} v \|^2}{\|v\|^2} - 1 \Bigr\rvert
+          \geq \varepsilon
+      \Bigr\}
+    \Bigr)
+    \\
+    &\leq \sum_{v\in (A - A)}
+      \mathbb{P}_\mathcal{S}\Bigl(
+        \Bigl\lvert \tfrac{\| L_\mathcal{S} v \|^2}{\|v\|^2} - 1 \Bigr\rvert
+          \geq \varepsilon
+      \Bigr)
+    \\
+    &\leq n (n - 1) e^{\tfrac{m}{12} (2 \varepsilon^3 - 3 \varepsilon^2)}
+    \,,
+\end{align*}
+
+% section applying_the_bound_to_get_a_j_l_result (end)
+
+
+\section*{Appendices} % (fold)
+\label{sec:appendices}
+
+\subsection*{Appendix A: the $\log(1+\varepsilon)$ bound} % (fold)
+\label{sub:appendix_a_the_log_bound}
+
+Consider the Taylor series expansion of $x\mapsto\log(1 + x)$ around $0$:
+$$
+    \log(1 + x)
+        = \sum_{n\geq 1} (-1)^{n+1} \frac{x^n}{n}
+    \,. $$
+Observe that for any $k\geq 1$ we have
+$$
+    \sum_{n=1}^k (-1)^{n+1} \tfrac{x^n}{n}
+        = \sum_{n=1}^k (-1)^{n-1+2} \int_0^x t^{n-1} dt
+        % = \int_0^x \sum_{n=1}^k (-1)^{n+1} t^{n-1} dt
+        % = \int_0^x \sum_{n=1}^k (-t)^{n-1} dt
+        % = \int_0^x \sum_{n=0}^{k-1} (-t)^n dt
+        = \int_0^x \frac{1 - (-1)^k t^k}{1 + t} dt
+    \,. $$
+Therefore for $x\geq 0$ we have
+\begin{align*}
+    \sum_{n=1}^k (-1)^{n+1} \tfrac{x^n}{n}
+        &
+        % = \int_0^x \frac{1 - (-1)^k t^k}{1 + t} dt
+        \leq \int_0^x \frac1{1 + t} dt
+        = \log(1+x)
+        \,, \text{ for}~k~\text{even}
+        \,; \\
+    \sum_{n=1}^k (-1)^{n+1} \tfrac{x^n}{n}
+        &
+        % = \int_0^x \frac{1 - (-1)^k t^k}{1 + t} dt
+        \geq \int_0^x \frac1{1 + t} dt
+        = \log(1+x)
+        \,, \text{ for}~k~\text{odd}
+        \,.
+\end{align*}
+The Taylor series expansion for $x\mapsto \log(1 - x)$ around $0$ follows from the
+one above, but easily lends an upper bound for all $k\geq 1$ and $x \in (0, 1)$
+$$
+    \log(1 - x)
+        = \sum_{n\geq 1} (-1)^{n+1} \frac{(-x)^n}{n}
+        = \sum_{n\geq 1} \frac{- x^n}{n}
+        \leq \sum_{n=1}^k \frac{- x^n}{n}
+    \,. $$
+
+% subsection* appendix_a_the_log_bound (end)
+
+% section* appendices (end)
+
+\end{document}
