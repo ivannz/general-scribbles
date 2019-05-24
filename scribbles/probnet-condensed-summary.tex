@@ -132,7 +132,7 @@ a subset of $\real$ is an interval iff it is connected;
 images of connected subsets via a continuous map are connected;
 if $\Omega$ is connected and $f$ continuous, then $[a, b] \subseteq f(\Omega)$ implies that for any $c \in [a, b]$ there is $z \in \Omega$ with $c = f(z)$;
 if $a < b$, and $f$ is differentiable everywhere at $[a, b]$ with $\int_a^b | f'(x)| dx < + \infty$, then $f(b) - f(a) = \int_a^b f'(s) ds$;
-on $(\real^n, \Bcal(\real^n))$ for any $\alpha > 0$ we have $dx({k_\alpha \in B}) = \alpha^n dx(B)$;
+on $(\real^n, \Bcal(\real^n))$ for any $\alpha > 0$ we have $dx({k_\alpha \in B}) = \alpha^{-n} dx(B) = \lvert J_{k_\alpha} \rvert^{-1} dx(B)$;
 for complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ the maximal function $M\mu(x) = \sup_{\varepsilon>0} \tfrac{|\mu|(B(x,\varepsilon))}{dx(B(x,\varepsilon))}$ is nonnegative and lsc;
 (constructive) for a collection $(B(x_i,\varepsilon_i))_{i=1}^n$, $\varepsilon_i > 0$ there exists an $S \subseteq \{1,\,\ldots,\,n\}$ such that $\cup_{i=1}^n B(x_i,\varepsilon_i))_{i=1}^n \subseteq \cup_{i\in S} B(x_i, 3\varepsilon_i)$ and $(B(x_i,\varepsilon_i))_{i\in S}$ are pairwise disjoint;
 for a complex measure $\mu$ and any $\lambda > 0$ we have $dx(\{\lambda < M\mu\}) \leq \tfrac{3^n}{\lambda} \|\mu\|$;
@@ -148,7 +148,7 @@ for any $f \in L^1_\cplx(dx)$ we have $\bigl\{\lim_{\varepsilon \downarrow 0} \t
 The space of $n\times n$ matrices $M_n(K)$, $K = \real$ or $\cplx$, is the same as the space $M'_n(K)$ of all finite products of diagonal scaling ($H_\alpha e_1 = \alpha e_1$, $H_\alpha e_i = e_i$, $\alpha \in K$), row swapping $P_{ij}$ ($P_{ij} e_i = e_j$, $P_{ij} e_j = e_i$, and $P_{ij} e_l = e_l$) and pivoting ($U e_1 = e_1 + e_2$, $U e_j = e_j$) matrices;
 if matrices with $1$ in the top left corner is in $M'_n(K)$, then $M'_n(K) \subseteq M_n(K)$;
 if matrices with $e_1$ in its first column is in $M'_n(K)$, then all matrices with $1$ in the top left corner are in $M'_n(K)$;
-the distribution of $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ under $\mu$ (possibly complex), or the image measure of $\mu$ under $X$, is $X(\mu)(E) = \mu^X(E) = \mu(\{X \in E\}) = \mu(X^{-1}(E))$, and we have $Y(X(\mu)) = Y(\mu^X)$;
+the distribution of $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ under $\mu$ (possibly complex), or the {\bf image measure} of $\mu$ under $X$, or the {\bf pushforward} of $\mu$, $X_\sharp\mu$, is $X(\mu)(E) = \mu^X(E) = \mu(\{X \in E\}) = \mu(X^{-1}(E))$, and we have $Y(X(\mu)) = Y(\mu^X)$;
 $|\mu^X| \leq |\mu|^X$;
 a complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ is translation invariant iff $\tau_\alpha(\mu) = \mu$ for $\tau_\alpha(x) = \alpha + x$;
 $\tau_\alpha(dx) = dx$, $k_\alpha(dx) = \alpha^{-n} dx$ for $x\mapsto k_\alpha(x) = \alpha x$, $a > 0$;
@@ -199,7 +199,7 @@ the matrix $A = d\phi(x)$ is non-singular, and $\tilde{\phi} = \phi \circ A$ is 
 hence $\lim_{\varepsilon\downarrow 0} \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}{dx\big\vert_{\Omega'}(B(x, \varepsilon))} = \lvert \det J(\psi)(x) \rvert$ for all $x\in \Omega'$;
 finally $\phi(dx\big\vert_{\Omega}) \ll dx\big\vert_{\Omega'}$ for a $C^1$-diffeomorphism $\phi$ between $\Omega$ and $\Omega'$ and the Radon-Nikodym derivative is $a \to \lvert \det J(\psi)(a) \rvert$;
 the Jacobian formula is $\int_\Omega (f\circ \phi) dx\big\vert_{\Omega} = \int_{\Omega'} f \, \phi(dx\big\vert_{\Omega}) = \int_{\Omega'} f \lvert J(\phi^{-1})\rvert dx\big\vert_{\Omega'}$ and $\int_{\Omega'} f dx\big\vert_{\Omega'} = \int_{\Omega} (f\circ \phi) \, \phi^{-1}(dx\big\vert_{\Omega}) = \int_{\Omega} (f\circ \phi) \lvert J(\phi)\rvert dx\big\vert_{\Omega}$ -- true for nonnegative $f$, $f\in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$ iff $(f \circ \phi) \lvert J(\phi) \rvert \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$, and $f \circ \phi \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$ iff $f \lvert J(\phi^{-1}) \rvert \in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$;
-
+{\bf pushforward}: $\phi_\sharp dx_\Omega = \lvert \det J(\phi^{-1}) \rvert dx_{\Omega'}$.
 % paragraph tut_18 (end)
 
 
