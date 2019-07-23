@@ -117,27 +117,77 @@ nondecreasing maps are always measurable.
 \paragraph{tut 16} % (fold)
 \label{par:tut_16}
 
-Remember $\limsup_{x\to x_0} = \inf_{U\ni x_0} \sup_{x\in U}$;
-lsc functions ($\{\lambda < f\}$ -- open in $\Omega$) are closed under addition, scaling by nonnegative values, and arbitrary suprema;
+Recall:
+$\limsup_{x\to x_0} = \inf_{U\ni x_0} \sup_{x\in U}$,
+$A_n~\text{i.o.} = \cap_{n\geq 0} \cup_{k\geq n} A_k$,
+$A_n~\text{ev.} = \cup_{n\geq 0} \cap_{k\geq n} A_k$;
+%
+lsc functions ($\{\lambda < f\}$ -- open in $\Omega$) are closed under addition,
+scaling by nonnegative values, and arbitrary suprema;
+%
 lsc = - usc;
+%
 $1_U$, $U$ open, is lsc;
+%
 $1_F$, $F$ -- closed, is usc;
+%
 all usc~/~lsc maps are measurable wrt. Borel $\sigma$-algebra;
-on a metrizable $\sigma$-compact space with a locally finite measure $\mu$ for any $f \in L^1_\real(\Omega, \Fcal, \mu)$ and any $\varepsilon > 0$ there are lsc $v$ and usc $u$ ($\mu$-as having counterparts in $L^1_\real(\mu)$) such that $u \leq f \leq v$ and $\int (v - u) d\mu \leq \varepsilon$ (Viteli-Caratheodory);
-a connected topological space has $\emptyset$ and $\Omega$ as the only closed and open;
-a space is connected iff whenever $\Omega = A \uplus B$ then either $A$ or $B$ is $\emptyset$;
-an interval is a subset $G$ of $\real$ such that for all $a \leq b$ we have $[a, b] \subseteq G$;
+%
+on a metrizable $\sigma$-compact space with a locally finite measure $\mu$ for any
+$f \in L^1_\real(\Omega, \Fcal, \mu)$ and any $\varepsilon > 0$ there are lsc $v$ and
+usc $u$ ($\mu$-as having counterparts in $L^1_\real(\mu)$) such that $u \leq f \leq v$
+and $\int (v - u) d\mu \leq \varepsilon$ (Viteli-Caratheodory);
+%
+a connected topological space has $\emptyset$ and $\Omega$ as the {\bf only} closed
+and open;
+%
+a space is connected iff whenever $\Omega = A \uplus B$ then either $A$ or $B$ is
+$\emptyset$;
+%
+an interval is a subset $G$ of $\real$ such that for all $a \leq b \in G$ we have
+$[a, b] \subseteq G$;
+%
 $G$ is an intervals iff $G$ is either $(a, b]$, $(a, b)$, $[a, b)$, or $[a, b]$;
+%
 a subset of $\real$ is an interval iff it is connected;
+%
 images of connected subsets via a continuous map are connected;
-if $\Omega$ is connected and $f$ continuous, then $[a, b] \subseteq f(\Omega)$ implies that for any $c \in [a, b]$ there is $z \in \Omega$ with $c = f(z)$;
-if $a < b$, and $f$ is differentiable everywhere at $[a, b]$ with $\int_a^b | f'(x)| dx < + \infty$, then $f(b) - f(a) = \int_a^b f'(s) ds$;
-on $(\real^n, \Bcal(\real^n))$ for any $\alpha > 0$ we have $dx({k_\alpha \in B}) = \alpha^{-n} dx(B) = \lvert J_{k_\alpha} \rvert^{-1} dx(B)$;
-for complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ the maximal function $M\mu(x) = \sup_{\varepsilon>0} \tfrac{|\mu|(B(x,\varepsilon))}{dx(B(x,\varepsilon))}$ is nonnegative and lsc;
-(constructive) for a collection $(B(x_i,\varepsilon_i))_{i=1}^n$, $\varepsilon_i > 0$ there exists an $S \subseteq \{1,\,\ldots,\,n\}$ such that $\cup_{i=1}^n B(x_i,\varepsilon_i))_{i=1}^n \subseteq \cup_{i\in S} B(x_i, 3\varepsilon_i)$ and $(B(x_i,\varepsilon_i))_{i\in S}$ are pairwise disjoint;
-for a complex measure $\mu$ and any $\lambda > 0$ we have $dx(\{\lambda < M\mu\}) \leq \tfrac{3^n}{\lambda} \|\mu\|$;
-the maximal function of $f \in L^1_\cplx(\real^n, \Bcal(\real^n), dx)$ is $M f = M \mu$ for $d\mu = f dx$;
-for any $f \in L^1_\cplx(dx)$ we have $\bigl\{\lim_{\varepsilon \downarrow 0} \tfrac{\int_{B(x, \varepsilon)} |f(x) - f(y)| dy}{dx(B(x, \varepsilon)))} = 0\bigr\}$ $dx$-a.s;
+%
+if $\Omega$ is connected and $f$ continuous, then $[a, b] \subseteq f(\Omega)$ implies
+that for any $c \in [a, b]$ there is $z \in \Omega$ with $c = f(z)$;
+%
+if $a < b$, and $f$ is differentiable everywhere at $[a, b]$ with
+$\int_a^b | f'(x)| dx < + \infty$, then $f(b) - f(a) = \int_a^b f'(s) ds$;
+%
+on $(\real^n, \Bcal(\real^n))$ for any $\alpha > 0$ we have
+$dx({k_\alpha \in B})
+  = \alpha^{-n} dx(B)
+  = \lvert J_{k_\alpha} \rvert^{-1} dx(B)$;
+%
+for complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ the maximal function
+$M\mu(x) = \sup_{\varepsilon>0}
+  \tfrac{|\mu|(B(x,\varepsilon))}
+        {dx(B(x,\varepsilon))}$
+is nonnegative and lsc;
+%
+(constructive) for a collection $(B(x_i,\varepsilon_i))_{i=1}^n$, $\varepsilon_i > 0$
+there exists an $S \subseteq \{1,\,\ldots,\,n\}$ such that
+$\cup_{i=1}^n B(x_i,\varepsilon_i))_{i=1}^n
+  \subseteq \cup_{i\in S} B(x_i, 3\varepsilon_i)$
+and $(B(x_i,\varepsilon_i))_{i\in S}$ are pairwise disjoint;
+%
+for a complex measure $\mu$ and any $\lambda > 0$ we have
+$dx(\{\lambda < M\mu\}) \leq \tfrac{3^n}{\lambda} \|\mu\|$;
+%
+the maximal function of $f \in L^1_\cplx(\real^n, \Bcal(\real^n), dx)$ is
+$M f = M \mu$ for $d\mu = f dx$;
+%
+for any $f \in L^1_\cplx(dx)$ we have
+$\bigl\{
+  \lim_{\varepsilon \downarrow 0}
+    \tfrac{\int_{B(x, \varepsilon)} |f(x) - f(y)| dy}
+          {dx(B(x, \varepsilon)))}
+  = 0\bigr\}$ $dx$-a.s.
 
 % paragraph tut_16 (end)
 
