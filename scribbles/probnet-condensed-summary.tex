@@ -172,7 +172,14 @@ $\tau_\alpha(dx) = dx$, $k_\alpha(dx) = \alpha^{-n} dx$ for $x\mapsto k_\alpha(x
 for $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ we have $\int_{\Omega} (f \circ X)
 d\mu = \int_{\Omega'} f dX(\mu)$ for measure $\mu$ and measurable $f\colon \Omega' \to
 [0, +\infty]$ or $f\in L^1_\cplx(\Omega', \Fcal', X(\mu))$ (iff $f\circ X \in
-L^1_\cplx(\Omega, \Fcal, \mu)$), or for a complex measure $\mu$ and integrable $f$;
+L^1_\cplx(\Omega, \Fcal, \mu)$), or for a complex measure $\mu$ and integrable
+$f$ (the STM);
+%
+the \textbf{s}tandard \textbf{m}achine \textbf{a}rgument: indicator $\to$ simple
+(linearity) $\to$ nonnegative (mct$\uparrow$, or dct$\to$+majorant) $\to$ general
+integrable, if the measurable sets are involved, then use Dynkin's lemma: if a
+$\lambda$-system includes a $\pi$-system, then it includes the $\sigma$-algebra
+of the latter;
 %
 if $\mu$ is a translation-invariant measure $(\real^n, \Bcal(\real^n))$, then there
 is a unique $\alpha \geq 0$, such that $\mu = \alpha dx$ (due to translation invariance
@@ -200,39 +207,129 @@ any linear subspace $V$ of $\real^n$ is closed and $dx(V) = 0$ when $\dim V \leq
 \paragraph{tut 18} % (fold)
 \label{par:tut_18}
 
-The norm topology of the $K$-normed vector space is the metric topology induced by the norm metric;
-if $E$ and $F$ are $K$-mormed spaces and $l\colon E \to F$ is a linear map, then $l$ is continuous iff $l$ is continuous at $0$, iff there is $M\geq 0$ such that $\|l(x)\| \leq M \|x\|$ for all $x\in E$, iff $\|l\| = \sup\{\|l(x)\|\colon x\in E,\, \|x\|=1\} < +\infty$;
-the norm $\|l\|$ of a linear map $l$ is $\sup\{\|l(x)\|\colon x\in E,\, \|x\| \leq 1\}$, $\sup\{\tfrac{\|l(x)\|}{\|x\|} \colon x\in E,\, x\neq 0\}$, and $\inf\{M\geq 0\colon \|l(x)\| \leq M \|x\|\,\,\forall{x\in E} \}$;
-for all $x\in E$ we have $\|l(x)\| \leq \|l\| \|x\|$, and $(\Lcal_K(E, F), \|\cdot\|)$ is a $K$-normed space.
+The norm topology of the $K$-normed vector space is the metric topology induced by
+the norm metric;
+%
+if $E$ and $F$ are $K$-mormed spaces and $l\colon E \to F$ is a linear map, then
+$l$ is continuous iff $l$ is continuous at $0$, iff there is $M\geq 0$ such that
+$\|l(x)\| \leq M \|x\|$ for all $x\in E$, iff
+$\|l\| = \sup\{\|l(x)\|\colon x\in E,\, \|x\|=1\} < +\infty$;
+%
+the norm $\|l\|$ of a linear map $l$ is $\sup\{\|l(x)\|\colon x\in E,\, \|x\| \leq 1\}$,
+$\sup\{\tfrac{\|l(x)\|}{\|x\|} \colon x\in E,\, x\neq 0\}$, and
+$\inf\{M\geq 0\colon \|l(x)\| \leq M \|x\|\,\,\forall{x\in E} \}$;
+%
+for all $x\in E$ we have $\|l(x)\| \leq \|l\| \|x\|$, and $(\Lcal_K(E, F), \|\cdot\|)$
+is a $K$-normed space.
 
-For $E, F$ be $\real$-normed spaces and an open $U\subseteq E$, the map $\phi\colon E\to F$ is differentiable at $a\in U$ iff there is $d\phi(a) \in \Lcal_\real(E, F)$ so that for any $\varepsilon > 0$ there is $\delta > 0$ such that for all $h\in E$ with $\|h\| \leq \delta$ and $a + h \in U$ we have $\|\phi(a+h) - \phi(a) - l(h) \| \leq \varepsilon \|h\|$;
-the linear map $d\phi(a)$ is unique, and the map $\phi$ is differentiable on $U$ if it is differentiable at every $a\in U$;
-$\phi\colon U \to F$ is $C^1$ if it is differentiable on $U$ and $d\phi\colon U \to (\Lcal_\real(E, F), \|\cdot\|)$ is continuous;
-for $\real$-normed spaces $E, F, G$ with $U$ -- open in $E$, $V$ -- open in $F$, if maps $\phi\colon U\to F$ and $\psi\colon V\to G$ are differentiable at $a\in U$ and $\phi(a)\in V$ with $\phi(U) \subseteq V$, then the map $\psi\circ \phi$ is differentiable at $a$ and $d(\psi\circ\phi)(a) = d\psi(\phi(a)) \circ d\phi(a)$;
+For $E, F$ be $\real$-normed spaces and an open $U\subseteq E$, the map $\phi\colon E\to F$
+is differentiable at $a\in U$ iff there is $d\phi(a) \in \Lcal_\real(E, F)$ so that for any
+$\varepsilon > 0$ there is $\delta > 0$ such that for all $h\in E$ with $\|h\| \leq \delta$
+and $a + h \in U$ we have $\|\phi(a+h) - \phi(a) - l(h) \| \leq \varepsilon \|h\|$;
+%
+the linear map $d\phi(a)$ is unique, and the map $\phi$ is differentiable on $U$ if
+it is differentiable at every $a\in U$;
+%
+$\phi\colon U \to F$ is $C^1$ if it is differentiable on $U$ and
+$d\phi\colon U \to (\Lcal_\real(E, F), \|\cdot\|)$ is continuous;
+%
+for $\real$-normed spaces $E, F, G$ with $U$ -- open in $E$, $V$ -- open in $F$, if
+maps $\phi\colon U\to F$ and $\psi\colon V\to G$ are differentiable at $a\in U$ and
+$\phi(a)\in V$ with $\phi(U) \subseteq V$, then the map $\psi\circ \phi$ is differentiable
+at $a$ and $d(\psi\circ\phi)(a) = d\psi(\phi(a)) \circ d\phi(a)$;
+%
 norms on finte product spaces are topologically equivalent;
-if norms $\|\cdot\|$ and $N_E(\cdot)$ induce the same topology, then the $id_E\colon (E, \|\cdot\|) \to (E, N_E(\cdot))$ is continuous, and the norms are equivalent: there exist $m_E, M_E > 0$ such that $m_E\|\cdot\| \leq N_E(\cdot) \leq M_E \|\cdot\|$;
+%
+if norms $\|\cdot\|$ and $N_E(\cdot)$ induce the same topology, then the
+$id_E\colon (E, \|\cdot\|) \to (E, N_E(\cdot))$ is continuous, and the norms are equivalent:
+there exist $m_E, M_E > 0$ such that $m_E\|\cdot\| \leq N_E(\cdot) \leq M_E \|\cdot\|$;
+%
 if maps are differentiable at $a$ so are their linear combinations;
+%
 the differential does not depend on the choice of norms in finite dimensional spaces;
-if $\phi\colon U\to F$ and $\psi\colon V\to G$ are $C^1$, then so their composition is $C^1$ as well;
-if $E$ is an $\real$-normed space, $f\colon [a, b] \to E$ and $g\colon [a, b] \to \real$ are differentiable at every $(a, b)$ with $\|f'(t)\| \leq g'(t)$, then $\|f(b) - f(a)\| \leq g(b) - g(b)$;
-$\Rightarrow$ if $\phi\subseteq \real^n \to E$, $\real$-normed, is differentiable at $a\in U$ then all $\tfrac{\partial \phi}{\partial x_i}(a)$ exist at $a$, furthermore $d\phi(a)(h) = \sum_i \tfrac{\partial \phi}{\partial x_i}(a) h_i$;
-if $d\phi$ exists on $U$ and is continuous at $a$, then $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous at $a$;
-$\Leftarrow$ if $\phi$ has all $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ on $U$ and they are continuous at $a\in U$, then $\phi$ is differentiable at $a$ (only existence!);
-if $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous on $U$ then so is $d\phi$ on $U$;
-finally $\phi\colon U\to E$ is $C^1$ on $U$ iff each $a\to \tfrac{\partial \phi}{\partial x_i}(a)$ is $U$-$E$ continuous;
+%
+if $\phi\colon U\to F$ and $\psi\colon V\to G$ are $C^1$, then so their composition is
+$C^1$ as well;
+%
+if $E$ is an $\real$-normed space, $f\colon [a, b] \to E$ and $g\colon [a, b] \to \real$
+are differentiable at every $(a, b)$ with $\|f'(t)\| \leq g'(t)$, then
+$\|f(b) - f(a)\| \leq g(b) - g(b)$;
+%
+$\Rightarrow$ if $\phi\subseteq \real^n \to E$, $\real$-normed, is differentiable at
+$a\in U$ then all $\tfrac{\partial \phi}{\partial x_i}(a)$ exist at $a$, furthermore
+$d\phi(a)(h) = \sum_i \tfrac{\partial \phi}{\partial x_i}(a) h_i$;
+%
+if $d\phi$ exists on $U$ and is continuous at $a$, then
+$\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous at $a$;
+%
+$\Leftarrow$ if $\phi$ has all $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ on $U$ and
+they are continuous at $a\in U$, then $\phi$ is differentiable at $a$ (only existence!);
+%
+if $\tfrac{\partial \phi}{\partial x_i}(\cdot)$ are continuous on $U$ then so is $d\phi$
+on $U$;
+%
+finally $\phi\colon U\to E$ is $C^1$ on $U$ iff each
+$a\to \tfrac{\partial \phi}{\partial x_i}(a)$ is $U$-$E$ continuous;
+%
 $l\in \Lcal(E, F)$ is $C^1$ and $d(l\big\vert_U)(a) = l$ for any $a\in U$ -- open in $E$;
-$\phi\colon U \to F = \prod_{i=1}^p F_p$ is differentiable at $a$ iff each $\phi_i\colon U\to F_i$ is, $\phi$ is $C^1$ on $U$ iff each $\phi_i$ is $C_1$ on $U$, and $d\phi(a) = (d\phi_i(a))_{i=1}^n \in \Lcal(E, F)$;
-if $\phi\colon U \to \real^n$ then $d\phi(a) = (\tfrac{\phi_c}{\partial x_r})_{r,c}^{n,n}\in \real^{n\times n}$;
-the Jacobian of $\phi$ is $J(\phi)(a) = \det d\phi(a)$ --- the determinant of the partial derivative matrix.
+%
+$\phi\colon U \to F = \prod_{i=1}^p F_p$ is differentiable at $a$ iff each
+$\phi_i\colon U\to F_i$ is, $\phi$ is $C^1$ on $U$ iff each $\phi_i$ is $C_1$ on $U$,
+and $d\phi(a) = (d\phi_i(a))_{i=1}^n \in \Lcal(E, F)$;
+%
+if $\phi\colon U \to \real^n$ then
+$d\phi(a) = (\tfrac{\phi_c}{\partial x_r})_{r,c}^{n,n} \in \real^{n\times n}$;
+%
+the Jacobian of $\phi$ is $J(\phi)(a) = \det d\phi(a)$ --- the determinant of the
+partial derivative matrix.
 
-For $\Omega$ and $\Omega'$ open in $\real^n$ a bijection $\phi\colon \Omega \to \Omega'$ is a $C^1$-diffeomorphism between $\Omega$ and $\Omega'$ iff $\phi\colon \Omega \to \real^n$ and $\phi^{-1}\colon \Omega' \to \real^n$ are both $C^1$;
-if $\phi$ is a $C^1$-diffeomorphism ($\psi = \phi^{-1}$) then $d\phi(\psi(x)) \circ d\psi(x) = id_{\real^n}$ and $d\psi(\phi(x)) \circ d\phi(x) = id_{\real^n}$ and $J(\phi) = \tfrac1{J(\psi) \circ \phi} \neq 0$;
-if $d\phi(a) = id_{\real^n}$, then $\lim_{\varepsilon\downarrow 0} \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}{dx\big\vert_{\Omega'}(B(x, \varepsilon))} = 1$ for all $x\in \Omega'$;
-the matrix $A = d\phi(x)$ is non-singular, and $\tilde{\phi} = \phi \circ A$ is $C^1$ diffeomorphism between $\Omega'' = A^{-1}(\Omega)$ and $\Omega'$ with $\tilde{\psi} = A^{-1} \circ \psi$ and $d\tilde{\phi}(x) = id_{\real^n} \in \Lcal(\real^n, \real^n)$;
-hence $\lim_{\varepsilon\downarrow 0} \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}{dx\big\vert_{\Omega'}(B(x, \varepsilon))} = \lvert \det J(\psi)(x) \rvert$ for all $x\in \Omega'$;
-finally $\phi(dx\big\vert_{\Omega}) \ll dx\big\vert_{\Omega'}$ for a $C^1$-diffeomorphism $\phi$ between $\Omega$ and $\Omega'$ and the Radon-Nikodym derivative is $a \to \lvert \det J(\psi)(a) \rvert$;
-the Jacobian formula is $\int_\Omega (f\circ \phi) dx\big\vert_{\Omega} = \int_{\Omega'} f \, \phi(dx\big\vert_{\Omega}) = \int_{\Omega'} f \lvert J(\phi^{-1})\rvert dx\big\vert_{\Omega'}$ and $\int_{\Omega'} f dx\big\vert_{\Omega'} = \int_{\Omega} (f\circ \phi) \, \phi^{-1}(dx\big\vert_{\Omega}) = \int_{\Omega} (f\circ \phi) \lvert J(\phi)\rvert dx\big\vert_{\Omega}$ -- true for nonnegative $f$, $f\in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$ iff $(f \circ \phi) \lvert J(\phi) \rvert \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$, and $f \circ \phi \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$ iff $f \lvert J(\phi^{-1}) \rvert \in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$;
-{\bf pushforward}: $\phi_\sharp dx_\Omega = \lvert \det J(\phi^{-1}) \rvert dx_{\Omega'}$.
+For $\Omega$ and $\Omega'$ open in $\real^n$ a bijection $\phi\colon \Omega \to \Omega'$
+is a $C^1$-diffeomorphism between $\Omega$ and $\Omega'$ iff $\phi\colon \Omega \to \real^n$
+and $\phi^{-1}\colon \Omega' \to \real^n$ are both $C^1$;
+%
+if $\phi$ is a $C^1$-diffeomorphism ($\psi = \phi^{-1}$) then
+$d\phi(\psi(x)) \circ d\psi(x) = id_{\real^n}$ and
+$d\psi(\phi(x)) \circ d\phi(x) = id_{\real^n}$ and
+$J(\phi) = \tfrac1{J(\psi) \circ \phi} \neq 0$;
+%
+if $d\phi(a) = id_{\real^n}$, then for all $x\in \Omega'$
+$\lim_{\varepsilon\downarrow 0}
+  \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}
+        {dx\big\vert_{\Omega'}(B(x, \varepsilon))} = 1$;
+%
+the matrix $A = d\phi(x)$ is non-singular, and $\tilde{\phi} = \phi \circ A$ is $C^1$
+diffeomorphism between $\Omega'' = A^{-1}(\Omega)$ and $\Omega'$ with
+$\tilde{\psi} = A^{-1} \circ \psi$ and
+$d\tilde{\phi}(x) = id_{\real^n} \in \Lcal(\real^n, \real^n)$;
+%
+hence
+$\lim_{\varepsilon\downarrow 0}
+  \tfrac{\phi(dx\big\vert_{\Omega})(B(x, \varepsilon))}
+        {dx\big\vert_{\Omega'}(B(x, \varepsilon))}
+  = \lvert \det J(\psi)(x) \rvert$ for all $x\in \Omega'$;
+%
+finally $\phi(dx\big\vert_{\Omega}) \ll dx\big\vert_{\Omega'}$ for a $C^1$-diffeomorphism
+$\phi$ between $\Omega$ and $\Omega'$ and the Radon-Nikodym derivative is
+$a \to \lvert \det J(\psi)(a) \rvert$;
+%
+the Jacobian formula is
+$\int_\Omega (f\circ \phi) dx\big\vert_{\Omega}
+  = \int_{\Omega'} f \, \phi(dx\big\vert_{\Omega})
+  = \int_{\Omega'} f \lvert J(\phi^{-1})\rvert dx\big\vert_{\Omega'}$
+and
+$\int_{\Omega'} f dx\big\vert_{\Omega'}
+  = \int_{\Omega} (f\circ \phi) \, \phi^{-1}(dx\big\vert_{\Omega})
+  = \int_{\Omega} (f\circ \phi) \lvert J(\phi)\rvert dx\big\vert_{\Omega}$
+-- true for nonnegative $f$, $f\in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$
+iff $(f \circ \phi) \lvert J(\phi) \rvert \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$,
+and $f \circ \phi \in \Lcal_\cplx^1(\Omega, \Bcal(\Omega), dx)$
+iff $f \lvert J(\phi^{-1}) \rvert \in \Lcal_\cplx^1(\Omega', \Bcal(\Omega'), dx)$;
+%
+{\bf pushforward}: $\phi_\sharp dx_\Omega = \lvert \det J(\phi^{-1}) \rvert dx_{\Omega'}$;
+%
+the integral w.r.t. measure $\mu$ of a {\bf pullback} of $f\colon \Omega'\to \real$ by
+$\phi\colon \Omega\to\Omega'$ is the integral of $f$ w.r.t the {\bf pushforward}
+of $\mu$ by $\phi$: $\int_\Omega f\circ \phi d\mu = \int_{\Omega'} f d\phi_\sharp\mu$.
 % paragraph tut_18 (end)
 
 
