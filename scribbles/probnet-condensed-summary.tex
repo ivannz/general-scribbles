@@ -145,20 +145,53 @@ for any $f \in L^1_\cplx(dx)$ we have $\bigl\{\lim_{\varepsilon \downarrow 0} \t
 \paragraph{tut 17} % (fold)
 \label{par:tut_17}
 
-The space of $n\times n$ matrices $M_n(K)$, $K = \real$ or $\cplx$, is the same as the space $M'_n(K)$ of all finite products of diagonal scaling ($H_\alpha e_1 = \alpha e_1$, $H_\alpha e_i = e_i$, $\alpha \in K$), row swapping $P_{ij}$ ($P_{ij} e_i = e_j$, $P_{ij} e_j = e_i$, and $P_{ij} e_l = e_l$) and pivoting ($U e_1 = e_1 + e_2$, $U e_j = e_j$) matrices;
+The space of $n\times n$ matrices $M_n(K)$, $K = \real$ or $\cplx$, is the same as
+the space $M'_n(K)$ of all finite products of diagonal scaling ($H_\alpha e_1 = \alpha e_1$,
+$H_\alpha e_i = e_i$, $\alpha \in K$), row swapping $P_{ij}$ ($P_{ij} e_i = e_j$,
+$P_{ij} e_j = e_i$, and $P_{ij} e_l = e_l$) and pivoting ($U e_1 = e_1 + e_2$, $U e_j = e_j$)
+matrices;
+%
 if matrices with $1$ in the top left corner is in $M'_n(K)$, then $M_n(K)\subseteq M'_n(K)$;
-if matrices with $e_1$ in its first column is in $M'_n(K)$, then all matrices with $1$ in the top left corner are in $M'_n(K)$;
-the distribution of $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ under $\mu$ (possibly complex), or the {\bf image measure} of $\mu$ under $X$, or the {\bf pushforward} of $\mu$, $X_\sharp\mu$, is $X(\mu)(E) = \mu^X(E) = \mu(\{X \in E\}) = \mu(X^{-1}(E))$, and we have $Y(X(\mu)) = Y(\mu^X)$;
+%
+if matrices with $e_1$ in its first column is in $M'_n(K)$, then all matrices with
+$1$ in the top left corner are in $M'_n(K)$;
+%
+the distribution of $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ under $\mu$ (possibly
+complex), or the {\bf image measure} of $\mu$ under $X$, or the {\bf pushforward} of
+$\mu$, $X_\sharp\mu$, is $X(\mu)(E) = \mu^X(E) = \mu(\{X \in E\}) = \mu(X^{-1}(E))$,
+and we have $Y(X(\mu)) = Y(\mu^X)$;
+%
 $|\mu^X| \leq |\mu|^X$;
-a complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ is translation invariant iff $\tau_\alpha(\mu) = \mu$ for $\tau_\alpha(x) = \alpha + x$;
-$\tau_\alpha(dx) = dx$, $k_\alpha(dx) = \alpha^{-n} dx$ for $x\mapsto k_\alpha(x) = \alpha x$, $a > 0$;
-for $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ we have $\int_{\Omega} (f \circ X) d\mu = \int_{\Omega'} f dX(\mu)$ for measure $\mu$ and measurable $f\colon \Omega' \to [0, +\infty]$ or $f\in L^1_\cplx(\Omega', \Fcal', X(\mu))$ (iff $f\circ X \in L^1_\cplx(\Omega, \Fcal, \mu)$), or for a complex measure $\mu$ and integrable $f$;
-if $\mu$ is a translation-invariant measure $(\real^n, \Bcal(\real^n))$, then there is a unique $\alpha \geq 0$, such that $\mu = \alpha dx$ (due to translation invariance the scaling in front of $\mu$ becomes the Lebesgue measure);
-$T\colon \real^n \to \real^n$ is a linear bijection iff it has a non-singular matrix representation in, e.g., canonical bases in domain and image spaces;
-the linearity of $T$ makes the image measure $\mu = T(dx)$ translation invariant in $\real^n$ with $\mu = \Delta(T) dx$;
-the matrix of $T$ being composed of invertible simple matrices makes $\Delta(T) \neq 0$ and $\Delta(T_1 \circ T_2) = \Delta(T_1) \Delta(T_2)$;
-ultimately $\Delta(T) = \lvert \det T^{-1} \rvert = \lvert \det T \rvert^{-1}$ due to the determinant of a product being equal to the product of determinants;
+%
+a complex measure $\mu$ on $(\real^n, \Bcal(\real^n))$ is translation invariant iff
+$\tau_\alpha(\mu) = \mu$ for $\tau_\alpha(x) = \alpha + x$;
+%
+$\tau_\alpha(dx) = dx$, $k_\alpha(dx) = \alpha^{-n} dx$ for $x\mapsto k_\alpha(x) =
+\alpha x$, $a > 0$;
+%
+for $X\colon (\Omega, \Fcal) \to (\Omega', \Fcal')$ we have $\int_{\Omega} (f \circ X)
+d\mu = \int_{\Omega'} f dX(\mu)$ for measure $\mu$ and measurable $f\colon \Omega' \to
+[0, +\infty]$ or $f\in L^1_\cplx(\Omega', \Fcal', X(\mu))$ (iff $f\circ X \in
+L^1_\cplx(\Omega, \Fcal, \mu)$), or for a complex measure $\mu$ and integrable $f$;
+%
+if $\mu$ is a translation-invariant measure $(\real^n, \Bcal(\real^n))$, then there
+is a unique $\alpha \geq 0$, such that $\mu = \alpha dx$ (due to translation invariance
+the scaling in front of $\mu$ becomes the Lebesgue measure);
+%
+$T\colon \real^n \to \real^n$ is a linear bijection iff it has a non-singular matrix
+representation in, e.g., canonical bases in domain and image spaces;
+%
+the linearity of $T$ makes the image measure $\mu = T(dx)$ translation invariant in
+$\real^n$ with $\mu = \Delta(T) dx$;
+%
+the matrix of $T$ being composed of invertible simple matrices makes $\Delta(T) \neq
+0$ and $\Delta(T_1 \circ T_2) = \Delta(T_1) \Delta(T_2)$;
+%
+ultimately $\Delta(T) = \lvert \det T^{-1} \rvert = \lvert \det T \rvert^{-1}$ due
+to the determinant of a product being equal to the product of determinants;
+%
 $dx(T(B)) = \lvert \det T\rvert dx(B)$;
+%
 any linear subspace $V$ of $\real^n$ is closed and $dx(V) = 0$ when $\dim V \leq n-1$;
 
 % paragraph tut_17 (end)
