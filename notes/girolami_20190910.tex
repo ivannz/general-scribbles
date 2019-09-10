@@ -1,0 +1,216 @@
+Diffusion and Dynamics on Statistical Manifolds for Monte Carlo
+
+* Spaghetti diagram. MC projected paths for uncertainty *
+
+Stat. uncertainty in mathematical models: account for, quantify and propagate uncertainty
+
+Goal: Stochastic sampling from induced prob measures (Bayesian posterior measures),
+inferring the parameters, unobserved states, etc.
+
+Models:
+\begin{itemize}
+    \item Circadean control in a cell
+    \item Heat conductivity (pde with fem)
+\end{itemize}
+
+Properties:
+\begin{itemize}
+    \item known (more or less) dynamic equation
+    \item unknown parameters
+    \item unknown initial conditions
+    \item uncertain measurements
+\end{itemize}
+
+Problems:
+\begin{itemize}
+    \item posterior is highly concentrated and in a non-linear fashion
+    \item (Metropolis-Hastings) MH MCMC completely fails (poor mixing for the induced posterior)
+\end{itemize}
+
+Goal: Design MC samples which exploit intrinsic geometry of the posterior
+H-MC on Riemanniann manifolds \url{https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9868.2010.00765.x}
+
+Hamiltonian dynamics on geodesic flows (with differential geometric foundations)
+
+
+$$
+\int \phi(\theta) \pi(\theta) d\theta
+    \approx \tfrac1n \sum_i \phi(\theta^i) + \mathca{O}(n^{-\tfrac12})
+\,. $$
+
+Draw each $\theta_i$ from an ergodic Markov Chain the stationary distribution of which is $\pi$.
+
+Key components of the MH:
+\begin{itemize}
+    \item Proposal $p_p$ generates a $\theta$ given $\theta'$
+    \item Accept~/~reject probability
+    $$
+    p_a(\theta'\vert \theta)
+        = \min\bigl\{
+            1, \frac{
+                \pi(\theta') p_p(\theta \vert \theta')
+            }{
+                \pi(\theta) p_p(\theta'\vert \theta)
+            }
+        \bigr\}
+        \,. $$
+\end{itemize}
+
+The rate of convergence is related to the proposal: appropriate proposal design.
+
+
+Choosing a good proposal -- borrow from differential geometry.
+
+Fisher information is $
+G(\theta)
+    = \mathbb{V} \nabla_\theta \log \ell(\theta)
+$
+
+The natural distance between distribution is \textbf{not} the
+distance between the parameters:
+\begin{itemize}
+    \item total-variation $
+    \|\mu - \nu\|_\mathrm{tv}
+        = \sup_{f\in C^b} \lvert \int f d\mu - \int f d\nu \rvert
+    $
+
+    \item Kullback-Leibler divergence (iff $\mu\ll \nu$) $
+    KL(\mu\|\nu)
+        = \int \tfrac{d\mu}{d\nu} \log \tfrac{d\mu}{d\nu} d\nu
+    $
+\end{itemize}
+
+Rao, 1945: $\chi^2$ distance (approximation of the KL)
+$$
+\chi^2(\delta
+    = \int \frac{
+            \lvert p(\omega; \theta + \delta) - p(\omega; \theta) \rvert^2
+        }{
+            p(\omega; \theta)
+        } d\omega
+    \approx \delta^\top G(\theta) \delta
+    \,. $$
+
+Jeffreys, 1948:
+$$
+KL(p(\omega; \theta + \delta)\|p(\omega; \theta))
+    = \int p(\omega; \theta + \delta)
+        \log\frac{
+            p(\omega; \theta + \delta)
+        }{
+            p(\omega; \theta)
+        } d\omega
+    \approx \delta^\top G(\theta) \delta
+    \,. $$
+
+Basic of Differential (Remanniann) manifolds. A tangent space,
+an exponential map, local metric
+(inner product)
+$
+\langle u, v \rangle_x
+    = u^\top G_x v
+$, a Riemannian connection, a geodesic path (the shortest path on the manifold).
+
+The geodesic is a solution to the following ODE:
+$$
+\tfrac{d^2 \theta^i}{d t^2}
+    + \sum_{kl} \Gamma^i_{kl}
+        \tfrac{d \theta^k}{d t}
+        \tfrac{d \theta^l}{d t}
+    = 0
+\,. $$
+
+The natural Riemannian metric for the manifold of distributions is
+given by Fisher's information matrix, and known as the Fisher-Rao metric:
+$
+G(\theta)
+    = - \mathbb{E}_{\omega \sim p(\omega\vert \theta)}
+        \nabla^2_{\theta\theta} \log p(\omega\vert \theta)
+$
+
+
+For a univariate Gaussian $\mathcal{N}(x\vert \mu, \sigma^2)$:
+$
+\delta^\top G(\theta) \delta
+    = \tfrac1{\sigma^2} \bigl(
+        \delta \mu^2 + 2 \sigma^2 \delta
+    \bigr)
+$
+
+So let's define a proposal distribution that \textbf{adapts}
+to the space that is being explored (and keep the normal traversal
+of Hamiltonian MC).
+
+How do? HMC!
+
+\subsection{Langevin} % (fold)
+\label{sub:langevin}
+
+Diffusion processes, driven by BM: SDE
+$
+d\theta_t
+    = \tfrac12 \nabla_\theta \mathcal{L}(\theta(t)) dt
+    + dB_t
+$
+with the $\log$-likelihood $\mathcal{L}$.
+
+Euler-Maruyama discrete SDE
+$
+\theta_{t + \delta}
+    = \theta_t
+    + \tfrac{\delta^2}2 \nabla_\theta \mathcal{L}(\theta(t)) dt
+    + \delta d \xi_t
+$
+for $\xi_t \sim \mathcal{N}_n(0, I)$
+
+Isotropic proposal:
+$$
+p_p(\theta'\vert \theta)
+    = \mathcal{N}_n(
+        \theta'
+        \vert
+        \mu(\theta, \delta), \delta^2 I
+        )
+    \,, \mu(\theta, \delta)
+    = \theta_t + \tfrac{\delta^2}2 \nabla_\theta \mathcal{L}(\theta(t))
+    \,. $$
+
+Is it any good?
+
+Diffusion in the natural manifold:
+$$
+d\theta_t
+    = \tfrac12 G^{-1}(\theta) \nabla_\theta \mathcal{L}(\theta(t)) dt
+    - \sum_{kl} G^{-1}(\theta)_{kl}
+    + G^{-\tfrac12}(\theta) dB_t
+    \,, $$
+
+The proposal on the manifold of the constant curvature (so that
+$\Gamma$'s go away):
+$$
+p_p(\theta'\vert \theta)
+    = \mathcal{N}_n(
+        \theta'
+        \vert
+        \mu(\theta, \delta),
+        \delta^2 G^{-1}(\theta)
+        )
+    \,, \mu(\theta, \delta)
+    = \theta_t + \tfrac{\delta^2}2 G^{-1}(\theta)
+        \nabla_\theta \mathcal{L}(\theta(t))
+    \,. $$
+
+% subsection langevin (end)
+
+Sampling from mixtures:
+$$
+\theta
+    \sim \sum_k \pi_k \mathcal{N}_n(\theta\vert \mu_k, \Sigma_k)
+    \,, $$
+\begin{itemize}
+    \item choose a component
+    \item sample from it
+\end{itemize}
+
+
+
