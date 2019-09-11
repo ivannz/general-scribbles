@@ -1,0 +1,29 @@
+\section{On Douglas-Rachford splittting} % (fold)
+\label{sec:on_douglas_rachford_splittting}
+
+This a short recap of a post at regularize.\footnote
+\footnotetext{\url{https://regularize.wordpress.com/2017/02/24/the-origin-of-the-douglas-rachford-iteration/}}
+
+Consider a Hilbert space $(\mathcal{H}, \langle \cdot, \cdot\rangle)$. A
+point-set map $T\colon \mathcal{H} \to \mathcal{P}(\mathcal{H})$ is a monotone
+operator if for any $x, y \in \mathcal{H}$ and any $u\in Tx$ and $v\in Ty$
+we have
+$
+\langle
+    x-y,
+    u-v
+\rangle \geq 0
+$.
+
+A problem of the form: find $x\in \mathcal{H}$ such that $0 \in Tx$, --
+is called a \textbf{monotone inclusion}. It is typically solved via splitting.
+
+We first split an operator, then find the resolvents of the components, and
+finally formulate a fixed point problem, that define an iterative algorithm.
+
+\subsection{Splitting} % (fold)
+\label{sub:splitting}
+
+% subsection splitting (end)
+
+% section on_douglas_rachford_splittting (end)
