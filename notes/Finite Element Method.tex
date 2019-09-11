@@ -1,0 +1,115 @@
+Finite Element Method
+A deterministic numeric procedure applied to PDEs
+
+A PDE is a model, and like every model is incorrect, i.e. misspecified:
+elastic versus plastic, absence of vortices, physics of turbulence is not yet  understood, material. Naiver-Stokes thus is usually (always) misspecified.
+
+\begin{itemize}
+    \item Miss-specification (oh-hoh)
+    \item Exploit the ability to make measurements / generate data.
+\end{itemize}
+
+
+How to take data and incorporate it into FEM, allowing it to update
+the FEM solution.
+
+* embed in to probabilistic framework and compute uncertainty propagation
+
+Redefine FEM in a statistical framework
+
+The premise: there is some truth, that is known partially, and not
+fully understood. But we can measure it (as generated from truth).
+
+Cox's thesis about iterative model-observation-hypothesis cycle.
+
+PDE BVRP
+$$
+    \Lcal_\theta u + f = 0
+    \text{ on } \Omega
+    \,, \\
+    \Dcal u = 0 \text{ on } \partial \Omega
+    \,. $$
+
+Diff. operators $\Lcal__\theta$ $\Dcal$ mapping Hilbert spaces into
+subsets of $\Lcal^2(\Omega)$.
+
+Randomized setup: the solution and the operators depend on Tyche's choice.
+$$
+    \Lcal_\theta(\omega) u(x, \omega) + f(x, \omega) = 0
+    \forall x\in \Omega
+    \,. $$
+
+Gaussian measure on the function (Hilbert space): a G measure conditional
+on $\theta$ (random function) and the action of $\Lcal_\theta$ on $u$
+is given by a Gaussian process, i.e $f\sim \mathcal{GP}(0, K_f)$.
+
+This pushforward induces a measure of the space of solutions:
+$$
+u \sim p(u\vert f)
+    = \mathcal{GP}\bigl(
+    -(\Lcal_\theta)^{-1} f, 
+    (\Lcal_\theta)^{-\top} K_f (\Lcal_\theta)^{-1}
+    \bigr)
+    \,. $$
+We look for weak solutions (eq. in \mathbf{Law}) via Portmanteau (?).
+
+FEM -- $u, f$ expansion via some basis functions, mesh resolution $h$
+FEM -- $\sum_i u_i B_\theta = \lale\rale$
+This induces a finite-dim conditional Gaussian measure
+$$
+p(u_h \vert f, \theta, h)
+    = \mathcal{N}(
+        A_\theta^{-1}, A_\theta^{-1} G A_\theta^{-1}
+    )
+    \,, $$
+and a non-gaussian measure marginalizing $\theta$.
+
+The matrix $A_\theta$ is given by the bilinear form (in the weak solution),
+$G$ is Gram-matrix of the $K_f$-inner-product of the basis elements.
+
+The measure is centered around the Galerkin solution of the FEM,
+and the uncertainty is the function of the original stoch. but also
+from the stiffness matrix, and the induced bilinear form.
+
+When $h\to 0$ the Gaussian measure collapses into a point-mass
+measure at Galerkin soln.
+
+Schematics: mesh, resolution, parameters $(x_u, \theta, h)$ $\Rightarrow$
+stiffness matrix $A$ $\oplus$ $K_f$, $f$ $\Rightarrow$ solution
+$u_h$.
+
+Given data $y\in \mathbb{R}$ with (linear) measurement error from some
+\textbf{true DGP}. The dgp colud be described (?) had we known
+better. From FEM we get a possibly severely misspecified soln.
+
+$$
+\eta
+    = \rho \Phi u_h + (\eta - \Phi u_h)
+    = \rho \Phi u_h + \delta
+    \,, $$
+where $\eta = \Phi u^*$ for the true $u^*$ (unobserved), with
+$\delta \sim \mathcal{N}(0, K)$.
+
+
+Te graphical model:
+$u_h$ $\Rightarrow$ observed $y$ on a grid via $\Phi$, noise $\delta$,
+depending on the observation pts. on the domain $x_y$, adn \rho$.
+
+(... dozed of)
+And the mismatch between a model and reality.
+
+$$
+p(y\vert \rho, \sigma, f, h, \theta)
+    = \mathcal{N}\bigl(
+        \rho \Phi m^\theta_u,
+        \rho^2 \Phi C_u^\theta_u \Phi m^\theta_u
+        + K_f + i\sigma^2
+    \bigr)
+    \,, $$
+
+
+Read \url{arxiv:1905.06391}. Not probabilistic numerics, since there
+is no prior on the soluitions. PRob Num models nuerical error and discretization
+uncertainty.
+
+
