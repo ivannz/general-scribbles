@@ -3,6 +3,7 @@ import torch
 from math import sqrt
 
 
+# BLAS level 1 routines for product spaces (in tuples) needed for trcg
 def clone(a):
     return [u.clone() for u in a]
 
