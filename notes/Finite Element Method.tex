@@ -93,7 +93,7 @@ $\delta \sim \mathcal{N}(0, K)$.
 
 Te graphical model:
 $u_h$ $\Rightarrow$ observed $y$ on a grid via $\Phi$, noise $\delta$,
-depending on the observation pts. on the domain $x_y$, adn \rho$.
+depending on the observation pts. on the domain $x_y$, and $\rho$.
 
 (... dozed of)
 And the mismatch between a model and reality.
@@ -111,5 +111,30 @@ p(y\vert \rho, \sigma, f, h, \theta)
 Read \url{arxiv:1905.06391}. Not probabilistic numerics, since there
 is no prior on the soluitions. PRob Num models nuerical error and discretization
 uncertainty.
+
+
+The representation of the process, $u(x)$, is governed by a linear PDE,
+$\Lcal_\theta u(x) = -f(x)$, where $\Lcal_\theta$ is a randomized
+self-adjoint elliptic linear operator over space, with uncertain
+parameters $\theta$. Suppose the uncertainty in the rhs (``forcing''
+$f$) is prepresetned by a gaussian random function:
+$
+\Lcal_\theta u(x)
+    = -f(x) + \varepsilon_f(x)
+$ for $\varepsilon_f\sim \mathcal{GP}(0, C_f)$.
+
+The push-forward of the measure (that is the GP) is a conditional
+infinite dimensional Gaussian measure over the Hilbert space of
+solutions $u$:
+$$
+p(u \vert f, \theta)
+    = \mathcal{GP}\bigl(
+        - \Lcal_\theta^{-1} f,
+        \Lcal_\theta^{-1} C_f \Lcal_\theta^{-1},
+    \bigr)
+    \,, $$
+where $\Lcal_\theta^{-1}$ is the Green's function for the PDE.
+
+
 
 
