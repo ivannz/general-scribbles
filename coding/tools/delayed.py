@@ -1,5 +1,7 @@
 import signal
 
+from inspect import ismethod
+
 
 class DelayedKeyboardInterrupt(object):
     """Create an atomic section with respect to the Keyboard Interrupt.
@@ -34,17 +36,22 @@ class DelayedKeyboardInterrupt(object):
         return self.signal is not None
 
     def __enter__(self):
-        self.signal = None
+        self.signal, self.is_nested_ = None, False
 
         self.old_handler = signal.getsignal(signal.SIGINT)
         signal.signal(signal.SIGINT, self.handler)
 
+        if ismethod(self.old_handler):
+            self.is_nested_ = isinstance(self.old_handler.__self__,
+                                         DelayedKeyboardInterrupt)
+
         return self
 
     def handler(self, sig, frame):
-        if self.action == "raise":
-            self.old_handler(sig, frame)
         self.signal = sig, frame
+
+        if self.action == "raise" or self.is_nested_:
+            self.old_handler(sig, frame)
 
     def __exit__(self, type, value, traceback):
         signal.signal(signal.SIGINT, self.old_handler)
