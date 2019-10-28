@@ -113,7 +113,16 @@ $p < +\infty$;
 Portmanteau lemma: complex measures on metrizable space coincide if their integrals
 are equal for all continuous bounded real-valued functions;
 %
+locally finite borel measure: every point has an open neighborhood with finite measure;
+%
 compact sets have finite measure for any locally finite measure;
+%
+metrizable compact ($\sigma$-compact) topological space is separable;
+%
+in a metrizable topological space separability is equivalent to a countable base;
+%
+in a topological space with a locally finite borel measure a subset of a base with finite
+measure is still a topological base;
 %
 on a metrizable $\sigma$-compact topological space any locally finite measure is
 inner and outer regular;
@@ -133,7 +142,34 @@ Locally compact -- every open neighborhood has a compact closure;
 $\sigma$-compact -- there exists an increasing family of compact sets that covers $\Omega$;
 %
 strongly $\sigma$-compact -- there is an increasing sequence of open sets with compact
-closure that covers $\Omega$.
+closure that covers $\Omega$;
+
+for $
+  H\vert_X
+    = \{A\cap X\colon A \in H\}
+$ we have $
+  T_X
+    = T(H) \vert_X
+    = T(H \vert_X)
+$;
+%
+$H$ is a topological base on $\Omega$ if $H$ cover $\Omega$ and $x \in U \cap V$ implies $
+  \exists W \in H
+  \,\colon\, x \in W \subseteq U \cap V
+$;
+%
+$
+\mathcal{T}(H)
+  = \{
+    \cup_{V \in \Gamma} V
+    \colon \Gamma \subseteq H
+  \}
+  = \{
+    U \subseteq \Omega
+    \colon \forall x\in U\, \exists W\in H
+    \colon x \in W \subseteq U
+  \}
+$.
 
 % paragraph tut_13 (end)
 
