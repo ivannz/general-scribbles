@@ -32,6 +32,8 @@ to be relevant or belong in the tentative plan of the text.
 
 Try to formulate what you want to write (at least crudely and partially) before actually
 writing -- some planning and thought does ignite the mind and put you in the "flow".
+It is not forbidden to type and design a sentence in Russian (native language), before
+actually translating it to English.
 
 
 ## Fractal text structuring
