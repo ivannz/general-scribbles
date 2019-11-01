@@ -58,3 +58,8 @@ letters into words into phrases, into sentences, into paragraphs and sections.
 Always try to come up with synonyms when writing sentences -- this increases variety,
 and broadens the perspective.
 
+
+## Iterative process
+
+Writing text is an iterrative process of constant addition, removal, refinement and
+revision. Just like research: submit for feedback, update, then rinse and repeat.
