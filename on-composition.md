@@ -61,5 +61,17 @@ and broadens the perspective.
 
 ## Iterative process
 
-Writing text is an iterrative process of constant addition, removal, refinement and
-revision. Just like research: submit for feedback, update, then rinse and repeat.
+Writing text is an iterative process of constant addition, removal, refinement and revision.
+Just like research: submit for feedback, update, then rinse and repeat.
+
+
+## General narrative guidelines
+
+The following rules are mostly listed as imperatives.
+
+Don't include things (text, sentence, ideas) that are not your point. Do not add a formula
+just for the sake of a formula. The narrative must flow: introduce concepts before using them,
+refer to them as necessary, or even reproduce their condensed versions when needed. Connect
+and develop ideas within text: what is the focus now builds upon what came before. Try to keep
+related things close to each other -- that way it requires much less cognitive load to understand
+the main idea of the paragraph, section or text.
