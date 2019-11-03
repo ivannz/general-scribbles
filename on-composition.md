@@ -40,9 +40,10 @@ actually translating it to English.
 
 The overall narrative follows the classic structure: from general to specific. We introduce
 something, develop it, draw conclusions, and move on either by getting more specific, or
-shifting focus onto the connected topic or related concept.
+shifting focus onto the connected topic or related concept. Focus on a single idea within a
+paragraph, section, plot, or table.
 
-Paragraph contain one complete piece of though and their structure is the same: intro-main-outro,
+Paragraph contains one complete piece of thought and its structure is the same: intro-main-outro,
 -- with cohesive devices interspersed here and there to string them together. Paragraphs
 themselves exist within this narration flow: some paragraphs introduce, other relay ideas
 concepts and the rest summarize or draw conclusion from the narrative in the former.
@@ -55,8 +56,8 @@ treatment of sentences, paragraphs, and sections. Top-down writing style works w
 with coarse plan, then progressively refine its element and ultimately being coalescing the
 letters into words into phrases, into sentences, into paragraphs and sections.
 
-Always try to come up with synonyms when writing sentences -- this increases variety,
-and broadens the perspective.
+Always try to come up with synonyms when writing sentences -- this increases variety, and
+broadens the perspective.
 
 
 ## Iterative process
